@@ -127,7 +127,7 @@
       outline: none;
     }
 
-    .module-link.is-current {
+    .module-link[aria-current="page"] {
       background: rgba(139, 92, 246, 0.32);
       color: white;
       box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
@@ -253,39 +253,6 @@
       outline: none;
     }
 
-    @media (max-width: 720px) {
-      .lesson-nav {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .module-links {
-        justify-content: center;
-      }
-
-      .menu {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-
-      .menu-panel {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-      }
-    }
-
-    @media (prefers-color-scheme: dark) {
-      nav {
-        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
-      }
-
-      footer p {
-        background: rgba(30, 17, 52, 0.62);
-      }
-    }
-
     main {
       padding: 3rem 1.5rem 4.5rem;
       max-width: 1100px;
@@ -310,14 +277,6 @@
       margin-bottom: 0.75rem;
     }
 
-    h3 {
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
     p {
       margin: 0.6rem 0;
     }
@@ -330,24 +289,6 @@
 
     li {
       margin-bottom: 0.45rem;
-    }
-
-    .module-card .module-lessons {
-      list-style: none;
-      margin: 1.1rem 0 1.6rem;
-      padding: 0;
-      display: grid;
-      gap: 0.5rem;
-    }
-
-    .module-card .module-lessons li {
-      background: rgba(139, 92, 246, 0.12);
-      border-left: 4px solid rgba(139, 92, 246, 0.55);
-      padding: 0.75rem 1rem;
-      border-radius: 16px;
-      font-weight: 600;
-      color: var(--accent-strong);
-      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
     }
 
     .examples {
@@ -378,27 +319,64 @@
       box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.12);
     }
 
-    .module-cta {
+    .module-card {
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    .module-card p {
+      margin: 0;
+    }
+
+    .module-lessons {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .module-lessons a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.75rem 1.4rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(56, 189, 248, 0.75));
-      color: white;
+    }
+
+    .module-lessons a::before {
+      content: "→";
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .module-card-link {
+      justify-self: start;
       text-decoration: none;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.85), rgba(56, 189, 248, 0.75));
+      color: white;
       font-weight: 600;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      padding: 0.85rem 1.4rem;
+      border-radius: 999px;
       box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .module-cta:hover,
-    .module-cta:focus-visible {
+    .module-card-link:hover,
+    .module-card-link:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 22px 40px rgba(80, 56, 160, 0.36);
       outline: none;
+    }
+
+    .module-card small {
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     footer {
@@ -420,33 +398,70 @@
       backdrop-filter: blur(16px);
       box-shadow: 0 12px 30px var(--shadow);
     }
+
+    @media (max-width: 720px) {
+      .lesson-nav {
+        justify-content: center;
+      }
+
+      .module-links {
+        justify-content: center;
+      }
+
+      .menu {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .menu-panel {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+      }
+
+      .module-card-link {
+        justify-self: center;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      nav {
+        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
+      }
+
+      footer p {
+        background: rgba(30, 17, 52, 0.62);
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Grammaire Martiniquaise</h1>
-    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en leçons pour accompagner vos exercices et révisions.</p>
+    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en modules thématiques pour accomp
+agner vos exercices et révisions.</p>
   </header>
 
-  <nav aria-label="Navigation des leçons">
+  <nav aria-label="Navigation principale">
     <div class="lesson-nav">
-      <div class="module-links" role="list">
-        <a class="module-link is-current" href="index.html" role="listitem" aria-current="page">Sommaire</a>
-        <a class="module-link" href="module-1.html" role="listitem">Module 1</a>
-        <a class="module-link" href="module-2.html" role="listitem">Module 2</a>
-        <a class="module-link" href="module-3.html" role="listitem">Module 3</a>
-        <a class="module-link" href="module-4.html" role="listitem">Module 4</a>
+      <div class="module-links">
+        <a class="module-link" href="index.html" aria-current="page">Accueil</a>
+        <a class="module-link" href="module-1.html">Module 1</a>
+        <a class="module-link" href="module-2.html">Module 2</a>
+        <a class="module-link" href="module-3.html">Module 3</a>
+        <a class="module-link" href="module-4.html">Module 4</a>
       </div>
       <details class="menu">
-        <summary class="menu-toggle">
-          Sommaire des modules
+        <summary class="menu-toggle" aria-expanded="false">
+          Sommaire
           <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M4.5 7l5.5 6 5.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </summary>
         <div class="menu-panel">
           <div class="menu-group">
-            <p class="menu-group-title">Explorer les modules</p>
+            <p class="menu-group-title">Sur cette page</p>
             <ul>
               <li><a href="#module-1">Module 1 · Déterminants et interactions</a></li>
               <li><a href="#module-2">Module 2 · Prépositions et expressions</a></li>
@@ -461,100 +476,121 @@
 
   <main>
     <section class="module-card" id="module-1">
-      <h2>Module 1 · Déterminants et interactions</h2>
-      <p>Approfondissez l’usage des déterminants, pronoms et outils interrogatifs essentiels du créole martiniquais.</p>
+      <small>Module 1</small>
+      <h2>Déterminants et interactions</h2>
+      <p>Articles, pronoms et particules interrogatives ouvrent l’étude par les fondations du syntagme nominal et des relations
+ entre les mots.</p>
       <ul class="module-lessons">
-        <li>L’article défini</li>
-        <li>L’article indéfini</li>
-        <li>Le pluriel</li>
-        <li>Les pronoms personnels</li>
-        <li>Les possessifs</li>
-        <li>Les démonstratifs</li>
-        <li>Les relatifs</li>
-        <li>L’interrogation</li>
-        <li>La négation</li>
+        <li><a href="module-1.html#lesson-1">L’article défini</a></li>
+        <li><a href="module-1.html#lesson-2">L’article indéfini</a></li>
+        <li><a href="module-1.html#lesson-3">Le pluriel</a></li>
+        <li><a href="module-1.html#lesson-4">Les pronoms personnels</a></li>
+        <li><a href="module-1.html#lesson-5">Les possessifs</a></li>
+        <li><a href="module-1.html#lesson-6">Les démonstratifs</a></li>
+        <li><a href="module-1.html#lesson-7">Les relatifs</a></li>
+        <li><a href="module-1.html#lesson-8">L’interrogation</a></li>
+        <li><a href="module-1.html#lesson-9">La négation</a></li>
       </ul>
-      <a class="module-cta" href="module-1.html">Accéder au module <span aria-hidden="true">→</span></a>
+      <a class="module-card-link" href="module-1.html">Accéder au module 1</a>
     </section>
 
     <section class="module-card" id="module-2">
-      <h2>Module 2 · Prépositions et expressions</h2>
-      <p>Explorez les principales particules prépositionnelles et exclamatives pour gagner en fluidité dans vos échanges.</p>
+      <small>Module 2</small>
+      <h2>Prépositions et expressions</h2>
+      <p>Ce module rassemble les particules qui expriment l’exclamation, les nuances de lieu, de destination et les relations log
+iques entre les éléments de la phrase.</p>
       <ul class="module-lessons">
-        <li>L’exclamation</li>
-        <li>La préposition « à »</li>
-        <li>La préposition « de »</li>
-        <li>Autres prépositions (I)</li>
-        <li>Autres prépositions (II)</li>
+        <li><a href="module-2.html#lesson-10">L’exclamation</a></li>
+        <li><a href="module-2.html#lesson-11">La préposition « à »</a></li>
+        <li><a href="module-2.html#lesson-12">La préposition « de »</a></li>
+        <li><a href="module-2.html#lesson-13">Autres prépositions (I)</a></li>
+        <li><a href="module-2.html#lesson-14">Autres prépositions (II)</a></li>
       </ul>
-      <a class="module-cta" href="module-2.html">Accéder au module <span aria-hidden="true">→</span></a>
+      <a class="module-card-link" href="module-2.html">Accéder au module 2</a>
     </section>
 
     <section class="module-card" id="module-3">
-      <h2>Module 3 · Verbe et temps</h2>
-      <p>Maîtrisez les valeurs temporelles et aspectuelles en contexte : être, temps simples, conditionnel ou impératif.</p>
+      <small>Module 3</small>
+      <h2>Verbe et temps</h2>
+      <p>Le cœur verbal est exploré à travers les principales particules temporelles, l’expression de la condition et des modalit
+és, ainsi que les constructions impératives.</p>
       <ul class="module-lessons">
-        <li>Le verbe « être »</li>
-        <li>Présent et particule « ka »</li>
-        <li>Le passé</li>
-        <li>Futur et conditionnel</li>
-        <li>La phrase conditionnelle</li>
-        <li>L’impératif</li>
-        <li>Le passif</li>
-        <li>Les verbes composés</li>
-        <li>Obligation et probabilité</li>
-        <li>Le verbe « pouvoir »</li>
+        <li><a href="module-3.html#lesson-15">Le verbe « être »</a></li>
+        <li><a href="module-3.html#lesson-16">Présent et particule « ka »</a></li>
+        <li><a href="module-3.html#lesson-17">Le passé</a></li>
+        <li><a href="module-3.html#lesson-18">Futur et conditionnel</a></li>
+        <li><a href="module-3.html#lesson-19">La phrase conditionnelle</a></li>
+        <li><a href="module-3.html#lesson-20">L’impératif</a></li>
+        <li><a href="module-3.html#lesson-21">Le passif</a></li>
+        <li><a href="module-3.html#lesson-22">Les verbes composés</a></li>
+        <li><a href="module-3.html#lesson-23">Obligation et probabilité</a></li>
+        <li><a href="module-3.html#lesson-24">Le verbe « pouvoir »</a></li>
       </ul>
-      <a class="module-cta" href="module-3.html">Accéder au module <span aria-hidden="true">→</span></a>
+      <a class="module-card-link" href="module-3.html">Accéder au module 3</a>
     </section>
 
     <section class="module-card" id="module-4">
-      <h2>Module 4 · Structures nominales et quantification</h2>
-      <p>Consolidez la construction du nom et la quantification pour nuancer descriptions et comparaisons.</p>
+      <small>Module 4</small>
+      <h2>Structures nominales et quantification</h2>
+      <p>Les derniers chapitres couvrent l’organisation du groupe nominal, l’adjectif, les degrés de comparaison et les outils de
+ quantification.</p>
       <ul class="module-lessons">
-        <li>Les usages de « sé »</li>
-        <li>Le nom commun</li>
-        <li>Noms propres, titres et adresses</li>
-        <li>L’adjectif</li>
-        <li>Le comparatif</li>
-        <li>Le superlatif</li>
-        <li>Quantification et numération (I)</li>
-        <li>Quantification et numération (II)</li>
+        <li><a href="module-4.html#lesson-25">Les usages de « sé »</a></li>
+        <li><a href="module-4.html#lesson-26">Le nom commun</a></li>
+        <li><a href="module-4.html#lesson-27">Noms propres, titres et adresses</a></li>
+        <li><a href="module-4.html#lesson-28">L’adjectif</a></li>
+        <li><a href="module-4.html#lesson-29">Le comparatif</a></li>
+        <li><a href="module-4.html#lesson-30">Le superlatif</a></li>
+        <li><a href="module-4.html#lesson-31">Quantification et numération (I)</a></li>
+        <li><a href="module-4.html#lesson-32">Quantification et numération (II)</a></li>
       </ul>
-      <a class="module-cta" href="module-4.html">Accéder au module <span aria-hidden="true">→</span></a>
+      <a class="module-card-link" href="module-4.html">Accéder au module 4</a>
     </section>
   </main>
 
   <footer>
-    <p>Mise à jour des règles grammaticales pour accompagner les exercices de créole martiniquais.</p>
+    <p>Travail collaboratif · Merci à tou·te·s les contributrices et contributeurs !</p>
   </footer>
 
   <script>
-    const menu = document.querySelector('.menu');
+    const menus = document.querySelectorAll('details.menu');
 
-    if (menu) {
-      const panel = menu.querySelector('.menu-panel');
+    menus.forEach((menu) => {
+      const summary = menu.querySelector('summary');
+      const links = menu.querySelectorAll('a');
 
-      panel?.addEventListener('click', (event) => {
-        const link = event.target.closest('a');
-        if (link) {
+      if (summary) {
+        summary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+        menu.addEventListener('toggle', () => {
+          summary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+        });
+      }
+
+      links.forEach((link) => {
+        link.addEventListener('click', () => {
           menu.removeAttribute('open');
-        }
+        });
       });
+    });
 
-      document.addEventListener('click', (event) => {
+    document.addEventListener('click', (event) => {
+      menus.forEach((menu) => {
         if (!menu.contains(event.target)) {
           menu.removeAttribute('open');
         }
       });
+    });
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          menu.removeAttribute('open');
-          menu.querySelector('summary')?.focus();
-        }
-      });
-    }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        menus.forEach((menu) => {
+          if (menu.open) {
+            menu.removeAttribute('open');
+            menu.querySelector('summary')?.focus();
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>

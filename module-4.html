@@ -127,7 +127,7 @@
       outline: none;
     }
 
-    .module-link.is-current {
+    .module-link[aria-current="page"] {
       background: rgba(139, 92, 246, 0.32);
       color: white;
       box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
@@ -253,39 +253,6 @@
       outline: none;
     }
 
-    @media (max-width: 720px) {
-      .lesson-nav {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .module-links {
-        justify-content: center;
-      }
-
-      .menu {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-
-      .menu-panel {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-      }
-    }
-
-    @media (prefers-color-scheme: dark) {
-      nav {
-        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
-      }
-
-      footer p {
-        background: rgba(30, 17, 52, 0.62);
-      }
-    }
-
     main {
       padding: 3rem 1.5rem 4.5rem;
       max-width: 1100px;
@@ -310,95 +277,68 @@
       margin-bottom: 0.75rem;
     }
 
-    h3 {
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
     p {
       margin: 0.6rem 0;
     }
 
-    ul,
-    ol {
-      margin: 0.75rem 0 0.75rem 1.25rem;
-      padding: 0;
-    }
-
-    li {
-      margin-bottom: 0.45rem;
-    }
-
-    .module-card .module-lessons {
-      list-style: none;
-      margin: 1.1rem 0 1.6rem;
-      padding: 0;
+    .module-card {
       display: grid;
-      gap: 0.5rem;
+      gap: 1.1rem;
     }
 
-    .module-card .module-lessons li {
-      background: rgba(139, 92, 246, 0.12);
-      border-left: 4px solid rgba(139, 92, 246, 0.55);
-      padding: 0.75rem 1rem;
-      border-radius: 16px;
-      font-weight: 600;
-      color: var(--accent-strong);
-      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
-    }
-
-    .examples {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 0.75rem;
-      margin: 1rem 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .examples li {
-      background: rgba(139, 92, 246, 0.12);
-      border-left: 4px solid rgba(139, 92, 246, 0.85);
-      padding: 0.9rem 1.1rem;
-      border-radius: 14px;
+    .module-card p {
       margin: 0;
-      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
     }
 
-    .note {
-      background: rgba(250, 204, 21, 0.18);
-      border-left: 4px solid #facc15;
-      padding: 0.85rem 1.1rem;
-      border-radius: 14px;
-      margin: 1.2rem 0;
+    .module-lessons {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .module-lessons a {
+      text-decoration: none;
       color: inherit;
-      box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.12);
-    }
-
-    .module-cta {
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.75rem 1.4rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(56, 189, 248, 0.75));
-      color: white;
+    }
+
+    .module-lessons a::before {
+      content: "→";
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .module-card-link {
+      justify-self: start;
       text-decoration: none;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.85), rgba(56, 189, 248, 0.75));
+      color: white;
       font-weight: 600;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      padding: 0.85rem 1.4rem;
+      border-radius: 999px;
       box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .module-cta:hover,
-    .module-cta:focus-visible {
+    .module-card-link:hover,
+    .module-card-link:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 22px 40px rgba(80, 56, 160, 0.36);
       outline: none;
+    }
+
+    .module-card small {
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     footer {
@@ -420,25 +360,61 @@
       backdrop-filter: blur(16px);
       box-shadow: 0 12px 30px var(--shadow);
     }
+
+    @media (max-width: 720px) {
+      .lesson-nav {
+        justify-content: center;
+      }
+
+      .module-links {
+        justify-content: center;
+      }
+
+      .menu {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .menu-panel {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+      }
+
+      .module-card-link {
+        justify-self: center;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      nav {
+        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
+      }
+
+      footer p {
+        background: rgba(30, 17, 52, 0.62);
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
+<header>
     <h1>Grammaire Martiniquaise</h1>
-    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en leçons pour accompagner vos exercices et révisions.</p>
+    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en modules thématiques pour accomp
+agner vos exercices et révisions.</p>
   </header>
-
-  <nav aria-label="Navigation des leçons">
+  <nav aria-label="Navigation principale">
     <div class="lesson-nav">
-      <div class="module-links" role="list">
-        <a class="module-link" href="index.html" role="listitem">Sommaire</a>
-        <a class="module-link" href="module-1.html" role="listitem">Module 1</a>
-        <a class="module-link" href="module-2.html" role="listitem">Module 2</a>
-        <a class="module-link" href="module-3.html" role="listitem">Module 3</a>
-        <a class="module-link is-current" href="module-4.html" role="listitem" aria-current="page">Module 4</a>
+      <div class="module-links">
+        <a class="module-link" href="index.html">Accueil</a>
+        <a class="module-link" href="module-1.html">Module 1</a>
+        <a class="module-link" href="module-2.html">Module 2</a>
+        <a class="module-link" href="module-3.html">Module 3</a>
+        <a class="module-link" href="module-4.html" aria-current="page">Module 4</a>
       </div>
       <details class="menu">
-        <summary class="menu-toggle">
+        <summary class="menu-toggle" aria-expanded="false">
           Sommaire du module
           <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M4.5 7l5.5 6 5.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -446,7 +422,7 @@
         </summary>
         <div class="menu-panel">
           <div class="menu-group">
-            <p class="menu-group-title">Module 4 · Structures nominales et quantification</p>
+            <p class="menu-group-title">Leçons 25 à 32</p>
             <ul>
               <li><a href="#lesson-25">Les usages de « sé »</a></li>
               <li><a href="#lesson-26">Le nom commun</a></li>
@@ -464,126 +440,137 @@
   </nav>
   <main>
     <section id="lesson-25">
-      <h2>Les usages de « sé »</h2>
-      <p><strong>sé</strong> possède quatre fonctions : présentatif (« c’est »), marque du pluriel défini, copule équivalente à « être » et optatif (conditionnel). Plusieurs occurrences peuvent cohabiter dans une même phrase.</p>
-      <ul class="examples">
-        <li><strong>sa, sé ki bagay ?</strong> : ça, qu’est-ce que c’est ?</li>
-        <li><strong>sé zanmi’w la</strong> : tes amis</li>
-        <li><strong>ou sé an salop</strong> : tu es un salaud</li>
-        <li><strong>man sé bwè an koko</strong> : je boirais bien un coco</li>
-      </ul>
-    </section>
+          <h2>Les usages de « sé »</h2>
+          <p><strong>sé</strong> possède quatre fonctions : présentatif (« c’est »), marque du pluriel défini, copule équivalente à « être » et optatif (conditionnel). Plusieurs occurrences peuvent cohabiter dans une même phrase.</p>
+          <ul class="examples">
+            <li><strong>sa, sé ki bagay ?</strong> : ça, qu’est-ce que c’est ?</li>
+            <li><strong>sé zanmi’w la</strong> : tes amis</li>
+            <li><strong>ou sé an salop</strong> : tu es un salaud</li>
+            <li><strong>man sé bwè an koko</strong> : je boirais bien un coco</li>
+          </ul>
+        </section>
 
     <section id="lesson-26">
-      <h2>Le nom commun</h2>
-      <p>Les noms peuvent apparaître sans article lorsqu’ils ont une valeur générique. Certains adjectifs ou verbes se nominalisent, souvent avec les préfixes <strong>la-</strong> ou <strong>le-</strong> pour les notions abstraites.</p>
-      <ul class="examples">
-        <li><strong>loto pa pou vini la</strong> : les voitures ne doivent pas venir ici</li>
-        <li><strong>lajistis sé an bon bagay</strong> : la justice est une bonne chose</li>
-        <li><strong>dòmi dous</strong> : c’est bon de dormir</li>
-        <li><strong>i fè an kay pa gran</strong> : il a construit une maison pas grande</li>
-      </ul>
-    </section>
+          <h2>Le nom commun</h2>
+          <p>Les noms peuvent apparaître sans article lorsqu’ils ont une valeur générique. Certains adjectifs ou verbes se nominalisent, souvent avec les préfixes <strong>la-</strong> ou <strong>le-</strong> pour les notions abstraites.</p>
+          <ul class="examples">
+            <li><strong>loto pa pou vini la</strong> : les voitures ne doivent pas venir ici</li>
+            <li><strong>lajistis sé an bon bagay</strong> : la justice est une bonne chose</li>
+            <li><strong>dòmi dous</strong> : c’est bon de dormir</li>
+            <li><strong>i fè an kay pa gran</strong> : il a construit une maison pas grande</li>
+          </ul>
+        </section>
 
     <section id="lesson-27">
-      <h2>Noms propres, titres et adresses</h2>
-      <p>Les noms propres peuvent recevoir l’article pour marquer la distance. Les titres et formules d’adresse varient selon le registre : <strong>misyé</strong>, <strong>manzè</strong>, <strong>mésyédanm</strong>, <strong>monchè</strong>, etc. Les noms de pays utilisent des prépositions spécifiques.</p>
-      <ul class="examples">
-        <li><strong>Misiyé Pòl la</strong> : ce Monsieur Paul</li>
-        <li><strong>mésyédanm</strong> : Mesdames et messieurs</li>
-        <li><strong>man dirèktris la konprann...</strong> : cette directrice pense…</li>
-        <li><strong>yo ka soti an Frans</strong> : ils viennent de France</li>
-      </ul>
-    </section>
+          <h2>Noms propres, titres et adresses</h2>
+          <p>Les noms propres peuvent recevoir l’article pour marquer la distance. Les titres et formules d’adresse varient selon le registre : <strong>misyé</strong>, <strong>manzè</strong>, <strong>mésyédanm</strong>, <strong>monchè</strong>, etc. Les noms de pays utilisent des prépositions spécifiques.</p>
+          <ul class="examples">
+            <li><strong>Misiyé Pòl la</strong> : ce Monsieur Paul</li>
+            <li><strong>mésyédanm</strong> : Mesdames et messieurs</li>
+            <li><strong>man dirèktris la konprann...</strong> : cette directrice pense…</li>
+            <li><strong>yo ka soti an Frans</strong> : ils viennent de France</li>
+          </ul>
+        </section>
 
     <section id="lesson-28">
-      <h2>L’adjectif</h2>
-      <p>De nombreux adjectifs résultent de relatives réduites ou de syntagmes nominalisés. Certains intensifs (<strong>bidim</strong>, <strong>manman</strong>) ou diminutifs (<strong>ti monyonyon</strong>) précèdent le nom. Le genre grammatical n’est pas marqué, mais des suffixes (<strong>-èz</strong>) peuvent souligner le féminin sémantique.</p>
-      <ul class="examples">
-        <li><strong>an boug vayan</strong> : un homme courageux</li>
-        <li><strong>an ti monyonyon pen</strong> : un tout petit bout de pain</li>
-        <li><strong>fanm ganmé a</strong> : la femme élégante</li>
-        <li><strong>Pyè, sé an boug blip</strong> : Pierre est un type mal dégrossi</li>
-      </ul>
-      <div class="note">Attention aux ambiguïtés : <strong>fanm kouyon an</strong> = la femme idiote ; <strong>fanm kouyon-an</strong> = la femme de l’idiot.</div>
-    </section>
+          <h2>L’adjectif</h2>
+          <p>De nombreux adjectifs résultent de relatives réduites ou de syntagmes nominalisés. Certains intensifs (<strong>bidim</strong>, <strong>manman</strong>) ou diminutifs (<strong>ti monyonyon</strong>) précèdent le nom. Le genre grammatical n’est pas marqué, mais des suffixes (<strong>-èz</strong>) peuvent souligner le féminin sémantique.</p>
+          <ul class="examples">
+            <li><strong>an boug vayan</strong> : un homme courageux</li>
+            <li><strong>an ti monyonyon pen</strong> : un tout petit bout de pain</li>
+            <li><strong>fanm ganmé a</strong> : la femme élégante</li>
+            <li><strong>Pyè, sé an boug blip</strong> : Pierre est un type mal dégrossi</li>
+          </ul>
+          <div class="note">Attention aux ambiguïtés : <strong>fanm kouyon an</strong> = la femme idiote ; <strong>fanm kouyon-an</strong> = la femme de l’idiot.</div>
+        </section>
 
     <section id="lesson-29">
-      <h2>Le comparatif</h2>
-      <p>La supériorité se marque avec <strong>pli… ki/pasé</strong>, l’égalité avec <strong>osi… ki</strong> ou <strong>otan… otan</strong>, l’infériorité avec <strong>mwen(s)… ki</strong>. Des adverbes (<strong>titak</strong>, <strong>anpil</strong>, <strong>lontan</strong>) modulant l’intensité.</p>
-      <ul class="examples">
-        <li><strong>Pyè pli sòt ki Wobè</strong> : Pierre est plus bête que Robert</li>
-        <li><strong>Féfé osi gwo ki Pyè</strong> : Féfé est aussi gros que Pierre</li>
-        <li><strong>mwen gran ki Pyè</strong> : moins grand que Pierre</li>
-        <li><strong>pli ou ké dòmi, pli ou ké anvi dòmi</strong> : plus tu dormiras, plus tu auras envie de dormir</li>
-      </ul>
-    </section>
+          <h2>Le comparatif</h2>
+          <p>La supériorité se marque avec <strong>pli… ki/pasé</strong>, l’égalité avec <strong>osi… ki</strong> ou <strong>otan… otan</strong>, l’infériorité avec <strong>mwen(s)… ki</strong>. Des adverbes (<strong>titak</strong>, <strong>anpil</strong>, <strong>lontan</strong>) modulant l’intensité.</p>
+          <ul class="examples">
+            <li><strong>Pyè pli sòt ki Wobè</strong> : Pierre est plus bête que Robert</li>
+            <li><strong>Féfé osi gwo ki Pyè</strong> : Féfé est aussi gros que Pierre</li>
+            <li><strong>mwen gran ki Pyè</strong> : moins grand que Pierre</li>
+            <li><strong>pli ou ké dòmi, pli ou ké anvi dòmi</strong> : plus tu dormiras, plus tu auras envie de dormir</li>
+          </ul>
+        </section>
 
     <section id="lesson-30">
-      <h2>Le superlatif</h2>
-      <p>Le superlatif relatif s’appuie sur <strong>pli</strong> ou <strong>mwen</strong> associés à l’article (<strong>sé… a</strong> pour le particulier, <strong>lé</strong> pour le général). Le superlatif absolu se forme par redoublement, particules intensives ou adjectifs comme <strong>bon</strong>, <strong>bèl</strong>, <strong>gwo</strong>, <strong>tou</strong>.</p>
-      <ul class="examples">
-        <li><strong>boug mwen pyétè a</strong> : le type le moins avare</li>
-        <li><strong>Pyè, sé boug pli séryé man konnèt</strong> : Pierre est le type le plus sérieux que je connaisse</li>
-        <li><strong>nou wè an bèl bèl fanm</strong> : nous avons vu une très belle femme</li>
-        <li><strong>i tou kagou</strong> : il est très malade</li>
-      </ul>
-    </section>
+          <h2>Le superlatif</h2>
+          <p>Le superlatif relatif s’appuie sur <strong>pli</strong> ou <strong>mwen</strong> associés à l’article (<strong>sé… a</strong> pour le particulier, <strong>lé</strong> pour le général). Le superlatif absolu se forme par redoublement, particules intensives ou adjectifs comme <strong>bon</strong>, <strong>bèl</strong>, <strong>gwo</strong>, <strong>tou</strong>.</p>
+          <ul class="examples">
+            <li><strong>boug mwen pyétè a</strong> : le type le moins avare</li>
+            <li><strong>Pyè, sé boug pli séryé man konnèt</strong> : Pierre est le type le plus sérieux que je connaisse</li>
+            <li><strong>nou wè an bèl bèl fanm</strong> : nous avons vu une très belle femme</li>
+            <li><strong>i tou kagou</strong> : il est très malade</li>
+          </ul>
+        </section>
 
     <section id="lesson-31">
-      <h2>Quantification et numération (I)</h2>
-      <p>Les adverbes/adjectifs de quantité incluent <strong>tout</strong>, <strong>chak</strong>, <strong>tjèk</strong>, <strong>yonndé</strong>, <strong>anpil</strong>, <strong>anlo</strong>, <strong>lòt</strong>, <strong>menm</strong>, <strong>kalté</strong>. Ils modulent la portée du nom selon qu’il est défini ou indéfini.</p>
-      <ul class="examples">
-        <li><strong>tout moun</strong> : tout le monde</li>
-        <li><strong>chak moun palé</strong> : chacun a parlé</li>
-        <li><strong>ni tjèk sé moun-la</strong> : il y a quelques-unes de ces personnes</li>
-        <li><strong>man pa enmen kalté moun-tala</strong> : je n’aime pas ce genre de personne</li>
-      </ul>
-    </section>
+          <h2>Quantification et numération (I)</h2>
+          <p>Les adverbes/adjectifs de quantité incluent <strong>tout</strong>, <strong>chak</strong>, <strong>tjèk</strong>, <strong>yonndé</strong>, <strong>anpil</strong>, <strong>anlo</strong>, <strong>lòt</strong>, <strong>menm</strong>, <strong>kalté</strong>. Ils modulent la portée du nom selon qu’il est défini ou indéfini.</p>
+          <ul class="examples">
+            <li><strong>tout moun</strong> : tout le monde</li>
+            <li><strong>chak moun palé</strong> : chacun a parlé</li>
+            <li><strong>ni tjèk sé moun-la</strong> : il y a quelques-unes de ces personnes</li>
+            <li><strong>man pa enmen kalté moun-tala</strong> : je n’aime pas ce genre de personne</li>
+          </ul>
+        </section>
 
     <section id="lesson-32">
-      <h2>Quantification et numération (II)</h2>
-      <p>Les numéraux cardinaux (yonn, dé, twa…) et ordinaux (prèmyé, dézyèm…) suivent des règles spécifiques. Certains servent d’intensif. Les expressions de durée ou de fréquence s’appuient sur ces formes.</p>
-      <ul class="examples">
-        <li><strong>ni dé lanné nou la</strong> : cela fait deux ans que nous sommes là</li>
-        <li><strong>ventan / ven lanné</strong> : vingt ans</li>
-        <li><strong>an dézyèm fi</strong> : une deuxième fille</li>
-        <li><strong>Pyè kouri sé dé prèmyé fwa-a</strong> : Pierre a couru les deux premières fois</li>
-      </ul>
-      <p>Des expressions comme <strong>lo</strong>, <strong>tèlman</strong>, <strong>an étsétéra</strong>, <strong>ti bren</strong> servent aussi à quantifier, parfois par antiphrase.</p>
-    </section>
+          <h2>Quantification et numération (II)</h2>
+          <p>Les numéraux cardinaux (yonn, dé, twa…) et ordinaux (prèmyé, dézyèm…) suivent des règles spécifiques. Certains servent d’intensif. Les expressions de durée ou de fréquence s’appuient sur ces formes.</p>
+          <ul class="examples">
+            <li><strong>ni dé lanné nou la</strong> : cela fait deux ans que nous sommes là</li>
+            <li><strong>ventan / ven lanné</strong> : vingt ans</li>
+            <li><strong>an dézyèm fi</strong> : une deuxième fille</li>
+            <li><strong>Pyè kouri sé dé prèmyé fwa-a</strong> : Pierre a couru les deux premières fois</li>
+          </ul>
+          <p>Des expressions comme <strong>lo</strong>, <strong>tèlman</strong>, <strong>an étsétéra</strong>, <strong>ti bren</strong> servent aussi à quantifier, parfois par antiphrase.</p>
+        </section>
   </main>
-
-  <footer>
-    <p>Mise à jour des règles grammaticales pour accompagner les exercices de créole martiniquais.</p>
+<footer>
+    <p>Travail collaboratif · Merci à tou·te·s les contributrices et contributeurs !</p>
   </footer>
+<script>
+    const menus = document.querySelectorAll('details.menu');
 
-  <script>
-    const menu = document.querySelector('.menu');
+    menus.forEach((menu) => {
+      const summary = menu.querySelector('summary');
+      const links = menu.querySelectorAll('a');
 
-    if (menu) {
-      const panel = menu.querySelector('.menu-panel');
+      if (summary) {
+        summary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+        menu.addEventListener('toggle', () => {
+          summary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+        });
+      }
 
-      panel?.addEventListener('click', (event) => {
-        const link = event.target.closest('a');
-        if (link) {
+      links.forEach((link) => {
+        link.addEventListener('click', () => {
           menu.removeAttribute('open');
-        }
+        });
       });
+    });
 
-      document.addEventListener('click', (event) => {
+    document.addEventListener('click', (event) => {
+      menus.forEach((menu) => {
         if (!menu.contains(event.target)) {
           menu.removeAttribute('open');
         }
       });
+    });
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          menu.removeAttribute('open');
-          menu.querySelector('summary')?.focus();
-        }
-      });
-    }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        menus.forEach((menu) => {
+          if (menu.open) {
+            menu.removeAttribute('open');
+            menu.querySelector('summary')?.focus();
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>

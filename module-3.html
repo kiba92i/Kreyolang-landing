@@ -127,7 +127,7 @@
       outline: none;
     }
 
-    .module-link.is-current {
+    .module-link[aria-current="page"] {
       background: rgba(139, 92, 246, 0.32);
       color: white;
       box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
@@ -253,39 +253,6 @@
       outline: none;
     }
 
-    @media (max-width: 720px) {
-      .lesson-nav {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .module-links {
-        justify-content: center;
-      }
-
-      .menu {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-
-      .menu-panel {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-      }
-    }
-
-    @media (prefers-color-scheme: dark) {
-      nav {
-        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
-      }
-
-      footer p {
-        background: rgba(30, 17, 52, 0.62);
-      }
-    }
-
     main {
       padding: 3rem 1.5rem 4.5rem;
       max-width: 1100px;
@@ -310,95 +277,68 @@
       margin-bottom: 0.75rem;
     }
 
-    h3 {
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
     p {
       margin: 0.6rem 0;
     }
 
-    ul,
-    ol {
-      margin: 0.75rem 0 0.75rem 1.25rem;
-      padding: 0;
-    }
-
-    li {
-      margin-bottom: 0.45rem;
-    }
-
-    .module-card .module-lessons {
-      list-style: none;
-      margin: 1.1rem 0 1.6rem;
-      padding: 0;
+    .module-card {
       display: grid;
-      gap: 0.5rem;
+      gap: 1.1rem;
     }
 
-    .module-card .module-lessons li {
-      background: rgba(139, 92, 246, 0.12);
-      border-left: 4px solid rgba(139, 92, 246, 0.55);
-      padding: 0.75rem 1rem;
-      border-radius: 16px;
-      font-weight: 600;
-      color: var(--accent-strong);
-      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
-    }
-
-    .examples {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 0.75rem;
-      margin: 1rem 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .examples li {
-      background: rgba(139, 92, 246, 0.12);
-      border-left: 4px solid rgba(139, 92, 246, 0.85);
-      padding: 0.9rem 1.1rem;
-      border-radius: 14px;
+    .module-card p {
       margin: 0;
-      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
     }
 
-    .note {
-      background: rgba(250, 204, 21, 0.18);
-      border-left: 4px solid #facc15;
-      padding: 0.85rem 1.1rem;
-      border-radius: 14px;
-      margin: 1.2rem 0;
+    .module-lessons {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .module-lessons a {
+      text-decoration: none;
       color: inherit;
-      box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.12);
-    }
-
-    .module-cta {
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.75rem 1.4rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(56, 189, 248, 0.75));
-      color: white;
+    }
+
+    .module-lessons a::before {
+      content: "→";
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .module-card-link {
+      justify-self: start;
       text-decoration: none;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.85), rgba(56, 189, 248, 0.75));
+      color: white;
       font-weight: 600;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      padding: 0.85rem 1.4rem;
+      border-radius: 999px;
       box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .module-cta:hover,
-    .module-cta:focus-visible {
+    .module-card-link:hover,
+    .module-card-link:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 22px 40px rgba(80, 56, 160, 0.36);
       outline: none;
+    }
+
+    .module-card small {
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     footer {
@@ -420,25 +360,61 @@
       backdrop-filter: blur(16px);
       box-shadow: 0 12px 30px var(--shadow);
     }
+
+    @media (max-width: 720px) {
+      .lesson-nav {
+        justify-content: center;
+      }
+
+      .module-links {
+        justify-content: center;
+      }
+
+      .menu {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .menu-panel {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+      }
+
+      .module-card-link {
+        justify-self: center;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      nav {
+        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
+      }
+
+      footer p {
+        background: rgba(30, 17, 52, 0.62);
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
+<header>
     <h1>Grammaire Martiniquaise</h1>
-    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en leçons pour accompagner vos exercices et révisions.</p>
+    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en modules thématiques pour accomp
+agner vos exercices et révisions.</p>
   </header>
-
-  <nav aria-label="Navigation des leçons">
+  <nav aria-label="Navigation principale">
     <div class="lesson-nav">
-      <div class="module-links" role="list">
-        <a class="module-link" href="index.html" role="listitem">Sommaire</a>
-        <a class="module-link" href="module-1.html" role="listitem">Module 1</a>
-        <a class="module-link" href="module-2.html" role="listitem">Module 2</a>
-        <a class="module-link is-current" href="module-3.html" role="listitem" aria-current="page">Module 3</a>
-        <a class="module-link" href="module-4.html" role="listitem">Module 4</a>
+      <div class="module-links">
+        <a class="module-link" href="index.html">Accueil</a>
+        <a class="module-link" href="module-1.html">Module 1</a>
+        <a class="module-link" href="module-2.html">Module 2</a>
+        <a class="module-link" href="module-3.html" aria-current="page">Module 3</a>
+        <a class="module-link" href="module-4.html">Module 4</a>
       </div>
       <details class="menu">
-        <summary class="menu-toggle">
+        <summary class="menu-toggle" aria-expanded="false">
           Sommaire du module
           <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M4.5 7l5.5 6 5.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -446,7 +422,7 @@
         </summary>
         <div class="menu-panel">
           <div class="menu-group">
-            <p class="menu-group-title">Module 3 · Verbe et temps</p>
+            <p class="menu-group-title">Leçons 15 à 24</p>
             <ul>
               <li><a href="#lesson-15">Le verbe « être »</a></li>
               <li><a href="#lesson-16">Présent et particule « ka »</a></li>
@@ -466,147 +442,158 @@
   </nav>
   <main>
     <section id="lesson-15">
-      <h2>Le verbe « être »</h2>
-      <p>Quatre stratégies rendent « être » : forme zéro devant adjectif ou compléments, copule <strong>sé</strong> devant un nom, forme <strong>yé</strong> pour les constructions disloquées ou interrogatives, et verbe plein <strong>èt</strong> dans certains contextes.</p>
-      <ul class="examples">
-        <li><strong>Pyè kontan</strong> : Pierre est content</li>
-        <li><strong>Féfé sé an tigason</strong> : Féfé est un petit garçon</li>
-        <li><strong>koté i yé ?</strong> : où est-il ?</li>
-        <li><strong>i lé èt an bon doktè</strong> : il veut être un bon médecin</li>
-      </ul>
-    </section>
+          <h2>Le verbe « être »</h2>
+          <p>Quatre stratégies rendent « être » : forme zéro devant adjectif ou compléments, copule <strong>sé</strong> devant un nom, forme <strong>yé</strong> pour les constructions disloquées ou interrogatives, et verbe plein <strong>èt</strong> dans certains contextes.</p>
+          <ul class="examples">
+            <li><strong>Pyè kontan</strong> : Pierre est content</li>
+            <li><strong>Féfé sé an tigason</strong> : Féfé est un petit garçon</li>
+            <li><strong>koté i yé ?</strong> : où est-il ?</li>
+            <li><strong>i lé èt an bon doktè</strong> : il veut être un bon médecin</li>
+          </ul>
+        </section>
 
     <section id="lesson-16">
-      <h2>Présent et particule « ka »</h2>
-      <p>La particule <strong>ka</strong> exprime l’aspect duratif ou habituel. Elle peut disparaître avec certains verbes statifs (<strong>enmen</strong>, <strong>konnèt</strong>, <strong>ni</strong>, <strong>sav</strong>, etc.) sauf pour indiquer l’habitude.</p>
-      <ul class="examples">
-        <li><strong>man ka chanté</strong> : je chante / je suis en train de chanter</li>
-        <li><strong>Pyè ka pran kouri</strong> : Pierre se met à courir</li>
-        <li><strong>i pa ka travay ankò</strong> : il ne travaille plus</li>
-        <li><strong>man sav sa</strong> : je sais ça (sans <strong>ka</strong>)</li>
-      </ul>
-    </section>
+          <h2>Présent et particule « ka »</h2>
+          <p>La particule <strong>ka</strong> exprime l’aspect duratif ou habituel. Elle peut disparaître avec certains verbes statifs (<strong>enmen</strong>, <strong>konnèt</strong>, <strong>ni</strong>, <strong>sav</strong>, etc.) sauf pour indiquer l’habitude.</p>
+          <ul class="examples">
+            <li><strong>man ka chanté</strong> : je chante / je suis en train de chanter</li>
+            <li><strong>Pyè ka pran kouri</strong> : Pierre se met à courir</li>
+            <li><strong>i pa ka travay ankò</strong> : il ne travaille plus</li>
+            <li><strong>man sav sa</strong> : je sais ça (sans <strong>ka</strong>)</li>
+          </ul>
+        </section>
 
     <section id="lesson-17">
-      <h2>Le passé</h2>
-      <p>Le passé s’exprime par la forme simple (équivalent passé composé/passé simple) ou par la particule <strong>té</strong> (antériorité ou imparfait selon le verbe). La combinaison <strong>té ka</strong> correspond à l’imparfait duratif.</p>
-      <ul class="examples">
-        <li><strong>yo pati</strong> : ils sont partis</li>
-        <li><strong>man té di’w</strong> : je t’avais dit</li>
-        <li><strong>man té lé</strong> : je voulais / j’ai voulu</li>
-        <li><strong>i té ka travay</strong> : il travaillait</li>
-      </ul>
-    </section>
+          <h2>Le passé</h2>
+          <p>Le passé s’exprime par la forme simple (équivalent passé composé/passé simple) ou par la particule <strong>té</strong> (antériorité ou imparfait selon le verbe). La combinaison <strong>té ka</strong> correspond à l’imparfait duratif.</p>
+          <ul class="examples">
+            <li><strong>yo pati</strong> : ils sont partis</li>
+            <li><strong>man té di’w</strong> : je t’avais dit</li>
+            <li><strong>man té lé</strong> : je voulais / j’ai voulu</li>
+            <li><strong>i té ka travay</strong> : il travaillait</li>
+          </ul>
+        </section>
 
     <section id="lesson-18">
-      <h2>Futur et conditionnel</h2>
-      <p>La particule <strong>ké</strong> marque le futur (avec variante proche <strong>kay</strong>). La combinaison <strong>té ké</strong> forme le conditionnel, tandis que <strong>sé</strong> peut rendre un conditionnel optatif. L’antériorité se gère avec <strong>fini</strong>.</p>
-      <ul class="examples">
-        <li><strong>nou ké dòmi bonnè</strong> : nous dormirons tôt</li>
-        <li><strong>ou kay travay</strong> : tu vas travailler (futur proche)</li>
-        <li><strong>yo té ké ja pati</strong> : ils seraient déjà partis</li>
-        <li><strong>man sé bwè an koko</strong> : je boirais bien un coco</li>
-      </ul>
-    </section>
+          <h2>Futur et conditionnel</h2>
+          <p>La particule <strong>ké</strong> marque le futur (avec variante proche <strong>kay</strong>). La combinaison <strong>té ké</strong> forme le conditionnel, tandis que <strong>sé</strong> peut rendre un conditionnel optatif. L’antériorité se gère avec <strong>fini</strong>.</p>
+          <ul class="examples">
+            <li><strong>nou ké dòmi bonnè</strong> : nous dormirons tôt</li>
+            <li><strong>ou kay travay</strong> : tu vas travailler (futur proche)</li>
+            <li><strong>yo té ké ja pati</strong> : ils seraient déjà partis</li>
+            <li><strong>man sé bwè an koko</strong> : je boirais bien un coco</li>
+          </ul>
+        </section>
 
     <section id="lesson-19">
-      <h2>La phrase conditionnelle</h2>
-      <p>Les subordonnées conditionnelles utilisent <strong>si</strong> ou <strong>siyanka</strong> et se combinent avec différents temps (<strong>ka</strong>, forme simple, <strong>té ka</strong>, <strong>té ké</strong>, optatif). Le choix reflète la probabilité ou l’irréel.</p>
-      <ul class="examples">
-        <li><strong>si ou lévé, ou ké tann</strong> : si tu te lèves, tu entendras</li>
-        <li><strong>si ou té travay, ou té ké ni</strong> : si tu avais travaillé, tu aurais eu</li>
-        <li><strong>siyanka man touvé, man ké pòté</strong> : si je trouve, je porterai</li>
-        <li><strong>siyanka ou té ké ni, ou té ké ba</strong> : si tu avais, tu donnerais</li>
-      </ul>
-    </section>
+          <h2>La phrase conditionnelle</h2>
+          <p>Les subordonnées conditionnelles utilisent <strong>si</strong> ou <strong>siyanka</strong> et se combinent avec différents temps (<strong>ka</strong>, forme simple, <strong>té ka</strong>, <strong>té ké</strong>, optatif). Le choix reflète la probabilité ou l’irréel.</p>
+          <ul class="examples">
+            <li><strong>si ou lévé, ou ké tann</strong> : si tu te lèves, tu entendras</li>
+            <li><strong>si ou té travay, ou té ké ni</strong> : si tu avais travaillé, tu aurais eu</li>
+            <li><strong>siyanka man touvé, man ké pòté</strong> : si je trouve, je porterai</li>
+            <li><strong>siyanka ou té ké ni, ou té ké ba</strong> : si tu avais, tu donnerais</li>
+          </ul>
+        </section>
 
     <section id="lesson-20">
-      <h2>L’impératif</h2>
-      <p>L’impératif utilise la forme verbale simple, éventuellement doublée ou renforcée par des particules (<strong>anni</strong>, <strong>kon</strong>, <strong>tou sa</strong>). Certaines personnes emploient <strong>annou</strong> pour la 1<sup>re</sup> pluriel. Des expressions avec <strong>kité</strong>, <strong>ba</strong> ou <strong>prété</strong> rendent l’impératif aux autres personnes.</p>
-      <ul class="examples">
-        <li><strong>sòti la !</strong> : sors de là !</li>
-        <li><strong>pa menyen mwen !</strong> : ne me touche pas !</li>
-        <li><strong>annou chanté !</strong> : chantons !</li>
-        <li><strong>kit’an fè sa !</strong> : laisse-moi faire ça !</li>
-      </ul>
-      <p>Certains verbes comme <strong>lé</strong> ou <strong>pé</strong> n’ont pas d’impératif propre et recourent à des périphrases.</p>
-    </section>
+          <h2>L’impératif</h2>
+          <p>L’impératif utilise la forme verbale simple, éventuellement doublée ou renforcée par des particules (<strong>anni</strong>, <strong>kon</strong>, <strong>tou sa</strong>). Certaines personnes emploient <strong>annou</strong> pour la 1<sup>re</sup> pluriel. Des expressions avec <strong>kité</strong>, <strong>ba</strong> ou <strong>prété</strong> rendent l’impératif aux autres personnes.</p>
+          <ul class="examples">
+            <li><strong>sòti la !</strong> : sors de là !</li>
+            <li><strong>pa menyen mwen !</strong> : ne me touche pas !</li>
+            <li><strong>annou chanté !</strong> : chantons !</li>
+            <li><strong>kit’an fè sa !</strong> : laisse-moi faire ça !</li>
+          </ul>
+          <p>Certains verbes comme <strong>lé</strong> ou <strong>pé</strong> n’ont pas d’impératif propre et recourent à des périphrases.</p>
+        </section>
 
     <section id="lesson-21">
-      <h2>Le passif</h2>
-      <p>Le passif s’exprime sans changement morphologique majeur : on supprime l’agent ou on utilise des participes lexicalisés (<strong>pri</strong>, <strong>fèt</strong>, <strong>bay</strong>). Certaines constructions participiales complètent la description.</p>
-      <ul class="examples">
-        <li><strong>lèt-la voyé</strong> : la lettre est envoyée</li>
-        <li><strong>an kay byen fèt</strong> : une maison bien faite</li>
-        <li><strong>an lajan bay</strong> : une somme donnée</li> 
-        <li><strong>man ka wè’y ka monté mòn-la</strong> : je le vois montant la colline</li>
-      </ul>
-    </section>
+          <h2>Le passif</h2>
+          <p>Le passif s’exprime sans changement morphologique majeur : on supprime l’agent ou on utilise des participes lexicalisés (<strong>pri</strong>, <strong>fèt</strong>, <strong>bay</strong>). Certaines constructions participiales complètent la description.</p>
+          <ul class="examples">
+            <li><strong>lèt-la voyé</strong> : la lettre est envoyée</li>
+            <li><strong>an kay byen fèt</strong> : une maison bien faite</li>
+            <li><strong>an lajan bay</strong> : une somme donnée</li> 
+            <li><strong>man ka wè’y ka monté mòn-la</strong> : je le vois montant la colline</li>
+          </ul>
+        </section>
 
     <section id="lesson-22">
-      <h2>Les verbes composés</h2>
-      <p>Le créole combine fréquemment deux verbes pour préciser la nuance aspectuelle ou directionnelle. Un verbe porte le sens lexical, l’autre ajoute une orientation ou une manière.</p>
-      <ul class="examples">
-        <li><strong>maché alé</strong> : marcher vers l’extérieur · <strong>maché vini</strong> : marcher vers l’intérieur</li>
-        <li><strong>mennen alé</strong> : emmener · <strong>pòté vini</strong> : apporter</li>
-        <li><strong>tounen viré</strong> : virevolter · <strong>bay désann</strong> : descendre rapidement</li>
-        <li><strong>gadé wè</strong> : s’occuper de · <strong>chèché gadé wè</strong> : chercher à savoir insistance</li>
-      </ul>
-    </section>
+          <h2>Les verbes composés</h2>
+          <p>Le créole combine fréquemment deux verbes pour préciser la nuance aspectuelle ou directionnelle. Un verbe porte le sens lexical, l’autre ajoute une orientation ou une manière.</p>
+          <ul class="examples">
+            <li><strong>maché alé</strong> : marcher vers l’extérieur · <strong>maché vini</strong> : marcher vers l’intérieur</li>
+            <li><strong>mennen alé</strong> : emmener · <strong>pòté vini</strong> : apporter</li>
+            <li><strong>tounen viré</strong> : virevolter · <strong>bay désann</strong> : descendre rapidement</li>
+            <li><strong>gadé wè</strong> : s’occuper de · <strong>chèché gadé wè</strong> : chercher à savoir insistance</li>
+          </ul>
+        </section>
 
     <section id="lesson-23">
-      <h2>Obligation et probabilité</h2>
-      <p>Trois marqueurs principaux expriment l’obligation : <strong>fok/fo</strong>, <strong>pou</strong> et <strong>dwèt</strong>. Ce dernier véhicule aussi la notion de probabilité selon le contexte.</p>
-      <ul class="examples">
-        <li><strong>fòk ou travay</strong> : il faut que tu travailles</li>
-        <li><strong>sé pati pou nou pati</strong> : il nous faut partir</li>
-        <li><strong>Pyè dwèt travay</strong> : Pierre doit travailler / Pierre travaille sûrement</li>
-        <li><strong>ou té dwèt pati</strong> : tu aurais dû partir</li>
-      </ul>
-    </section>
+          <h2>Obligation et probabilité</h2>
+          <p>Trois marqueurs principaux expriment l’obligation : <strong>fok/fo</strong>, <strong>pou</strong> et <strong>dwèt</strong>. Ce dernier véhicule aussi la notion de probabilité selon le contexte.</p>
+          <ul class="examples">
+            <li><strong>fòk ou travay</strong> : il faut que tu travailles</li>
+            <li><strong>sé pati pou nou pati</strong> : il nous faut partir</li>
+            <li><strong>Pyè dwèt travay</strong> : Pierre doit travailler / Pierre travaille sûrement</li>
+            <li><strong>ou té dwèt pati</strong> : tu aurais dû partir</li>
+          </ul>
+        </section>
 
     <section id="lesson-24">
-      <h2>Le verbe « pouvoir »</h2>
-      <p><strong>pé</strong> traduit la capacité et la possibilité, souvent combiné à <strong>sa</strong> pour indiquer la réussite. La négation se fond avec <strong>pé</strong> au futur (<strong>pé ké</strong>). Le verbe peut aussi exprimer la probabilité.</p>
-      <ul class="examples">
-        <li><strong>ou pé pati</strong> : tu peux partir</li>
-        <li><strong>man ba’y san fran pou i pé sa manjé</strong> : je lui ai donné cent francs pour qu’il puisse manger</li>
-        <li><strong>man pé ké pé vini</strong> : je ne pourrai pas venir</li>
-        <li><strong>i pé ja rivé</strong> : il est peut-être déjà arrivé</li>
-      </ul>
-    </section>
+          <h2>Le verbe « pouvoir »</h2>
+          <p><strong>pé</strong> traduit la capacité et la possibilité, souvent combiné à <strong>sa</strong> pour indiquer la réussite. La négation se fond avec <strong>pé</strong> au futur (<strong>pé ké</strong>). Le verbe peut aussi exprimer la probabilité.</p>
+          <ul class="examples">
+            <li><strong>ou pé pati</strong> : tu peux partir</li>
+            <li><strong>man ba’y san fran pou i pé sa manjé</strong> : je lui ai donné cent francs pour qu’il puisse manger</li>
+            <li><strong>man pé ké pé vini</strong> : je ne pourrai pas venir</li>
+            <li><strong>i pé ja rivé</strong> : il est peut-être déjà arrivé</li>
+          </ul>
+        </section>
   </main>
-
-  <footer>
-    <p>Mise à jour des règles grammaticales pour accompagner les exercices de créole martiniquais.</p>
+<footer>
+    <p>Travail collaboratif · Merci à tou·te·s les contributrices et contributeurs !</p>
   </footer>
+<script>
+    const menus = document.querySelectorAll('details.menu');
 
-  <script>
-    const menu = document.querySelector('.menu');
+    menus.forEach((menu) => {
+      const summary = menu.querySelector('summary');
+      const links = menu.querySelectorAll('a');
 
-    if (menu) {
-      const panel = menu.querySelector('.menu-panel');
+      if (summary) {
+        summary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+        menu.addEventListener('toggle', () => {
+          summary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+        });
+      }
 
-      panel?.addEventListener('click', (event) => {
-        const link = event.target.closest('a');
-        if (link) {
+      links.forEach((link) => {
+        link.addEventListener('click', () => {
           menu.removeAttribute('open');
-        }
+        });
       });
+    });
 
-      document.addEventListener('click', (event) => {
+    document.addEventListener('click', (event) => {
+      menus.forEach((menu) => {
         if (!menu.contains(event.target)) {
           menu.removeAttribute('open');
         }
       });
+    });
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          menu.removeAttribute('open');
-          menu.querySelector('summary')?.focus();
-        }
-      });
-    }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        menus.forEach((menu) => {
+          if (menu.open) {
+            menu.removeAttribute('open');
+            menu.querySelector('summary')?.focus();
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>

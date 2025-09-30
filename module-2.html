@@ -127,7 +127,7 @@
       outline: none;
     }
 
-    .module-link.is-current {
+    .module-link[aria-current="page"] {
       background: rgba(139, 92, 246, 0.32);
       color: white;
       box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
@@ -253,39 +253,6 @@
       outline: none;
     }
 
-    @media (max-width: 720px) {
-      .lesson-nav {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .module-links {
-        justify-content: center;
-      }
-
-      .menu {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-
-      .menu-panel {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-      }
-    }
-
-    @media (prefers-color-scheme: dark) {
-      nav {
-        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
-      }
-
-      footer p {
-        background: rgba(30, 17, 52, 0.62);
-      }
-    }
-
     main {
       padding: 3rem 1.5rem 4.5rem;
       max-width: 1100px;
@@ -310,95 +277,68 @@
       margin-bottom: 0.75rem;
     }
 
-    h3 {
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
     p {
       margin: 0.6rem 0;
     }
 
-    ul,
-    ol {
-      margin: 0.75rem 0 0.75rem 1.25rem;
-      padding: 0;
-    }
-
-    li {
-      margin-bottom: 0.45rem;
-    }
-
-    .module-card .module-lessons {
-      list-style: none;
-      margin: 1.1rem 0 1.6rem;
-      padding: 0;
+    .module-card {
       display: grid;
-      gap: 0.5rem;
+      gap: 1.1rem;
     }
 
-    .module-card .module-lessons li {
-      background: rgba(139, 92, 246, 0.12);
-      border-left: 4px solid rgba(139, 92, 246, 0.55);
-      padding: 0.75rem 1rem;
-      border-radius: 16px;
-      font-weight: 600;
-      color: var(--accent-strong);
-      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
-    }
-
-    .examples {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 0.75rem;
-      margin: 1rem 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .examples li {
-      background: rgba(139, 92, 246, 0.12);
-      border-left: 4px solid rgba(139, 92, 246, 0.85);
-      padding: 0.9rem 1.1rem;
-      border-radius: 14px;
+    .module-card p {
       margin: 0;
-      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
     }
 
-    .note {
-      background: rgba(250, 204, 21, 0.18);
-      border-left: 4px solid #facc15;
-      padding: 0.85rem 1.1rem;
-      border-radius: 14px;
-      margin: 1.2rem 0;
+    .module-lessons {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .module-lessons a {
+      text-decoration: none;
       color: inherit;
-      box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.12);
-    }
-
-    .module-cta {
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.75rem 1.4rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(56, 189, 248, 0.75));
-      color: white;
+    }
+
+    .module-lessons a::before {
+      content: "→";
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .module-card-link {
+      justify-self: start;
       text-decoration: none;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.85), rgba(56, 189, 248, 0.75));
+      color: white;
       font-weight: 600;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      padding: 0.85rem 1.4rem;
+      border-radius: 999px;
       box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .module-cta:hover,
-    .module-cta:focus-visible {
+    .module-card-link:hover,
+    .module-card-link:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 22px 40px rgba(80, 56, 160, 0.36);
       outline: none;
+    }
+
+    .module-card small {
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     footer {
@@ -420,25 +360,61 @@
       backdrop-filter: blur(16px);
       box-shadow: 0 12px 30px var(--shadow);
     }
+
+    @media (max-width: 720px) {
+      .lesson-nav {
+        justify-content: center;
+      }
+
+      .module-links {
+        justify-content: center;
+      }
+
+      .menu {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .menu-panel {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+      }
+
+      .module-card-link {
+        justify-self: center;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      nav {
+        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
+      }
+
+      footer p {
+        background: rgba(30, 17, 52, 0.62);
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
+<header>
     <h1>Grammaire Martiniquaise</h1>
-    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en leçons pour accompagner vos exercices et révisions.</p>
+    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en modules thématiques pour accomp
+agner vos exercices et révisions.</p>
   </header>
-
-  <nav aria-label="Navigation des leçons">
+  <nav aria-label="Navigation principale">
     <div class="lesson-nav">
-      <div class="module-links" role="list">
-        <a class="module-link" href="index.html" role="listitem">Sommaire</a>
-        <a class="module-link" href="module-1.html" role="listitem">Module 1</a>
-        <a class="module-link is-current" href="module-2.html" role="listitem" aria-current="page">Module 2</a>
-        <a class="module-link" href="module-3.html" role="listitem">Module 3</a>
-        <a class="module-link" href="module-4.html" role="listitem">Module 4</a>
+      <div class="module-links">
+        <a class="module-link" href="index.html">Accueil</a>
+        <a class="module-link" href="module-1.html">Module 1</a>
+        <a class="module-link" href="module-2.html" aria-current="page">Module 2</a>
+        <a class="module-link" href="module-3.html">Module 3</a>
+        <a class="module-link" href="module-4.html">Module 4</a>
       </div>
       <details class="menu">
-        <summary class="menu-toggle">
+        <summary class="menu-toggle" aria-expanded="false">
           Sommaire du module
           <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M4.5 7l5.5 6 5.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -446,7 +422,7 @@
         </summary>
         <div class="menu-panel">
           <div class="menu-group">
-            <p class="menu-group-title">Module 2 · Prépositions et expressions</p>
+            <p class="menu-group-title">Leçons 10 à 14</p>
             <ul>
               <li><a href="#lesson-10">L’exclamation</a></li>
               <li><a href="#lesson-11">La préposition « à »</a></li>
@@ -461,94 +437,105 @@
   </nav>
   <main>
     <section id="lesson-10">
-      <h2>L’exclamation</h2>
-      <p>Plusieurs particules expriment l’exclamation et l’intensité : <strong>fout</strong>, <strong>wi</strong>, <strong>mé</strong>, <strong>wo</strong>, <strong>dann</strong>, <strong>aten</strong>, <strong>papa</strong>, <strong>mézanmi</strong>, <strong>an</strong>, <strong>woy</strong>, <strong>mi</strong>, <strong>joy</strong>, <strong>yan</strong>, <strong>pou</strong>. Elles peuvent être autonomes ou combinées pour renforcer une réaction.</p>
-      <ul class="examples">
-        <li><strong>fout madanm-la bèl !</strong> : que la dame est belle !</li>
-        <li><strong>mé i mové !</strong> : qu’il est méchant !</li>
-        <li><strong>woy woy woy !</strong> : oh là là !</li>
-        <li><strong>mi kalté gwo madanm !</strong> : quelle grosse femme !</li>
-      </ul>
-      <p>Certains termes sont répétés pour intensifier l’émotion (<strong>pa… pa… pa…</strong>, <strong>an an an an</strong>).</p>
-    </section>
+          <h2>L’exclamation</h2>
+          <p>Plusieurs particules expriment l’exclamation et l’intensité : <strong>fout</strong>, <strong>wi</strong>, <strong>mé</strong>, <strong>wo</strong>, <strong>dann</strong>, <strong>aten</strong>, <strong>papa</strong>, <strong>mézanmi</strong>, <strong>an</strong>, <strong>woy</strong>, <strong>mi</strong>, <strong>joy</strong>, <strong>yan</strong>, <strong>pou</strong>. Elles peuvent être autonomes ou combinées pour renforcer une réaction.</p>
+          <ul class="examples">
+            <li><strong>fout madanm-la bèl !</strong> : que la dame est belle !</li>
+            <li><strong>mé i mové !</strong> : qu’il est méchant !</li>
+            <li><strong>woy woy woy !</strong> : oh là là !</li>
+            <li><strong>mi kalté gwo madanm !</strong> : quelle grosse femme !</li>
+          </ul>
+          <p>Certains termes sont répétés pour intensifier l’émotion (<strong>pa… pa… pa…</strong>, <strong>an an an an</strong>).</p>
+        </section>
 
     <section id="lesson-11">
-      <h2>La préposition « à »</h2>
-      <p>La préposition française « à » peut être rendue par une forme zéro ou par diverses particules selon le contexte : <strong>a</strong>, <strong>ta</strong>, <strong>an</strong>, <strong>épi</strong>, <strong>ala</strong>, <strong>ka</strong>, <strong>ba</strong>, <strong>pou</strong>, <strong>o</strong>, <strong>rivé</strong>.</p>
-      <ul class="examples">
-        <li><strong>ba Pyè lajan</strong> : donne de l’argent à Pierre</li>
-        <li><strong>man ka alé lanmès</strong> : je vais à la messe</li>
-        <li><strong>vini a katrè</strong> : viens à quatre heures</li>
-        <li><strong>pòté patjé-tala ba papa’w</strong> : porte ce paquet à ton père</li>
-      </ul>
-      <p>Les constructions diffèrent selon qu’il s’agit d’attribution, de caractérisation, de localisation, de destination ou de verbe particulier.</p>
-    </section>
+          <h2>La préposition « à »</h2>
+          <p>La préposition française « à » peut être rendue par une forme zéro ou par diverses particules selon le contexte : <strong>a</strong>, <strong>ta</strong>, <strong>an</strong>, <strong>épi</strong>, <strong>ala</strong>, <strong>ka</strong>, <strong>ba</strong>, <strong>pou</strong>, <strong>o</strong>, <strong>rivé</strong>.</p>
+          <ul class="examples">
+            <li><strong>ba Pyè lajan</strong> : donne de l’argent à Pierre</li>
+            <li><strong>man ka alé lanmès</strong> : je vais à la messe</li>
+            <li><strong>vini a katrè</strong> : viens à quatre heures</li>
+            <li><strong>pòté patjé-tala ba papa’w</strong> : porte ce paquet à ton père</li>
+          </ul>
+          <p>Les constructions diffèrent selon qu’il s’agit d’attribution, de caractérisation, de localisation, de destination ou de verbe particulier.</p>
+        </section>
 
     <section id="lesson-12">
-      <h2>La préposition « de »</h2>
-      <p>« De » se traduit par la forme zéro pour l’appartenance, la partitive, la provenance, etc., mais aussi par <strong>di</strong>, <strong>sòti</strong>, <strong>an</strong>, ou <strong>adan</strong> selon la nuance (matière, provenance, localisation, dénombrement).</p>
-      <ul class="examples">
-        <li><strong>joujou timanmay-la</strong> : le jouet de l’enfant</li>
-        <li><strong>i bwè dlo</strong> : il a bu de l’eau</li>
-        <li><strong>man kontan di’w</strong> : je suis content de toi</li>
-        <li><strong>dè adan yo chapé</strong> : deux d’entre eux se sont échappés</li>
-      </ul>
-    </section>
+          <h2>La préposition « de »</h2>
+          <p>« De » se traduit par la forme zéro pour l’appartenance, la partitive, la provenance, etc., mais aussi par <strong>di</strong>, <strong>sòti</strong>, <strong>an</strong>, ou <strong>adan</strong> selon la nuance (matière, provenance, localisation, dénombrement).</p>
+          <ul class="examples">
+            <li><strong>joujou timanmay-la</strong> : le jouet de l’enfant</li>
+            <li><strong>i bwè dlo</strong> : il a bu de l’eau</li>
+            <li><strong>man kontan di’w</strong> : je suis content de toi</li>
+            <li><strong>dè adan yo chapé</strong> : deux d’entre eux se sont échappés</li>
+          </ul>
+        </section>
 
     <section id="lesson-13">
-      <h2>Autres prépositions (I)</h2>
-      <p>Les prépositions françaises « pour », « vers », « en/dans », « chez », « contre » se rendent en créole par plusieurs équivalents dépendant du sens précis.</p>
-      <ul class="examples">
-        <li><strong>man ka travay pou érisi</strong> : je travaille pour réussir</li>
-        <li><strong>man ké fè tou sa man pé ba’w</strong> : je ferai tout ce que je peux pour toi</li>
-        <li><strong>nou ka alé o Pòl</strong> : nous allons vers Paul</li>
-        <li><strong>pòté sa alé lakay Pyè</strong> : porte ça chez Pierre</li>
-        <li><strong>nou ké goumen kont yo</strong> : nous nous battrons contre eux</li>
-      </ul>
-    </section>
+          <h2>Autres prépositions (I)</h2>
+          <p>Les prépositions françaises « pour », « vers », « en/dans », « chez », « contre » se rendent en créole par plusieurs équivalents dépendant du sens précis.</p>
+          <ul class="examples">
+            <li><strong>man ka travay pou érisi</strong> : je travaille pour réussir</li>
+            <li><strong>man ké fè tou sa man pé ba’w</strong> : je ferai tout ce que je peux pour toi</li>
+            <li><strong>nou ka alé o Pòl</strong> : nous allons vers Paul</li>
+            <li><strong>pòté sa alé lakay Pyè</strong> : porte ça chez Pierre</li>
+            <li><strong>nou ké goumen kont yo</strong> : nous nous battrons contre eux</li>
+          </ul>
+        </section>
 
     <section id="lesson-14">
-      <h2>Autres prépositions (II)</h2>
-      <p><strong>épi</strong> traduit fréquemment « avec », complété par <strong>ansanm épi</strong> pour l’accompagnement. D’autres prépositions usuelles : <strong>apré</strong>, <strong>avan</strong>, <strong>dépi</strong>, <strong>dèyè</strong>, <strong>douvan</strong>, <strong>ant</strong>, <strong>adan</strong>, <strong>an déwò</strong>, <strong>jik</strong>, <strong>magré</strong>, <strong>san</strong>, <strong>silon</strong>, <strong>anba</strong>, <strong>anlè</strong>.</p>
-      <ul class="examples">
-        <li><strong>frè mwen vini épi madanm li</strong> : mon frère est venu avec sa femme</li>
-        <li><strong>dèyè kay-la</strong> : derrière la maison</li>
-        <li><strong>ann Italie</strong> : en Italie</li>
-        <li><strong>anba tab-la</strong> : sous la table</li>
-      </ul>
-    </section>
+          <h2>Autres prépositions (II)</h2>
+          <p><strong>épi</strong> traduit fréquemment « avec », complété par <strong>ansanm épi</strong> pour l’accompagnement. D’autres prépositions usuelles : <strong>apré</strong>, <strong>avan</strong>, <strong>dépi</strong>, <strong>dèyè</strong>, <strong>douvan</strong>, <strong>ant</strong>, <strong>adan</strong>, <strong>an déwò</strong>, <strong>jik</strong>, <strong>magré</strong>, <strong>san</strong>, <strong>silon</strong>, <strong>anba</strong>, <strong>anlè</strong>.</p>
+          <ul class="examples">
+            <li><strong>frè mwen vini épi madanm li</strong> : mon frère est venu avec sa femme</li>
+            <li><strong>dèyè kay-la</strong> : derrière la maison</li>
+            <li><strong>ann Italie</strong> : en Italie</li>
+            <li><strong>anba tab-la</strong> : sous la table</li>
+          </ul>
+        </section>
   </main>
-
-  <footer>
-    <p>Mise à jour des règles grammaticales pour accompagner les exercices de créole martiniquais.</p>
+<footer>
+    <p>Travail collaboratif · Merci à tou·te·s les contributrices et contributeurs !</p>
   </footer>
+<script>
+    const menus = document.querySelectorAll('details.menu');
 
-  <script>
-    const menu = document.querySelector('.menu');
+    menus.forEach((menu) => {
+      const summary = menu.querySelector('summary');
+      const links = menu.querySelectorAll('a');
 
-    if (menu) {
-      const panel = menu.querySelector('.menu-panel');
+      if (summary) {
+        summary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+        menu.addEventListener('toggle', () => {
+          summary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+        });
+      }
 
-      panel?.addEventListener('click', (event) => {
-        const link = event.target.closest('a');
-        if (link) {
+      links.forEach((link) => {
+        link.addEventListener('click', () => {
           menu.removeAttribute('open');
-        }
+        });
       });
+    });
 
-      document.addEventListener('click', (event) => {
+    document.addEventListener('click', (event) => {
+      menus.forEach((menu) => {
         if (!menu.contains(event.target)) {
           menu.removeAttribute('open');
         }
       });
+    });
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          menu.removeAttribute('open');
-          menu.querySelector('summary')?.focus();
-        }
-      });
-    }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        menus.forEach((menu) => {
+          if (menu.open) {
+            menu.removeAttribute('open');
+            menu.querySelector('summary')?.focus();
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>

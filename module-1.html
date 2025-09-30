@@ -127,7 +127,7 @@
       outline: none;
     }
 
-    .module-link.is-current {
+    .module-link[aria-current="page"] {
       background: rgba(139, 92, 246, 0.32);
       color: white;
       box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
@@ -253,39 +253,6 @@
       outline: none;
     }
 
-    @media (max-width: 720px) {
-      .lesson-nav {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .module-links {
-        justify-content: center;
-      }
-
-      .menu {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-
-      .menu-panel {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-      }
-    }
-
-    @media (prefers-color-scheme: dark) {
-      nav {
-        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
-      }
-
-      footer p {
-        background: rgba(30, 17, 52, 0.62);
-      }
-    }
-
     main {
       padding: 3rem 1.5rem 4.5rem;
       max-width: 1100px;
@@ -310,95 +277,68 @@
       margin-bottom: 0.75rem;
     }
 
-    h3 {
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
     p {
       margin: 0.6rem 0;
     }
 
-    ul,
-    ol {
-      margin: 0.75rem 0 0.75rem 1.25rem;
-      padding: 0;
-    }
-
-    li {
-      margin-bottom: 0.45rem;
-    }
-
-    .module-card .module-lessons {
-      list-style: none;
-      margin: 1.1rem 0 1.6rem;
-      padding: 0;
+    .module-card {
       display: grid;
-      gap: 0.5rem;
+      gap: 1.1rem;
     }
 
-    .module-card .module-lessons li {
-      background: rgba(139, 92, 246, 0.12);
-      border-left: 4px solid rgba(139, 92, 246, 0.55);
-      padding: 0.75rem 1rem;
-      border-radius: 16px;
-      font-weight: 600;
-      color: var(--accent-strong);
-      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
-    }
-
-    .examples {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 0.75rem;
-      margin: 1rem 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .examples li {
-      background: rgba(139, 92, 246, 0.12);
-      border-left: 4px solid rgba(139, 92, 246, 0.85);
-      padding: 0.9rem 1.1rem;
-      border-radius: 14px;
+    .module-card p {
       margin: 0;
-      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
     }
 
-    .note {
-      background: rgba(250, 204, 21, 0.18);
-      border-left: 4px solid #facc15;
-      padding: 0.85rem 1.1rem;
-      border-radius: 14px;
-      margin: 1.2rem 0;
+    .module-lessons {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .module-lessons a {
+      text-decoration: none;
       color: inherit;
-      box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.12);
-    }
-
-    .module-cta {
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.75rem 1.4rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(56, 189, 248, 0.75));
-      color: white;
+    }
+
+    .module-lessons a::before {
+      content: "→";
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .module-card-link {
+      justify-self: start;
       text-decoration: none;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.85), rgba(56, 189, 248, 0.75));
+      color: white;
       font-weight: 600;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      padding: 0.85rem 1.4rem;
+      border-radius: 999px;
       box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .module-cta:hover,
-    .module-cta:focus-visible {
+    .module-card-link:hover,
+    .module-card-link:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 22px 40px rgba(80, 56, 160, 0.36);
       outline: none;
+    }
+
+    .module-card small {
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     footer {
@@ -420,25 +360,61 @@
       backdrop-filter: blur(16px);
       box-shadow: 0 12px 30px var(--shadow);
     }
+
+    @media (max-width: 720px) {
+      .lesson-nav {
+        justify-content: center;
+      }
+
+      .module-links {
+        justify-content: center;
+      }
+
+      .menu {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .menu-panel {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+      }
+
+      .module-card-link {
+        justify-self: center;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      nav {
+        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
+      }
+
+      footer p {
+        background: rgba(30, 17, 52, 0.62);
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
+<header>
     <h1>Grammaire Martiniquaise</h1>
-    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en leçons pour accompagner vos exercices et révisions.</p>
+    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en modules thématiques pour accomp
+agner vos exercices et révisions.</p>
   </header>
-
-  <nav aria-label="Navigation des leçons">
+  <nav aria-label="Navigation principale">
     <div class="lesson-nav">
-      <div class="module-links" role="list">
-        <a class="module-link" href="index.html" role="listitem">Sommaire</a>
-        <a class="module-link is-current" href="module-1.html" role="listitem" aria-current="page">Module 1</a>
-        <a class="module-link" href="module-2.html" role="listitem">Module 2</a>
-        <a class="module-link" href="module-3.html" role="listitem">Module 3</a>
-        <a class="module-link" href="module-4.html" role="listitem">Module 4</a>
+      <div class="module-links">
+        <a class="module-link" href="index.html">Accueil</a>
+        <a class="module-link" href="module-1.html" aria-current="page">Module 1</a>
+        <a class="module-link" href="module-2.html">Module 2</a>
+        <a class="module-link" href="module-3.html">Module 3</a>
+        <a class="module-link" href="module-4.html">Module 4</a>
       </div>
       <details class="menu">
-        <summary class="menu-toggle">
+        <summary class="menu-toggle" aria-expanded="false">
           Sommaire du module
           <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M4.5 7l5.5 6 5.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -446,7 +422,7 @@
         </summary>
         <div class="menu-panel">
           <div class="menu-group">
-            <p class="menu-group-title">Module 1 · Déterminants et interactions</p>
+            <p class="menu-group-title">Leçons 1 à 9</p>
             <ul>
               <li><a href="#lesson-1">L’article défini</a></li>
               <li><a href="#lesson-2">L’article indéfini</a></li>
@@ -465,145 +441,156 @@
   </nav>
   <main>
     <section id="lesson-1">
-      <h2>L’article défini</h2>
-      <p>L’article défini du créole martiniquais est postposé et varie selon la finale phonétique du nom. Les formes principales sont <strong>-la</strong> après une consonne et <strong>-a</strong> après une voyelle. Après une voyelle nasale, on rencontre les variantes <strong>-lan</strong> et <strong>-an</strong>; d’autres formes comme <strong>-wa</strong>, <strong>-wan</strong>, <strong>-ya</strong> ou <strong>-yan</strong> peuvent apparaître selon la liaison.</p>
-      <ul class="examples">
-        <li><strong>boug-la</strong> : le type · <strong>fanm-lan</strong> : la femme</li>
-        <li><strong>loto-a</strong> : la voiture · <strong>sitwon-an</strong> : le citron</li>
-        <li><strong>dto-wa</strong> : l’eau · <strong>zyé-ya</strong> : l’œil</li>
-        <li><strong>kabrit la ou maré a</strong> : la chèvre que tu as attachée</li>
-      </ul>
-      <p>Dans les relatives, le « que » français est implicite et un article de rappel se place en fin de subordonnée lorsque l’antécédent possède déjà un article défini. Le trait d’union est indispensable pour distinguer les constructions nominales des adjectifs.</p>
-      <div class="note">Le créole martiniquais ne marque pas le genre grammatical : seules les distinctions sémantiques (mâle, femelle, inanimé) sont conservées.</div>
-    </section>
+          <h2>L’article défini</h2>
+          <p>L’article défini du créole martiniquais est postposé et varie selon la finale phonétique du nom. Les formes principales sont <strong>-la</strong> après une consonne et <strong>-a</strong> après une voyelle. Après une voyelle nasale, on rencontre les variantes <strong>-lan</strong> et <strong>-an</strong>; d’autres formes comme <strong>-wa</strong>, <strong>-wan</strong>, <strong>-ya</strong> ou <strong>-yan</strong> peuvent apparaître selon la liaison.</p>
+          <ul class="examples">
+            <li><strong>boug-la</strong> : le type · <strong>fanm-lan</strong> : la femme</li>
+            <li><strong>loto-a</strong> : la voiture · <strong>sitwon-an</strong> : le citron</li>
+            <li><strong>dto-wa</strong> : l’eau · <strong>zyé-ya</strong> : l’œil</li>
+            <li><strong>kabrit la ou maré a</strong> : la chèvre que tu as attachée</li>
+          </ul>
+          <p>Dans les relatives, le « que » français est implicite et un article de rappel se place en fin de subordonnée lorsque l’antécédent possède déjà un article défini. Le trait d’union est indispensable pour distinguer les constructions nominales des adjectifs.</p>
+          <div class="note">Le créole martiniquais ne marque pas le genre grammatical : seules les distinctions sémantiques (mâle, femelle, inanimé) sont conservées.</div>
+        </section>
 
     <section id="lesson-2">
-      <h2>L’article indéfini</h2>
-      <p>L’indéfini possède la forme unique <strong>an</strong> placée avant le nom, sans distinction de genre. Il peut se combiner avec des possessifs ou d’autres déterminants. Au pluriel, l’absence d’article marque l’indéfini (« forme zéro »), mais on peut rencontrer <strong>dé</strong> dans des contextes spécifiques ou exclamations avec <strong>yan</strong>.</p>
-      <ul class="examples">
-        <li><strong>an boug</strong> : un type · <strong>an madanm</strong> : une femme</li>
-        <li><strong>té ni an fwa…</strong> : il était une fois</li>
-        <li><strong>Mi dé boug kouyon !</strong> : Voilà des types idiots !</li>
-        <li><strong>man pa wè pyès zanmi</strong> : je n’ai vu aucun ami</li>
-      </ul>
-      <p>La négation introduit des nuances : <strong>pa</strong> + indéfini pour « ne… pas », <strong>pyès</strong> pour « aucun ». Des formes pronominales dérivées (par ex. <strong>yann</strong>) expriment « un seul ».</p>
-    </section>
+          <h2>L’article indéfini</h2>
+          <p>L’indéfini possède la forme unique <strong>an</strong> placée avant le nom, sans distinction de genre. Il peut se combiner avec des possessifs ou d’autres déterminants. Au pluriel, l’absence d’article marque l’indéfini (« forme zéro »), mais on peut rencontrer <strong>dé</strong> dans des contextes spécifiques ou exclamations avec <strong>yan</strong>.</p>
+          <ul class="examples">
+            <li><strong>an boug</strong> : un type · <strong>an madanm</strong> : une femme</li>
+            <li><strong>té ni an fwa…</strong> : il était une fois</li>
+            <li><strong>Mi dé boug kouyon !</strong> : Voilà des types idiots !</li>
+            <li><strong>man pa wè pyès zanmi</strong> : je n’ai vu aucun ami</li>
+          </ul>
+          <p>La négation introduit des nuances : <strong>pa</strong> + indéfini pour « ne… pas », <strong>pyès</strong> pour « aucun ». Des formes pronominales dérivées (par ex. <strong>yann</strong>) expriment « un seul ».</p>
+        </section>
 
     <section id="lesson-3">
-      <h2>Le pluriel</h2>
-      <p>Le pluriel défini se forme avec <strong>sé …-la</strong> ou <strong>sé …-a</strong> selon la finale du mot, alors que le pluriel indéfini est généralement exprimé par la forme zéro ou par <strong>dé</strong>. L’article permet de distinguer les ensembles particuliers des valeurs générales.</p>
-      <ul class="examples">
-        <li><strong>sé bèf-la</strong> : les bœufs · <strong>sé soulyé-a</strong> : les chaussures</li>
-        <li><strong>man wè kay</strong> : j’ai vu des maisons · <strong>man wè sé kay-la</strong> : j’ai vu les maisons</li>
-        <li><strong>sé mèt-la ka palé</strong> : les maîtres parlent</li>
-        <li><strong>tamwen</strong> : les miens (général) · <strong>sé tamwen-an</strong> : les miens (particulier)</li>
-      </ul>
-      <p>Selon les régions, d’autres marques comme <strong>lé</strong> peuvent remplacer <strong>sé</strong>. Les possessifs se combinent avec l’article pour préciser la portée.</p>
-    </section>
+          <h2>Le pluriel</h2>
+          <p>Le pluriel défini se forme avec <strong>sé …-la</strong> ou <strong>sé …-a</strong> selon la finale du mot, alors que le pluriel indéfini est généralement exprimé par la forme zéro ou par <strong>dé</strong>. L’article permet de distinguer les ensembles particuliers des valeurs générales.</p>
+          <ul class="examples">
+            <li><strong>sé bèf-la</strong> : les bœufs · <strong>sé soulyé-a</strong> : les chaussures</li>
+            <li><strong>man wè kay</strong> : j’ai vu des maisons · <strong>man wè sé kay-la</strong> : j’ai vu les maisons</li>
+            <li><strong>sé mèt-la ka palé</strong> : les maîtres parlent</li>
+            <li><strong>tamwen</strong> : les miens (général) · <strong>sé tamwen-an</strong> : les miens (particulier)</li>
+          </ul>
+          <p>Selon les régions, d’autres marques comme <strong>lé</strong> peuvent remplacer <strong>sé</strong>. Les possessifs se combinent avec l’article pour préciser la portée.</p>
+        </section>
 
     <section id="lesson-4">
-      <h2>Les pronoms personnels</h2>
-      <p>Les pronoms distinguent formes toniques et atones, avec des variantes après voyelle. Les pronoms objets suivent toujours le verbe. Les compléments directs de chose utilisent souvent <strong>sa</strong> plutôt qu’un pronom personnel.</p>
-      <ul class="examples">
-        <li><strong>mwen / man</strong> : je · <strong>wou / ou / ’w</strong> : tu · <strong>li / i / y</strong> : il/elle</li>
-        <li><strong>man wè’w</strong> : je t’ai vu(e) · <strong>kité’y palé</strong> : laisse-le parler</li>
-        <li><strong>man ka ba’y li</strong> : je le lui donne (personne avant objet)</li>
-        <li><strong>nou fè sa</strong> : nous l’avons fait</li>
-      </ul>
-      <p>Les formes réfléchies fusionnent avec <strong>kò-</strong> (ex. <strong>kòmwen</strong>). Les intensifs (<strong>mwen menm la</strong>) servent à insister sur le sujet.</p>
-    </section>
+          <h2>Les pronoms personnels</h2>
+          <p>Les pronoms distinguent formes toniques et atones, avec des variantes après voyelle. Les pronoms objets suivent toujours le verbe. Les compléments directs de chose utilisent souvent <strong>sa</strong> plutôt qu’un pronom personnel.</p>
+          <ul class="examples">
+            <li><strong>mwen / man</strong> : je · <strong>wou / ou / ’w</strong> : tu · <strong>li / i / y</strong> : il/elle</li>
+            <li><strong>man wè’w</strong> : je t’ai vu(e) · <strong>kité’y palé</strong> : laisse-le parler</li>
+            <li><strong>man ka ba’y li</strong> : je le lui donne (personne avant objet)</li>
+            <li><strong>nou fè sa</strong> : nous l’avons fait</li>
+          </ul>
+          <p>Les formes réfléchies fusionnent avec <strong>kò-</strong> (ex. <strong>kòmwen</strong>). Les intensifs (<strong>mwen menm la</strong>) servent à insister sur le sujet.</p>
+        </section>
 
     <section id="lesson-5">
-      <h2>Les possessifs</h2>
-      <p>La possession se marque en plaçant le pronom personnel après le nom. L’article défini détermine la portée (générale ou particulière). Les formes pronominales dérivées utilisent la particule <strong>ta</strong> pour exprimer « le mien », « les nôtres », etc.</p>
-      <ul class="examples">
-        <li><strong>tab li</strong> : ses tables (général) · <strong>tab li a</strong> : sa table</li>
-        <li><strong>loto mwen</strong> : mes voitures · <strong>loto mwen an</strong> : ma voiture</li>
-        <li><strong>tamwen</strong> : les miens · <strong>tamwen an</strong> : le mien</li>
-        <li><strong>kisa ki ta’w ?</strong> : qu’est-ce qui est à toi ?</li>
-      </ul>
-      <p>Lorsque l’on présume l’unicité (parents, conjoint), l’article disparaît : <strong>papa’w</strong>, <strong>manman’w</strong>. Des tournures comme <strong>an yich mwen</strong> signifient « un de mes enfants ».</p>
-    </section>
+          <h2>Les possessifs</h2>
+          <p>La possession se marque en plaçant le pronom personnel après le nom. L’article défini détermine la portée (générale ou particulière). Les formes pronominales dérivées utilisent la particule <strong>ta</strong> pour exprimer « le mien », « les nôtres », etc.</p>
+          <ul class="examples">
+            <li><strong>tab li</strong> : ses tables (général) · <strong>tab li a</strong> : sa table</li>
+            <li><strong>loto mwen</strong> : mes voitures · <strong>loto mwen an</strong> : ma voiture</li>
+            <li><strong>tamwen</strong> : les miens · <strong>tamwen an</strong> : le mien</li>
+            <li><strong>kisa ki ta’w ?</strong> : qu’est-ce qui est à toi ?</li>
+          </ul>
+          <p>Lorsque l’on présume l’unicité (parents, conjoint), l’article disparaît : <strong>papa’w</strong>, <strong>manman’w</strong>. Des tournures comme <strong>an yich mwen</strong> signifient « un de mes enfants ».</p>
+        </section>
 
     <section id="lesson-6">
-      <h2>Les démonstratifs</h2>
-      <p>Le démonstratif adjectival <strong>tala</strong> se place après le nom avec un trait d’union. Des variantes abrégées (<strong>taa</strong>) existent. Le pluriel se forme avec <strong>sé</strong> et des pronoms démonstratifs (<strong>sé tala</strong>) reprennent l’antécédent.</p>
-      <ul class="examples">
-        <li><strong>bagay-tala</strong> : cette chose-ci/là</li>
-        <li><strong>sé moun-tala</strong> : ces gens-là</li>
-        <li><strong>tala ki palé a sé mèt-la</strong> : celui qui a parlé, c’est le maître</li>
-        <li><strong>ba mwen sa</strong> : donne-moi cela</li>
-      </ul>
-      <p>L’article défini peut jouer un rôle démonstratif (<strong>boug-la</strong> = « ce type »). Les expressions temporelles (<strong>oswè-a</strong>, <strong>bonmaten-an</strong>) utilisent l’article pour indiquer la précision.</p>
-    </section>
+          <h2>Les démonstratifs</h2>
+          <p>Le démonstratif adjectival <strong>tala</strong> se place après le nom avec un trait d’union. Des variantes abrégées (<strong>taa</strong>) existent. Le pluriel se forme avec <strong>sé</strong> et des pronoms démonstratifs (<strong>sé tala</strong>) reprennent l’antécédent.</p>
+          <ul class="examples">
+            <li><strong>bagay-tala</strong> : cette chose-ci/là</li>
+            <li><strong>sé moun-tala</strong> : ces gens-là</li>
+            <li><strong>tala ki palé a sé mèt-la</strong> : celui qui a parlé, c’est le maître</li>
+            <li><strong>ba mwen sa</strong> : donne-moi cela</li>
+          </ul>
+          <p>L’article défini peut jouer un rôle démonstratif (<strong>boug-la</strong> = « ce type »). Les expressions temporelles (<strong>oswè-a</strong>, <strong>bonmaten-an</strong>) utilisent l’article pour indiquer la précision.</p>
+        </section>
 
     <section id="lesson-7">
-      <h2>Les relatifs</h2>
-      <p>Le relatif <strong>ki</strong> s’utilise lorsque l’antécédent est sujet, tandis que la forme zéro s’applique aux compléments. Un article de rappel clôt les subordonnées lorsque l’antécédent est déterminé. Le mot explétif <strong>éti</strong> peut précéder le relatif.</p>
-      <ul class="examples">
-        <li><strong>sé Pyè ki vòlé bèf-la</strong> : c’est Pierre qui a volé le bœuf</li>
-        <li><strong>sé bèf-la Pyè vòlé</strong> : c’est le bœuf que Pierre a volé</li>
-        <li><strong>boug-la ki ka rété Fodfrans la</strong> : le type qui habite Fort-de-France</li>
-        <li><strong>koutla-a man ka koupé kann épi’y la</strong> : le coutelas avec lequel je coupe la canne</li>
-      </ul>
-      <p>Les traductions de « dont », « où », « lequel » s’appuient sur des structures possessives ou prépositionnelles (<strong>mi boug-la i té ka palé’w la</strong>).</p>
-    </section>
+          <h2>Les relatifs</h2>
+          <p>Le relatif <strong>ki</strong> s’utilise lorsque l’antécédent est sujet, tandis que la forme zéro s’applique aux compléments. Un article de rappel clôt les subordonnées lorsque l’antécédent est déterminé. Le mot explétif <strong>éti</strong> peut précéder le relatif.</p>
+          <ul class="examples">
+            <li><strong>sé Pyè ki vòlé bèf-la</strong> : c’est Pierre qui a volé le bœuf</li>
+            <li><strong>sé bèf-la Pyè vòlé</strong> : c’est le bœuf que Pierre a volé</li>
+            <li><strong>boug-la ki ka rété Fodfrans la</strong> : le type qui habite Fort-de-France</li>
+            <li><strong>koutla-a man ka koupé kann épi’y la</strong> : le coutelas avec lequel je coupe la canne</li>
+          </ul>
+          <p>Les traductions de « dont », « où », « lequel » s’appuient sur des structures possessives ou prépositionnelles (<strong>mi boug-la i té ka palé’w la</strong>).</p>
+        </section>
 
     <section id="lesson-8">
-      <h2>L’interrogation</h2>
-      <p>L’interrogation se marque par l’intonation ou par des particules (<strong>ès</strong>, <strong>an</strong>, <strong>wi</strong>, <strong>non</strong>, <strong>pa vré</strong>). Les interrogatifs se combinent souvent avec le relatif <strong>ki</strong>.</p>
-      <ul class="examples">
-        <li><strong>ou ka vini, an ?</strong> : tu viens ?</li>
-        <li><strong>ès i fè sa ?</strong> : est-ce qu’il a fait ça ?</li>
-        <li><strong>ki moun ki fè sa ?</strong> : qui a fait ça ?</li>
-        <li><strong>poutji ou pa vini ?</strong> : pourquoi n’es-tu pas venu ?</li>
-      </ul>
-      <p>Les formes interrogatives couvrent qui (<strong>ki moun</strong>), quoi (<strong>kisa</strong>), quel (<strong>kilès</strong>), où (<strong>koté</strong>, <strong>oti</strong>), comment (<strong>ki mannyè</strong>), pourquoi (<strong>poutji</strong>), quand (<strong>ki tan</strong>, <strong>ki jou</strong>).</p>
-    </section>
+          <h2>L’interrogation</h2>
+          <p>L’interrogation se marque par l’intonation ou par des particules (<strong>ès</strong>, <strong>an</strong>, <strong>wi</strong>, <strong>non</strong>, <strong>pa vré</strong>). Les interrogatifs se combinent souvent avec le relatif <strong>ki</strong>.</p>
+          <ul class="examples">
+            <li><strong>ou ka vini, an ?</strong> : tu viens ?</li>
+            <li><strong>ès i fè sa ?</strong> : est-ce qu’il a fait ça ?</li>
+            <li><strong>ki moun ki fè sa ?</strong> : qui a fait ça ?</li>
+            <li><strong>poutji ou pa vini ?</strong> : pourquoi n’es-tu pas venu ?</li>
+          </ul>
+          <p>Les formes interrogatives couvrent qui (<strong>ki moun</strong>), quoi (<strong>kisa</strong>), quel (<strong>kilès</strong>), où (<strong>koté</strong>, <strong>oti</strong>), comment (<strong>ki mannyè</strong>), pourquoi (<strong>poutji</strong>), quand (<strong>ki tan</strong>, <strong>ki jou</strong>).</p>
+        </section>
 
     <section id="lesson-9">
-      <h2>La négation</h2>
-      <p>La particule <strong>pa</strong> précède le verbe pour exprimer la négation. Selon le temps, elle peut varier : <strong>pé</strong> devant <strong>ké</strong> (futur/conditionnel), <strong>poko</strong> pour « pas encore », <strong>pa… ankò</strong> pour « ne… plus ».</p>
-      <ul class="examples">
-        <li><strong>i pa ni lajan</strong> : il n’a pas d’argent</li>
-        <li><strong>nou pé ké kontan</strong> : nous ne serons pas contents</li>
-        <li><strong>i pòkò fè sa</strong> : il ne l’a pas encore fait</li>
-        <li><strong>man pa wè pyès moun</strong> : je n’ai vu personne</li>
-      </ul>
-      <p>Des intensificateurs comme <strong>pyès</strong>, <strong>ayen</strong>, <strong>janmen</strong> renforcent la négation. La place de <strong>pa</strong> autour du verbe <strong>pé</strong> (pouvoir) influe sur le sens (<strong>i pa pé</strong> vs <strong>i pé pa</strong>).</p>
-    </section>
+          <h2>La négation</h2>
+          <p>La particule <strong>pa</strong> précède le verbe pour exprimer la négation. Selon le temps, elle peut varier : <strong>pé</strong> devant <strong>ké</strong> (futur/conditionnel), <strong>poko</strong> pour « pas encore », <strong>pa… ankò</strong> pour « ne… plus ».</p>
+          <ul class="examples">
+            <li><strong>i pa ni lajan</strong> : il n’a pas d’argent</li>
+            <li><strong>nou pé ké kontan</strong> : nous ne serons pas contents</li>
+            <li><strong>i pòkò fè sa</strong> : il ne l’a pas encore fait</li>
+            <li><strong>man pa wè pyès moun</strong> : je n’ai vu personne</li>
+          </ul>
+          <p>Des intensificateurs comme <strong>pyès</strong>, <strong>ayen</strong>, <strong>janmen</strong> renforcent la négation. La place de <strong>pa</strong> autour du verbe <strong>pé</strong> (pouvoir) influe sur le sens (<strong>i pa pé</strong> vs <strong>i pé pa</strong>).</p>
+        </section>
   </main>
-
-  <footer>
-    <p>Mise à jour des règles grammaticales pour accompagner les exercices de créole martiniquais.</p>
+<footer>
+    <p>Travail collaboratif · Merci à tou·te·s les contributrices et contributeurs !</p>
   </footer>
+<script>
+    const menus = document.querySelectorAll('details.menu');
 
-  <script>
-    const menu = document.querySelector('.menu');
+    menus.forEach((menu) => {
+      const summary = menu.querySelector('summary');
+      const links = menu.querySelectorAll('a');
 
-    if (menu) {
-      const panel = menu.querySelector('.menu-panel');
+      if (summary) {
+        summary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+        menu.addEventListener('toggle', () => {
+          summary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+        });
+      }
 
-      panel?.addEventListener('click', (event) => {
-        const link = event.target.closest('a');
-        if (link) {
+      links.forEach((link) => {
+        link.addEventListener('click', () => {
           menu.removeAttribute('open');
-        }
+        });
       });
+    });
 
-      document.addEventListener('click', (event) => {
+    document.addEventListener('click', (event) => {
+      menus.forEach((menu) => {
         if (!menu.contains(event.target)) {
           menu.removeAttribute('open');
         }
       });
+    });
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          menu.removeAttribute('open');
-          menu.querySelector('summary')?.focus();
-        }
-      });
-    }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        menus.forEach((menu) => {
+          if (menu.open) {
+            menu.removeAttribute('open');
+            menu.querySelector('summary')?.focus();
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>
