@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription - Kreyolang</title>
+  <link rel="stylesheet" href="/css/app.css" />
+  <script src="/js/auth.js" defer></script>
+</head>
+<body>
+  <form class="auth-form" data-signup-form>
+    <h1>Créer un compte</h1>
+    <p class="alert" data-alert hidden></p>
+    <label>
+      Nom complet (optionnel)
+      <input type="text" name="name" autocomplete="name" />
+    </label>
+    <label>
+      Adresse e-mail
+      <input type="email" name="email" autocomplete="email" required />
+    </label>
+    <label>
+      Mot de passe
+      <input type="password" name="password" autocomplete="new-password" required minlength="8" />
+    </label>
+    <button type="submit">Créer mon compte</button>
+    <p class="form-footer">
+      Déjà membre?
+      <a href="/login.html">Se connecter</a>
+    </p>
+  </form>
+</body>
+</html>

@@ -18,6 +18,42 @@ exercices auto-corrigés,
 
 dialogues et mini-scénarios.
 
+## 🚀 Plateforme web & authentification
+
+Le dépôt inclut désormais un backend Express (Node.js) pour la gestion des comptes et des abonnements Stripe.
+
+### Démarrage
+
+1. Créez un fichier `.env` à la racine avec au minimum :
+
+   ```env
+   JWT_SECRET="change-me"
+   STRIPE_SECRET_KEY="sk_test_..."      # optionnel mais nécessaire pour Stripe
+   STRIPE_WEBHOOK_SECRET="whsec_..."    # optionnel pour activer les webhooks
+   PORT=3000
+   ```
+
+2. Installez les dépendances puis démarrez le serveur :
+
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+3. Les pages publiques sont servies depuis `public/` :
+
+   - `/login.html` : connexion
+   - `/signup.html` : création de compte
+   - `/subscribe.html` : état d’abonnement
+   - `/modules/*` : modules protégés (sessions + abonnement actif requis)
+
+### Fonctionnement
+
+- Inscription / connexion : routes JSON sous `/api/auth/*` (hash bcrypt, cookie HTTPOnly).
+- Stockage : base SQLite (`data/app.sqlite`) initialisée automatiquement.
+- Stripe : route webhook `/webhooks/stripe` qui met à jour le statut d’abonnement (`active` / `inactive`).
+- Protection : garde côté serveur pour les routes `/modules/*` et côté client (`public/js/session.js`).
+
 📦 Structure du dépôt
 .
 ├─ data/
