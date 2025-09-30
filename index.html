@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grammaire Martiniquaise</title>
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
   <style>
     :root {
       color-scheme: light dark;
@@ -53,6 +56,7 @@
     }
 
     nav {
+      --nav-height: 3.5rem;
       background-color: rgba(15, 118, 110, 0.1);
       border-bottom: 1px solid rgba(15, 118, 110, 0.2);
       backdrop-filter: blur(8px);
@@ -61,14 +65,100 @@
       z-index: 5;
     }
 
-    nav ul {
+    .lesson-nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: var(--nav-height);
+      padding: 0.25rem 1rem;
+      gap: 1rem;
+    }
+
+    .lesson-nav__toggle {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: transparent;
+      border: 2px solid rgba(15, 118, 110, 0.4);
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .lesson-nav__toggle:hover,
+    .lesson-nav__toggle:focus-visible {
+      background-color: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    .js .lesson-nav__toggle {
+      display: inline-flex;
+    }
+
+    .lesson-nav__panel {
+      width: 100%;
+      padding: 0.75rem 1.5rem;
+    }
+
+    .lesson-nav__panel ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem 1rem;
-      margin: 0;
-      padding: 0.75rem 1.5rem;
-      list-style: none;
       justify-content: center;
+    }
+
+    .js .lesson-nav__panel {
+      position: fixed;
+      inset: calc(var(--nav-height) + 0.5rem) 0 0;
+      margin: 0 auto;
+      max-width: min(680px, 100%);
+      background-color: var(--bg);
+      background-color: color-mix(in srgb, var(--bg) 92%, white 8%);
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
+      padding: 1.25rem clamp(1rem, 5vw, 2rem) 2.5rem;
+      overflow-y: auto;
+      max-height: calc(100vh - var(--nav-height) - 1.5rem);
+      transform: translateY(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      background-clip: padding-box;
+      z-index: 20;
+    }
+
+    .js .lesson-nav__panel::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.35);
+      backdrop-filter: blur(1px);
+      z-index: -1;
+      opacity: 1;
+    }
+
+    .js .lesson-nav__panel.is-open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .lesson-nav__panel[hidden] {
+      display: none;
+    }
+
+    .js .lesson-nav__panel ul {
+      display: grid;
+      gap: 0.25rem;
     }
 
     nav a {
@@ -81,10 +171,55 @@
     }
 
     nav a:hover,
-    nav a:focus {
+    nav a:focus,
+    nav a:focus-visible {
       background-color: var(--accent);
       color: white;
       outline: none;
+    }
+
+    body.nav-open {
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .lesson-nav {
+        padding: 0.75rem 1.5rem;
+      }
+
+      .lesson-nav__toggle {
+        display: none;
+      }
+
+      .lesson-nav__panel,
+      .js .lesson-nav__panel {
+        position: static;
+        inset: auto;
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
+        border-radius: 0;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        display: block !important;
+        max-width: none;
+        overflow: visible;
+      }
+
+      .lesson-nav__panel::before,
+      .js .lesson-nav__panel::before {
+        display: none;
+      }
+
+      .lesson-nav__panel ul,
+      .js .lesson-nav__panel ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+      }
     }
 
     main {
@@ -170,40 +305,48 @@
   </header>
 
   <nav aria-label="Navigation des leçons">
-    <ul>
-      <li><a href="#lesson-1">Leçon 1</a></li>
-      <li><a href="#lesson-2">Leçon 2</a></li>
-      <li><a href="#lesson-3">Leçon 3</a></li>
-      <li><a href="#lesson-4">Leçon 4</a></li>
-      <li><a href="#lesson-5">Leçon 5</a></li>
-      <li><a href="#lesson-6">Leçon 6</a></li>
-      <li><a href="#lesson-7">Leçon 7</a></li>
-      <li><a href="#lesson-8">Leçon 8</a></li>
-      <li><a href="#lesson-9">Leçon 9</a></li>
-      <li><a href="#lesson-10">Leçon 10</a></li>
-      <li><a href="#lesson-11">Leçon 11</a></li>
-      <li><a href="#lesson-12">Leçon 12</a></li>
-      <li><a href="#lesson-13">Leçon 13</a></li>
-      <li><a href="#lesson-14">Leçon 14</a></li>
-      <li><a href="#lesson-15">Leçon 15</a></li>
-      <li><a href="#lesson-16">Leçon 16</a></li>
-      <li><a href="#lesson-17">Leçon 17</a></li>
-      <li><a href="#lesson-18">Leçon 18</a></li>
-      <li><a href="#lesson-19">Leçon 19</a></li>
-      <li><a href="#lesson-20">Leçon 20</a></li>
-      <li><a href="#lesson-21">Leçon 21</a></li>
-      <li><a href="#lesson-22">Leçon 22</a></li>
-      <li><a href="#lesson-23">Leçon 23</a></li>
-      <li><a href="#lesson-24">Leçon 24</a></li>
-      <li><a href="#lesson-25">Leçon 25</a></li>
-      <li><a href="#lesson-26">Leçon 26</a></li>
-      <li><a href="#lesson-27">Leçon 27</a></li>
-      <li><a href="#lesson-28">Leçon 28</a></li>
-      <li><a href="#lesson-29">Leçon 29</a></li>
-      <li><a href="#lesson-30">Leçon 30</a></li>
-      <li><a href="#lesson-31">Leçon 31</a></li>
-      <li><a href="#lesson-32">Leçon 32</a></li>
-    </ul>
+    <div class="lesson-nav">
+      <button type="button" class="lesson-nav__toggle" aria-expanded="false" aria-controls="lesson-menu" aria-haspopup="true">
+        Leçons
+        <span aria-hidden="true">▾</span>
+      </button>
+      <div class="lesson-nav__panel" id="lesson-menu">
+        <ul>
+          <li><a href="#lesson-1">Leçon 1</a></li>
+          <li><a href="#lesson-2">Leçon 2</a></li>
+          <li><a href="#lesson-3">Leçon 3</a></li>
+          <li><a href="#lesson-4">Leçon 4</a></li>
+          <li><a href="#lesson-5">Leçon 5</a></li>
+          <li><a href="#lesson-6">Leçon 6</a></li>
+          <li><a href="#lesson-7">Leçon 7</a></li>
+          <li><a href="#lesson-8">Leçon 8</a></li>
+          <li><a href="#lesson-9">Leçon 9</a></li>
+          <li><a href="#lesson-10">Leçon 10</a></li>
+          <li><a href="#lesson-11">Leçon 11</a></li>
+          <li><a href="#lesson-12">Leçon 12</a></li>
+          <li><a href="#lesson-13">Leçon 13</a></li>
+          <li><a href="#lesson-14">Leçon 14</a></li>
+          <li><a href="#lesson-15">Leçon 15</a></li>
+          <li><a href="#lesson-16">Leçon 16</a></li>
+          <li><a href="#lesson-17">Leçon 17</a></li>
+          <li><a href="#lesson-18">Leçon 18</a></li>
+          <li><a href="#lesson-19">Leçon 19</a></li>
+          <li><a href="#lesson-20">Leçon 20</a></li>
+          <li><a href="#lesson-21">Leçon 21</a></li>
+          <li><a href="#lesson-22">Leçon 22</a></li>
+          <li><a href="#lesson-23">Leçon 23</a></li>
+          <li><a href="#lesson-24">Leçon 24</a></li>
+          <li><a href="#lesson-25">Leçon 25</a></li>
+          <li><a href="#lesson-26">Leçon 26</a></li>
+          <li><a href="#lesson-27">Leçon 27</a></li>
+          <li><a href="#lesson-28">Leçon 28</a></li>
+          <li><a href="#lesson-29">Leçon 29</a></li>
+          <li><a href="#lesson-30">Leçon 30</a></li>
+          <li><a href="#lesson-31">Leçon 31</a></li>
+          <li><a href="#lesson-32">Leçon 32</a></li>
+        </ul>
+      </div>
+    </div>
   </nav>
 
   <main>
@@ -579,5 +722,92 @@
   <footer>
     <p>Mise à jour des règles grammaticales pour accompagner les exercices de créole martiniquais.</p>
   </footer>
+  <script>
+    (function () {
+      const navToggle = document.querySelector('.lesson-nav__toggle');
+      const panel = document.getElementById('lesson-menu');
+      if (!navToggle || !panel) {
+        return;
+      }
+
+      const mediaQuery = window.matchMedia('(min-width: 768px)');
+      let restoreFocusTo = null;
+
+      function openMenu({ focusFirst = true } = {}) {
+        panel.hidden = false;
+        panel.classList.add('is-open');
+        navToggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('nav-open');
+        restoreFocusTo = document.activeElement;
+        if (focusFirst) {
+          const firstLink = panel.querySelector('a[href]');
+          if (firstLink) {
+            firstLink.focus();
+          }
+        }
+      }
+
+      function closeMenu({ focusToggle = true } = {}) {
+        panel.classList.remove('is-open');
+        panel.hidden = true;
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('nav-open');
+        if (focusToggle) {
+          navToggle.focus();
+        } else if (restoreFocusTo instanceof HTMLElement) {
+          restoreFocusTo.focus();
+        }
+        restoreFocusTo = null;
+      }
+
+      function handleToggle() {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          closeMenu({ focusToggle: false });
+        } else {
+          openMenu();
+        }
+      }
+
+      function syncForViewport(event) {
+        if (event.matches) {
+          panel.hidden = false;
+          panel.classList.remove('is-open');
+          navToggle.setAttribute('aria-expanded', 'true');
+          document.body.classList.remove('nav-open');
+          restoreFocusTo = null;
+        } else {
+          panel.classList.remove('is-open');
+          panel.hidden = true;
+          navToggle.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('nav-open');
+          restoreFocusTo = null;
+        }
+      }
+
+      navToggle.addEventListener('click', handleToggle);
+
+      panel.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target instanceof HTMLElement && target.tagName === 'A' && !mediaQuery.matches) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true' && !mediaQuery.matches) {
+          event.preventDefault();
+          closeMenu();
+        }
+      });
+
+      if (typeof mediaQuery.addEventListener === 'function') {
+        mediaQuery.addEventListener('change', syncForViewport);
+      } else if (typeof mediaQuery.addListener === 'function') {
+        mediaQuery.addListener(syncForViewport);
+      }
+      syncForViewport(mediaQuery);
+    })();
+  </script>
 </body>
 </html>
