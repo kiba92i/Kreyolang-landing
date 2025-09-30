@@ -48,7 +48,7 @@
     header {
       background: linear-gradient(140deg, rgba(139, 92, 246, 0.95), rgba(56, 189, 248, 0.85));
       color: white;
-      padding: 3.5rem 1.5rem 2.25rem;
+      padding: 3.5rem 1.5rem 3.25rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -68,15 +68,49 @@
       z-index: 1;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: clamp(2rem, 5vw, 3rem);
+    .hero-content {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
     }
 
-    header p {
-      margin: 0.75rem auto 0;
-      max-width: 60ch;
-      font-size: 1.1rem;
+    header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+    }
+
+    .hero-tagline {
+      margin: 0;
+      font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+      max-width: 70ch;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.95rem 2.2rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: 0 22px 45px rgba(80, 56, 160, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .cta-button:hover,
+    .cta-button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 26px 55px rgba(80, 56, 160, 0.6);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.15));
+      outline: none;
     }
 
     nav {
@@ -281,51 +315,156 @@
       margin: 0.6rem 0;
     }
 
-    ul,
-    ol {
-      margin: 0.75rem 0 0.75rem 1.25rem;
-      padding: 0;
+    .section-lead {
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
     }
 
-    li {
-      margin-bottom: 0.45rem;
-    }
-
-    .examples {
+    .feature-grid,
+    .audience-grid,
+    .testimonial-grid,
+    .pricing-table {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .feature-card,
+    .audience-card,
+    .testimonial-card,
+    .pricing-card {
+      border-radius: 20px;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.32);
+      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.14);
+      backdrop-filter: blur(14px);
+    }
+
+    .feature-card p,
+    .audience-card p {
+      margin-bottom: 0;
+    }
+
+    .story-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .testimonial-card blockquote {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--fg);
+    }
+
+    .testimonial-card figcaption {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--accent-strong);
+    }
+
+    .faq-list {
+      display: grid;
       gap: 0.75rem;
-      margin: 1rem 0;
-      padding: 0;
+    }
+
+    .faq-list details {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 18px;
+      padding: 1rem 1.2rem;
+      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .faq-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--accent-strong);
       list-style: none;
     }
 
-    .examples li {
-      background: rgba(139, 92, 246, 0.12);
-      border-left: 4px solid rgba(139, 92, 246, 0.85);
-      padding: 0.9rem 1.1rem;
-      border-radius: 14px;
-      margin: 0;
-      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
+    .faq-list summary::-webkit-details-marker {
+      display: none;
     }
 
-    .note {
-      background: rgba(250, 204, 21, 0.18);
-      border-left: 4px solid #facc15;
-      padding: 0.85rem 1.1rem;
-      border-radius: 14px;
-      margin: 1.2rem 0;
-      color: inherit;
-      box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.12);
+    .faq-list details[open] summary {
+      margin-bottom: 0.6rem;
+    }
+
+    .pricing-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+
+    .pricing-card.highlight {
+      background: rgba(139, 92, 246, 0.28);
+      box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.4);
+    }
+
+    .pricing-card ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent-strong);
+      margin: 0;
+    }
+
+    .secondary-cta {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--accent-strong);
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 14px 28px rgba(80, 56, 160, 0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .secondary-cta:hover,
+    .secondary-cta:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(80, 56, 160, 0.28);
+      outline: none;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
     }
 
     .module-card {
       display: grid;
       gap: 1.1rem;
+      background: var(--surface);
+      border-radius: 26px;
+      padding: clamp(1.75rem, 2.4vw, 2.65rem);
+      box-shadow: 0 20px 55px var(--shadow);
+      border: 1px solid var(--surface-strong);
+      backdrop-filter: blur(18px);
     }
 
     .module-card p {
       margin: 0;
+    }
+
+    .module-card h3 {
+      margin: 0;
+      color: var(--accent-strong);
+      font-size: clamp(1.45rem, 2.6vw, 1.9rem);
     }
 
     .module-lessons {
@@ -384,9 +523,12 @@
       padding: 2.5rem 1.5rem 3.5rem;
       color: var(--muted);
       font-size: 0.95rem;
+      display: grid;
+      gap: 1.2rem;
+      justify-items: center;
     }
 
-    footer p {
+    .footer-pill {
       margin: 0;
       display: inline-flex;
       align-items: center;
@@ -397,6 +539,12 @@
       border: 1px solid var(--surface-strong);
       backdrop-filter: blur(16px);
       box-shadow: 0 12px 30px var(--shadow);
+    }
+
+    .footer-note {
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 0.02em;
     }
 
     @media (max-width: 720px) {
@@ -430,17 +578,38 @@
         background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
       }
 
-      footer p {
+      .footer-pill {
         background: rgba(30, 17, 52, 0.62);
+      }
+
+      .feature-card,
+      .audience-card,
+      .testimonial-card,
+      .pricing-card {
+        background: rgba(15, 7, 28, 0.56);
+      }
+
+      .faq-list details {
+        background: rgba(15, 7, 28, 0.6);
+      }
+
+      .secondary-cta {
+        background: rgba(15, 7, 28, 0.75);
+      }
+
+      .footer-note {
+        color: rgba(184, 176, 214, 0.85);
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Grammaire Martiniquaise</h1>
-    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en modules thématiques pour accomp
-agner vos exercices et révisions.</p>
+    <div class="hero-content">
+      <h1>Grammaire Martiniquaise</h1>
+      <p class="hero-tagline">La plateforme qui facilite l’apprentissage du créole martiniquais grâce à des ressources structurées, des parcours guidés et des outils pensés pour la pratique quotidienne.</p>
+      <a class="cta-button" href="/paiement">S’abonner</a>
+    </div>
   </header>
 
   <nav aria-label="Navigation principale">
@@ -461,7 +630,18 @@ agner vos exercices et révisions.</p>
         </summary>
         <div class="menu-panel">
           <div class="menu-group">
-            <p class="menu-group-title">Sur cette page</p>
+            <p class="menu-group-title">Explorer l’offre</p>
+            <ul>
+              <li><a href="#presentation">Présentation du service</a></li>
+              <li><a href="#audience">Public visé</a></li>
+              <li><a href="#genese">Genèse du projet</a></li>
+              <li><a href="#social-proof">Preuves sociales</a></li>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="#pricing">Formules et tarifs</a></li>
+            </ul>
+          </div>
+          <div class="menu-group">
+            <p class="menu-group-title">Modules de grammaire</p>
             <ul>
               <li><a href="#module-1">Module 1 · Déterminants et interactions</a></li>
               <li><a href="#module-2">Module 2 · Prépositions et expressions</a></li>
@@ -475,81 +655,206 @@ agner vos exercices et révisions.</p>
   </nav>
 
   <main>
-    <section class="module-card" id="module-1">
-      <small>Module 1</small>
-      <h2>Déterminants et interactions</h2>
-      <p>Articles, pronoms et particules interrogatives ouvrent l’étude par les fondations du syntagme nominal et des relations
- entre les mots.</p>
-      <ul class="module-lessons">
-        <li><a href="module-1.html#lesson-1">L’article défini</a></li>
-        <li><a href="module-1.html#lesson-2">L’article indéfini</a></li>
-        <li><a href="module-1.html#lesson-3">Le pluriel</a></li>
-        <li><a href="module-1.html#lesson-4">Les pronoms personnels</a></li>
-        <li><a href="module-1.html#lesson-5">Les possessifs</a></li>
-        <li><a href="module-1.html#lesson-6">Les démonstratifs</a></li>
-        <li><a href="module-1.html#lesson-7">Les relatifs</a></li>
-        <li><a href="module-1.html#lesson-8">L’interrogation</a></li>
-        <li><a href="module-1.html#lesson-9">La négation</a></li>
-      </ul>
-      <a class="module-card-link" href="module-1.html">Accéder au module 1</a>
+    <section id="presentation">
+      <h2>Présentation du service</h2>
+      <p class="section-lead">Kreyolang est un service d’accompagnement numérique pour apprendre et pratiquer le créole martiniquais. Il combine des parcours guidés, des ressources audio et écrites, ainsi qu’un suivi continu pour aider les apprenant·es à progresser avec confiance.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Parcours progressifs</h3>
+          <p>Des modules thématiques conçus avec des linguistes et des enseignants pour maîtriser les bases avant d’aller vers la conversation spontanée.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Pratique quotidienne</h3>
+          <p>Des exercices interactifs, des capsules audio et des rappels personnalisés pour maintenir le rythme même avec un agenda chargé.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Support communautaire</h3>
+          <p>Un accès à un forum modéré, à des ateliers en direct et à des feedbacks ciblés pour ne jamais apprendre seul·e.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="module-card" id="module-2">
-      <small>Module 2</small>
-      <h2>Prépositions et expressions</h2>
-      <p>Ce module rassemble les particules qui expriment l’exclamation, les nuances de lieu, de destination et les relations log
-iques entre les éléments de la phrase.</p>
-      <ul class="module-lessons">
-        <li><a href="module-2.html#lesson-10">L’exclamation</a></li>
-        <li><a href="module-2.html#lesson-11">La préposition « à »</a></li>
-        <li><a href="module-2.html#lesson-12">La préposition « de »</a></li>
-        <li><a href="module-2.html#lesson-13">Autres prépositions (I)</a></li>
-        <li><a href="module-2.html#lesson-14">Autres prépositions (II)</a></li>
-      </ul>
-      <a class="module-card-link" href="module-2.html">Accéder au module 2</a>
+    <section id="audience">
+      <h2>Public visé</h2>
+      <div class="audience-grid">
+        <article class="audience-card">
+          <h3>Débutant·es curieux·ses</h3>
+          <p>Vous souhaitez découvrir la richesse du créole martiniquais sans savoir par où commencer ? Les parcours guidés proposent une progression sécurisante.</p>
+        </article>
+        <article class="audience-card">
+          <h3>Familles et diasporas</h3>
+          <p>Retissez le lien avec vos racines linguistiques grâce à des contenus culturels authentiques et des activités à réaliser en famille.</p>
+        </article>
+        <article class="audience-card">
+          <h3>Professionnel·les de terrain</h3>
+          <p>Enrichissez votre communication au quotidien avec des lexiques métiers, des mises en situation et des modules dédiés à la médiation linguistique.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="module-card" id="module-3">
-      <small>Module 3</small>
-      <h2>Verbe et temps</h2>
-      <p>Le cœur verbal est exploré à travers les principales particules temporelles, l’expression de la condition et des modalit
-és, ainsi que les constructions impératives.</p>
-      <ul class="module-lessons">
-        <li><a href="module-3.html#lesson-15">Le verbe « être »</a></li>
-        <li><a href="module-3.html#lesson-16">Présent et particule « ka »</a></li>
-        <li><a href="module-3.html#lesson-17">Le passé</a></li>
-        <li><a href="module-3.html#lesson-18">Futur et conditionnel</a></li>
-        <li><a href="module-3.html#lesson-19">La phrase conditionnelle</a></li>
-        <li><a href="module-3.html#lesson-20">L’impératif</a></li>
-        <li><a href="module-3.html#lesson-21">Le passif</a></li>
-        <li><a href="module-3.html#lesson-22">Les verbes composés</a></li>
-        <li><a href="module-3.html#lesson-23">Obligation et probabilité</a></li>
-        <li><a href="module-3.html#lesson-24">Le verbe « pouvoir »</a></li>
-      </ul>
-      <a class="module-card-link" href="module-3.html">Accéder au module 3</a>
+    <section id="genese">
+      <h2>Genèse du projet</h2>
+      <div class="story-grid">
+        <p>Kreyolang est né d’un collectif d’enseignant·es et de locuteur·rices natifs désireux de rendre l’apprentissage du créole martiniquais accessible partout. Après plusieurs années de rencontres dans les associations culturelles de l’île et de la diaspora, nous avons co-construit un parcours numérique qui restitue la richesse orale tout en proposant une progression claire.</p>
+        <p>La plateforme s’appuie sur des corpus authentiques recueillis auprès de conteurs, de musicien·nes et de familles, et sur une méthodologie testée dans des ateliers pilotes. Chaque trimestre, nous intégrons de nouvelles ressources issues de partenariats locaux (écoles, bibliothèques, radios) pour maintenir un lien vivant avec le territoire.</p>
+      </div>
     </section>
 
-    <section class="module-card" id="module-4">
-      <small>Module 4</small>
-      <h2>Structures nominales et quantification</h2>
-      <p>Les derniers chapitres couvrent l’organisation du groupe nominal, l’adjectif, les degrés de comparaison et les outils de
- quantification.</p>
-      <ul class="module-lessons">
-        <li><a href="module-4.html#lesson-25">Les usages de « sé »</a></li>
-        <li><a href="module-4.html#lesson-26">Le nom commun</a></li>
-        <li><a href="module-4.html#lesson-27">Noms propres, titres et adresses</a></li>
-        <li><a href="module-4.html#lesson-28">L’adjectif</a></li>
-        <li><a href="module-4.html#lesson-29">Le comparatif</a></li>
-        <li><a href="module-4.html#lesson-30">Le superlatif</a></li>
-        <li><a href="module-4.html#lesson-31">Quantification et numération (I)</a></li>
-        <li><a href="module-4.html#lesson-32">Quantification et numération (II)</a></li>
-      </ul>
-      <a class="module-card-link" href="module-4.html">Accéder au module 4</a>
+    <section id="social-proof">
+      <h2>Preuves sociales</h2>
+      <div class="testimonial-grid">
+        <figure class="testimonial-card">
+          <blockquote>« J’ai pu transmettre à mes enfants les expressions de mon enfance. Les parcours sont motivants et les rappels m’aident à garder le rythme. »</blockquote>
+          <figcaption>— Mireille, abonnée depuis 8 mois</figcaption>
+        </figure>
+        <figure class="testimonial-card">
+          <blockquote>« Les ateliers en direct ont complètement débloqué mon oral. On échange avec des personnes bienveillantes et on se sent soutenu. »</blockquote>
+          <figcaption>— Johan, apprenant intermédiaire</figcaption>
+        </figure>
+        <figure class="testimonial-card">
+          <blockquote>« En tant qu’enseignante, je recommande Kreyolang : les ressources sont fiables et actualisées, et mes élèves adorent les quiz. »</blockquote>
+          <figcaption>— Ségolène, professeure de collège</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <details>
+          <summary>Comment se déroule l’abonnement ?</summary>
+          <p>Une fois inscrit·e, vous accédez immédiatement à l’ensemble des parcours et vous recevez un plan de progression personnalisé. Le prélèvement est mensuel et résiliable en un clic.</p>
+        </details>
+        <details>
+          <summary>Dois-je déjà connaître le créole martiniquais ?</summary>
+          <p>Non, des parcours « découverte » permettent de démarrer sans prérequis. Vous pouvez ensuite passer aux modules intermédiaires et avancés quand vous vous sentez prêt·e.</p>
+        </details>
+        <details>
+          <summary>Proposez-vous des ressources pour les classes ou associations ?</summary>
+          <p>Oui, la formule « Collectivités » inclut des licences multi-utilisateurs, des guides pédagogiques et un accompagnement pour les animateur·rices.</p>
+        </details>
+        <details>
+          <summary>Puis-je tester la plateforme avant de payer ?</summary>
+          <p>Chaque nouvelle inscription bénéficie de 14 jours d’essai gratuit et d’un parcours d’initiation guidé pour découvrir les fonctionnalités sans engagement.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2>Tableau des formules</h2>
+      <div class="pricing-table">
+        <article class="pricing-card">
+          <h3>Découverte</h3>
+          <p class="price">12 € / mois</p>
+          <ul>
+            <li>Accès aux parcours débutants</li>
+            <li>Exercices quotidiens et rappels</li>
+            <li>Suivi de progression individuel</li>
+          </ul>
+          <a class="secondary-cta" href="/paiement">Choisir cette formule</a>
+        </article>
+        <article class="pricing-card highlight">
+          <h3>Intégrale</h3>
+          <p class="price">24 € / mois</p>
+          <ul>
+            <li>Tous les parcours et ateliers en direct</li>
+            <li>Capsules audio et vidéo exclusives</li>
+            <li>Corrections personnalisées hebdomadaires</li>
+          </ul>
+          <a class="secondary-cta" href="/paiement">Choisir cette formule</a>
+        </article>
+        <article class="pricing-card">
+          <h3>Collectivités</h3>
+          <p class="price">Sur devis</p>
+          <ul>
+            <li>Licences multi-utilisateurs illimitées</li>
+            <li>Formation des animateur·rices</li>
+            <li>Support dédié et ressources pédagogiques</li>
+          </ul>
+          <a class="secondary-cta" href="/paiement">Nous contacter</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="modules">
+      <h2>Parcours de grammaire</h2>
+      <p class="section-lead">Retrouvez l’intégralité des 32 leçons réparties en quatre modules thématiques. Chaque page rassemble les contenus d’origine, leurs exemples et les encadrés de notes.</p>
+      <div class="module-grid">
+        <article class="module-card" id="module-1">
+          <small>Module 1</small>
+          <h3>Déterminants et interactions</h3>
+          <p>Articles, pronoms et particules interrogatives ouvrent l’étude par les fondations du syntagme nominal et des relations entre les mots.</p>
+          <ul class="module-lessons">
+            <li><a href="module-1.html#lesson-1">L’article défini</a></li>
+            <li><a href="module-1.html#lesson-2">L’article indéfini</a></li>
+            <li><a href="module-1.html#lesson-3">Le pluriel</a></li>
+            <li><a href="module-1.html#lesson-4">Les pronoms personnels</a></li>
+            <li><a href="module-1.html#lesson-5">Les possessifs</a></li>
+            <li><a href="module-1.html#lesson-6">Les démonstratifs</a></li>
+            <li><a href="module-1.html#lesson-7">Les relatifs</a></li>
+            <li><a href="module-1.html#lesson-8">L’interrogation</a></li>
+            <li><a href="module-1.html#lesson-9">La négation</a></li>
+          </ul>
+          <a class="module-card-link" href="module-1.html">Accéder au module 1</a>
+        </article>
+
+        <article class="module-card" id="module-2">
+          <small>Module 2</small>
+          <h3>Prépositions et expressions</h3>
+          <p>Ce module rassemble les particules qui expriment l’exclamation, les nuances de lieu, de destination et les relations logiques entre les éléments de la phrase.</p>
+          <ul class="module-lessons">
+            <li><a href="module-2.html#lesson-10">L’exclamation</a></li>
+            <li><a href="module-2.html#lesson-11">La préposition « à »</a></li>
+            <li><a href="module-2.html#lesson-12">La préposition « de »</a></li>
+            <li><a href="module-2.html#lesson-13">Autres prépositions (I)</a></li>
+            <li><a href="module-2.html#lesson-14">Autres prépositions (II)</a></li>
+          </ul>
+          <a class="module-card-link" href="module-2.html">Accéder au module 2</a>
+        </article>
+
+        <article class="module-card" id="module-3">
+          <small>Module 3</small>
+          <h3>Verbe et temps</h3>
+          <p>Le cœur verbal est exploré à travers les principales particules temporelles, l’expression de la condition et des modalités, ainsi que les constructions impératives.</p>
+          <ul class="module-lessons">
+            <li><a href="module-3.html#lesson-15">Le verbe « être »</a></li>
+            <li><a href="module-3.html#lesson-16">Présent et particule « ka »</a></li>
+            <li><a href="module-3.html#lesson-17">Le passé</a></li>
+            <li><a href="module-3.html#lesson-18">Futur et conditionnel</a></li>
+            <li><a href="module-3.html#lesson-19">La phrase conditionnelle</a></li>
+            <li><a href="module-3.html#lesson-20">L’impératif</a></li>
+            <li><a href="module-3.html#lesson-21">Le passif</a></li>
+            <li><a href="module-3.html#lesson-22">Les verbes composés</a></li>
+            <li><a href="module-3.html#lesson-23">Obligation et probabilité</a></li>
+            <li><a href="module-3.html#lesson-24">Le verbe « pouvoir »</a></li>
+          </ul>
+          <a class="module-card-link" href="module-3.html">Accéder au module 3</a>
+        </article>
+
+        <article class="module-card" id="module-4">
+          <small>Module 4</small>
+          <h3>Structures nominales et quantification</h3>
+          <p>Les derniers chapitres couvrent l’organisation du groupe nominal, l’adjectif, les degrés de comparaison et les outils de quantification.</p>
+          <ul class="module-lessons">
+            <li><a href="module-4.html#lesson-25">Les usages de « sé »</a></li>
+            <li><a href="module-4.html#lesson-26">Le nom commun</a></li>
+            <li><a href="module-4.html#lesson-27">Noms propres, titres et adresses</a></li>
+            <li><a href="module-4.html#lesson-28">L’adjectif</a></li>
+            <li><a href="module-4.html#lesson-29">Le comparatif</a></li>
+            <li><a href="module-4.html#lesson-30">Le superlatif</a></li>
+            <li><a href="module-4.html#lesson-31">Quantification et numération (I)</a></li>
+            <li><a href="module-4.html#lesson-32">Quantification et numération (II)</a></li>
+          </ul>
+          <a class="module-card-link" href="module-4.html">Accéder au module 4</a>
+        </article>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>Travail collaboratif · Merci à tou·te·s les contributrices et contributeurs !</p>
+    <p class="footer-pill">Mise à jour des règles grammaticales pour accompagner les exercices de créole martiniquais.</p>
+    <a class="link-button" href="subscribe.html">S’abonner à la newsletter</a>
+    <p class="footer-note">Travail collaboratif · Merci à tou·te·s les contributrices et contributeurs !</p>
   </footer>
 
   <script>
