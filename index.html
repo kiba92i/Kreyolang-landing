@@ -62,22 +62,28 @@
     }
 
     nav ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.75rem;
       margin: 0;
-      padding: 0.75rem 1.5rem;
+      padding: 1rem 1.5rem;
       list-style: none;
-      justify-content: center;
+    }
+
+    nav li {
+      margin: 0;
     }
 
     nav a {
+      display: block;
       color: var(--accent);
       text-decoration: none;
       font-weight: 600;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      padding: 0.6rem 0.9rem;
+      border-radius: 16px;
+      line-height: 1.4;
+      background-color: rgba(15, 118, 110, 0.05);
+      transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     }
 
     nav a:hover,
@@ -85,6 +91,22 @@
       background-color: var(--accent);
       color: white;
       outline: none;
+      box-shadow: 0 8px 18px rgba(15, 118, 110, 0.35);
+    }
+
+    nav .nav-group {
+      grid-column: 1 / -1;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.5rem 0 0.25rem;
+    }
+
+    nav .nav-group span {
+      display: inline-block;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid rgba(15, 118, 110, 0.25);
     }
 
     main {
@@ -171,38 +193,42 @@
 
   <nav aria-label="Navigation des leçons">
     <ul>
-      <li><a href="#lesson-1">Leçon 1</a></li>
-      <li><a href="#lesson-2">Leçon 2</a></li>
-      <li><a href="#lesson-3">Leçon 3</a></li>
-      <li><a href="#lesson-4">Leçon 4</a></li>
-      <li><a href="#lesson-5">Leçon 5</a></li>
-      <li><a href="#lesson-6">Leçon 6</a></li>
-      <li><a href="#lesson-7">Leçon 7</a></li>
-      <li><a href="#lesson-8">Leçon 8</a></li>
-      <li><a href="#lesson-9">Leçon 9</a></li>
-      <li><a href="#lesson-10">Leçon 10</a></li>
-      <li><a href="#lesson-11">Leçon 11</a></li>
-      <li><a href="#lesson-12">Leçon 12</a></li>
-      <li><a href="#lesson-13">Leçon 13</a></li>
-      <li><a href="#lesson-14">Leçon 14</a></li>
-      <li><a href="#lesson-15">Leçon 15</a></li>
-      <li><a href="#lesson-16">Leçon 16</a></li>
-      <li><a href="#lesson-17">Leçon 17</a></li>
-      <li><a href="#lesson-18">Leçon 18</a></li>
-      <li><a href="#lesson-19">Leçon 19</a></li>
-      <li><a href="#lesson-20">Leçon 20</a></li>
-      <li><a href="#lesson-21">Leçon 21</a></li>
-      <li><a href="#lesson-22">Leçon 22</a></li>
-      <li><a href="#lesson-23">Leçon 23</a></li>
-      <li><a href="#lesson-24">Leçon 24</a></li>
-      <li><a href="#lesson-25">Leçon 25</a></li>
-      <li><a href="#lesson-26">Leçon 26</a></li>
-      <li><a href="#lesson-27">Leçon 27</a></li>
-      <li><a href="#lesson-28">Leçon 28</a></li>
-      <li><a href="#lesson-29">Leçon 29</a></li>
-      <li><a href="#lesson-30">Leçon 30</a></li>
-      <li><a href="#lesson-31">Leçon 31</a></li>
-      <li><a href="#lesson-32">Leçon 32</a></li>
+      <li class="nav-group"><span>Module 1 · Déterminants et interactions</span></li>
+      <li><a href="#lesson-1">Leçon 1 · L’article défini</a></li>
+      <li><a href="#lesson-2">Leçon 2 · L’article indéfini</a></li>
+      <li><a href="#lesson-3">Leçon 3 · Le pluriel</a></li>
+      <li><a href="#lesson-4">Leçon 4 · Les pronoms personnels</a></li>
+      <li><a href="#lesson-5">Leçon 5 · Les possessifs</a></li>
+      <li><a href="#lesson-6">Leçon 6 · Les démonstratifs</a></li>
+      <li><a href="#lesson-7">Leçon 7 · Les relatifs</a></li>
+      <li><a href="#lesson-8">Leçon 8 · L’interrogation</a></li>
+      <li><a href="#lesson-9">Leçon 9 · La négation</a></li>
+      <li class="nav-group"><span>Module 2 · Prépositions et expressions</span></li>
+      <li><a href="#lesson-10">Leçon 10 · L’exclamation</a></li>
+      <li><a href="#lesson-11">Leçon 11 · La préposition « à »</a></li>
+      <li><a href="#lesson-12">Leçon 12 · La préposition « de »</a></li>
+      <li><a href="#lesson-13">Leçon 13 · Autres prépositions (I)</a></li>
+      <li><a href="#lesson-14">Leçon 14 · Autres prépositions (II)</a></li>
+      <li class="nav-group"><span>Module 3 · Verbe et temps</span></li>
+      <li><a href="#lesson-15">Leçon 15 · Le verbe « être »</a></li>
+      <li><a href="#lesson-16">Leçon 16 · Présent et particule « ka »</a></li>
+      <li><a href="#lesson-17">Leçon 17 · Le passé</a></li>
+      <li><a href="#lesson-18">Leçon 18 · Futur et conditionnel</a></li>
+      <li><a href="#lesson-19">Leçon 19 · La phrase conditionnelle</a></li>
+      <li><a href="#lesson-20">Leçon 20 · L’impératif</a></li>
+      <li><a href="#lesson-21">Leçon 21 · Le passif</a></li>
+      <li><a href="#lesson-22">Leçon 22 · Les verbes composés</a></li>
+      <li><a href="#lesson-23">Leçon 23 · Obligation et probabilité</a></li>
+      <li><a href="#lesson-24">Leçon 24 · Le verbe « pouvoir »</a></li>
+      <li class="nav-group"><span>Module 4 · Structures nominales et quantification</span></li>
+      <li><a href="#lesson-25">Leçon 25 · Les usages de « sé »</a></li>
+      <li><a href="#lesson-26">Leçon 26 · Le nom commun</a></li>
+      <li><a href="#lesson-27">Leçon 27 · Noms propres, titres et adresses</a></li>
+      <li><a href="#lesson-28">Leçon 28 · L’adjectif</a></li>
+      <li><a href="#lesson-29">Leçon 29 · Le comparatif</a></li>
+      <li><a href="#lesson-30">Leçon 30 · Le superlatif</a></li>
+      <li><a href="#lesson-31">Leçon 31 · Quantification et numération (I)</a></li>
+      <li><a href="#lesson-32">Leçon 32 · Quantification et numération (II)</a></li>
     </ul>
   </nav>
 
