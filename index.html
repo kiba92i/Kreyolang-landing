@@ -801,9 +801,23 @@
       };
 
       toggle.addEventListener('click', () => {
-        const expanded = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', String(!expanded));
-        panel.hidden = expanded;
+        const nextExpanded = toggle.getAttribute('aria-expanded') !== 'true';
+
+        if (!nextExpanded) {
+          closeMenu();
+          return;
+        }
+
+        toggle.setAttribute('aria-expanded', 'true');
+        panel.hidden = false;
+
+        if (!panel.hasAttribute('tabindex')) {
+          panel.setAttribute('tabindex', '-1');
+        }
+
+        if (document.activeElement !== panel) {
+          panel.focus({ preventScroll: true });
+        }
       });
 
       panel.addEventListener('click', (event) => {
