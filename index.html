@@ -7,18 +7,26 @@
   <style>
     :root {
       color-scheme: light dark;
-      --bg: #fdfdfd;
-      --fg: #1f1f1f;
-      --accent: #0f766e;
-      --muted: #475569;
+      --bg: #f5f0ff;
+      --fg: #1a1237;
+      --accent: #8b5cf6;
+      --accent-strong: #6d28d9;
+      --muted: #665f80;
+      --surface: rgba(255, 255, 255, 0.68);
+      --surface-strong: rgba(139, 92, 246, 0.16);
+      --shadow: rgba(45, 24, 87, 0.18);
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #0f172a;
-        --fg: #f8fafc;
-        --accent: #14b8a6;
-        --muted: #94a3b8;
+        --bg: #090414;
+        --fg: #f5f3ff;
+        --accent: #a78bfa;
+        --accent-strong: #7c3aed;
+        --muted: #b8b0d6;
+        --surface: rgba(30, 17, 52, 0.72);
+        --surface-strong: rgba(124, 58, 237, 0.32);
+        --shadow: rgba(9, 4, 20, 0.45);
       }
     }
 
@@ -28,17 +36,36 @@
 
     body {
       margin: 0;
-      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
       line-height: 1.6;
-      background-color: var(--bg);
+      min-height: 100vh;
+      background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.25), transparent 45%),
+        radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.18), transparent 50%),
+        linear-gradient(180deg, var(--bg), rgba(245, 240, 255, 0.88));
       color: var(--fg);
     }
 
     header {
-      background: linear-gradient(135deg, var(--accent), #0284c7);
+      background: linear-gradient(140deg, rgba(139, 92, 246, 0.95), rgba(56, 189, 248, 0.85));
       color: white;
-      padding: 3rem 1.5rem 2rem;
+      padding: 3.5rem 1.5rem 2.25rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: -120px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, transparent 65%);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    header * {
+      position: relative;
+      z-index: 1;
     }
 
     header h1 {
@@ -53,85 +80,177 @@
     }
 
     nav {
-      background-color: rgba(15, 118, 110, 0.1);
-      border-bottom: 1px solid rgba(15, 118, 110, 0.2);
-      backdrop-filter: blur(8px);
       position: sticky;
       top: 0;
-      z-index: 5;
-    }
-
-    nav ul {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 0.75rem;
-      margin: 0;
+      z-index: 10;
       padding: 1rem 1.5rem;
-      list-style: none;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(245, 240, 255, 0.82), rgba(245, 240, 255, 0.4));
+      border-bottom: 1px solid var(--surface-strong);
     }
 
-    nav li {
-      margin: 0;
+    .lesson-nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
     }
 
-    nav a {
-      display: block;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      padding: 0.6rem 0.9rem;
-      border-radius: 16px;
-      line-height: 1.4;
-      background-color: rgba(15, 118, 110, 0.05);
-      transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    nav a:hover,
-    nav a:focus {
-      background-color: var(--accent);
+    .menu-toggle {
+      appearance: none;
+      border: none;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.85), rgba(56, 189, 248, 0.75));
       color: white;
-      outline: none;
-      box-shadow: 0 8px 18px rgba(15, 118, 110, 0.35);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.4rem;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 18px 35px rgba(80, 56, 160, 0.32);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    nav .nav-group {
-      grid-column: 1 / -1;
+    .menu-toggle:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.7);
+      outline-offset: 3px;
+    }
+
+    .menu-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 40px rgba(80, 56, 160, 0.36);
+    }
+
+    .menu-toggle svg {
+      width: 1rem;
+      height: 1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] svg {
+      transform: rotate(180deg);
+    }
+
+    .menu-panel {
+      position: absolute;
+      top: calc(100% + 0.75rem);
+      right: 1.5rem;
+      width: min(640px, calc(100% - 3rem));
+      max-height: min(70vh, 540px);
+      overflow-y: auto;
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 1.25rem;
+      box-shadow: 0 28px 60px var(--shadow);
+      border: 1px solid var(--surface-strong);
+      backdrop-filter: blur(22px);
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .menu-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(145deg, rgba(139, 92, 246, 0.22), rgba(56, 189, 248, 0.12));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .menu-group {
+      position: relative;
+      z-index: 1;
+    }
+
+    .menu-group-title {
       font-size: 0.75rem;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      padding: 0.5rem 0 0.25rem;
+      margin: 0 0 0.75rem;
     }
 
-    nav .nav-group span {
-      display: inline-block;
-      padding-bottom: 0.25rem;
-      border-bottom: 1px solid rgba(15, 118, 110, 0.25);
+    .menu-group ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .menu-group a {
+      display: block;
+      text-decoration: none;
+      color: var(--fg);
+      font-weight: 600;
+      padding: 0.65rem 0.9rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.25);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .menu-group a:hover,
+    .menu-group a:focus {
+      background: rgba(139, 92, 246, 0.25);
+      color: var(--accent-strong);
+      transform: translateX(3px);
+      box-shadow: 0 10px 20px rgba(80, 56, 160, 0.18);
+      outline: none;
+    }
+
+    @media (max-width: 720px) {
+      .lesson-nav {
+        justify-content: center;
+      }
+
+      .menu-panel {
+        right: 50%;
+        transform: translateX(50%);
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      nav {
+        background: linear-gradient(180deg, rgba(12, 6, 26, 0.9), rgba(12, 6, 26, 0.55));
+      }
+
+      footer p {
+        background: rgba(30, 17, 52, 0.62);
+      }
     }
 
     main {
-      padding: 2.5rem 1.5rem 4rem;
+      padding: 3rem 1.5rem 4.5rem;
       max-width: 1100px;
       margin: 0 auto;
+      display: grid;
+      gap: clamp(1.8rem, 3vw, 2.8rem);
     }
 
     section {
-      background-color: rgba(148, 163, 184, 0.08);
-      border-radius: 18px;
-      padding: clamp(1.5rem, 2vw, 2.25rem);
-      margin-bottom: clamp(1.75rem, 3vw, 2.75rem);
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+      background: var(--surface);
+      border-radius: 26px;
+      padding: clamp(1.75rem, 2.4vw, 2.65rem);
+      box-shadow: 0 20px 55px var(--shadow);
+      border: 1px solid var(--surface-strong);
+      backdrop-filter: blur(18px);
     }
 
     section h2 {
       margin-top: 0;
-      color: var(--accent);
-      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--accent-strong);
+      font-size: clamp(1.65rem, 3vw, 2.1rem);
+      margin-bottom: 0.75rem;
     }
 
     h3 {
       color: var(--muted);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
       font-size: 1.05rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -161,27 +280,42 @@
     }
 
     .examples li {
-      background-color: rgba(15, 118, 110, 0.08);
-      border-left: 4px solid var(--accent);
-      padding: 0.75rem 1rem;
-      border-radius: 10px;
+      background: rgba(139, 92, 246, 0.12);
+      border-left: 4px solid rgba(139, 92, 246, 0.85);
+      padding: 0.9rem 1.1rem;
+      border-radius: 14px;
       margin: 0;
+      box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.08);
     }
 
     .note {
-      background-color: rgba(234, 179, 8, 0.15);
-      border-left: 4px solid #f59e0b;
-      padding: 0.75rem 1rem;
-      border-radius: 10px;
-      margin: 1rem 0;
+      background: rgba(250, 204, 21, 0.18);
+      border-left: 4px solid #facc15;
+      padding: 0.85rem 1.1rem;
+      border-radius: 14px;
+      margin: 1.2rem 0;
       color: inherit;
+      box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.12);
     }
 
     footer {
       text-align: center;
-      padding: 2rem 1.5rem 3rem;
+      padding: 2.5rem 1.5rem 3.5rem;
       color: var(--muted);
       font-size: 0.95rem;
+    }
+
+    footer p {
+      margin: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1rem 1.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.38);
+      border: 1px solid var(--surface-strong);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 30px var(--shadow);
     }
   </style>
 </head>
@@ -192,49 +326,73 @@
   </header>
 
   <nav aria-label="Navigation des leçons">
-    <ul>
-      <li class="nav-group"><span>Module 1 · Déterminants et interactions</span></li>
-      <li><a href="#lesson-1">Leçon 1 · L’article défini</a></li>
-      <li><a href="#lesson-2">Leçon 2 · L’article indéfini</a></li>
-      <li><a href="#lesson-3">Leçon 3 · Le pluriel</a></li>
-      <li><a href="#lesson-4">Leçon 4 · Les pronoms personnels</a></li>
-      <li><a href="#lesson-5">Leçon 5 · Les possessifs</a></li>
-      <li><a href="#lesson-6">Leçon 6 · Les démonstratifs</a></li>
-      <li><a href="#lesson-7">Leçon 7 · Les relatifs</a></li>
-      <li><a href="#lesson-8">Leçon 8 · L’interrogation</a></li>
-      <li><a href="#lesson-9">Leçon 9 · La négation</a></li>
-      <li class="nav-group"><span>Module 2 · Prépositions et expressions</span></li>
-      <li><a href="#lesson-10">Leçon 10 · L’exclamation</a></li>
-      <li><a href="#lesson-11">Leçon 11 · La préposition « à »</a></li>
-      <li><a href="#lesson-12">Leçon 12 · La préposition « de »</a></li>
-      <li><a href="#lesson-13">Leçon 13 · Autres prépositions (I)</a></li>
-      <li><a href="#lesson-14">Leçon 14 · Autres prépositions (II)</a></li>
-      <li class="nav-group"><span>Module 3 · Verbe et temps</span></li>
-      <li><a href="#lesson-15">Leçon 15 · Le verbe « être »</a></li>
-      <li><a href="#lesson-16">Leçon 16 · Présent et particule « ka »</a></li>
-      <li><a href="#lesson-17">Leçon 17 · Le passé</a></li>
-      <li><a href="#lesson-18">Leçon 18 · Futur et conditionnel</a></li>
-      <li><a href="#lesson-19">Leçon 19 · La phrase conditionnelle</a></li>
-      <li><a href="#lesson-20">Leçon 20 · L’impératif</a></li>
-      <li><a href="#lesson-21">Leçon 21 · Le passif</a></li>
-      <li><a href="#lesson-22">Leçon 22 · Les verbes composés</a></li>
-      <li><a href="#lesson-23">Leçon 23 · Obligation et probabilité</a></li>
-      <li><a href="#lesson-24">Leçon 24 · Le verbe « pouvoir »</a></li>
-      <li class="nav-group"><span>Module 4 · Structures nominales et quantification</span></li>
-      <li><a href="#lesson-25">Leçon 25 · Les usages de « sé »</a></li>
-      <li><a href="#lesson-26">Leçon 26 · Le nom commun</a></li>
-      <li><a href="#lesson-27">Leçon 27 · Noms propres, titres et adresses</a></li>
-      <li><a href="#lesson-28">Leçon 28 · L’adjectif</a></li>
-      <li><a href="#lesson-29">Leçon 29 · Le comparatif</a></li>
-      <li><a href="#lesson-30">Leçon 30 · Le superlatif</a></li>
-      <li><a href="#lesson-31">Leçon 31 · Quantification et numération (I)</a></li>
-      <li><a href="#lesson-32">Leçon 32 · Quantification et numération (II)</a></li>
-    </ul>
+    <div class="lesson-nav">
+      <button class="menu-toggle" type="button" aria-expanded="false">
+        Leçons
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4.5 7l5.5 6 5.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <div class="menu-panel" hidden>
+        <div class="menu-group">
+          <p class="menu-group-title">Module 1 · Déterminants et interactions</p>
+          <ul>
+            <li><a href="#lesson-1">L’article défini</a></li>
+            <li><a href="#lesson-2">L’article indéfini</a></li>
+            <li><a href="#lesson-3">Le pluriel</a></li>
+            <li><a href="#lesson-4">Les pronoms personnels</a></li>
+            <li><a href="#lesson-5">Les possessifs</a></li>
+            <li><a href="#lesson-6">Les démonstratifs</a></li>
+            <li><a href="#lesson-7">Les relatifs</a></li>
+            <li><a href="#lesson-8">L’interrogation</a></li>
+            <li><a href="#lesson-9">La négation</a></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <p class="menu-group-title">Module 2 · Prépositions et expressions</p>
+          <ul>
+            <li><a href="#lesson-10">L’exclamation</a></li>
+            <li><a href="#lesson-11">La préposition « à »</a></li>
+            <li><a href="#lesson-12">La préposition « de »</a></li>
+            <li><a href="#lesson-13">Autres prépositions (I)</a></li>
+            <li><a href="#lesson-14">Autres prépositions (II)</a></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <p class="menu-group-title">Module 3 · Verbe et temps</p>
+          <ul>
+            <li><a href="#lesson-15">Le verbe « être »</a></li>
+            <li><a href="#lesson-16">Présent et particule « ka »</a></li>
+            <li><a href="#lesson-17">Le passé</a></li>
+            <li><a href="#lesson-18">Futur et conditionnel</a></li>
+            <li><a href="#lesson-19">La phrase conditionnelle</a></li>
+            <li><a href="#lesson-20">L’impératif</a></li>
+            <li><a href="#lesson-21">Le passif</a></li>
+            <li><a href="#lesson-22">Les verbes composés</a></li>
+            <li><a href="#lesson-23">Obligation et probabilité</a></li>
+            <li><a href="#lesson-24">Le verbe « pouvoir »</a></li>
+          </ul>
+        </div>
+        <div class="menu-group">
+          <p class="menu-group-title">Module 4 · Structures nominales et quantification</p>
+          <ul>
+            <li><a href="#lesson-25">Les usages de « sé »</a></li>
+            <li><a href="#lesson-26">Le nom commun</a></li>
+            <li><a href="#lesson-27">Noms propres, titres et adresses</a></li>
+            <li><a href="#lesson-28">L’adjectif</a></li>
+            <li><a href="#lesson-29">Le comparatif</a></li>
+            <li><a href="#lesson-30">Le superlatif</a></li>
+            <li><a href="#lesson-31">Quantification et numération (I)</a></li>
+            <li><a href="#lesson-32">Quantification et numération (II)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </nav>
 
   <main>
     <section id="lesson-1">
-      <h2>Leçon 1 · L’article défini</h2>
+      <h2>L’article défini</h2>
       <p>L’article défini du créole martiniquais est postposé et varie selon la finale phonétique du nom. Les formes principales sont <strong>-la</strong> après une consonne et <strong>-a</strong> après une voyelle. Après une voyelle nasale, on rencontre les variantes <strong>-lan</strong> et <strong>-an</strong>; d’autres formes comme <strong>-wa</strong>, <strong>-wan</strong>, <strong>-ya</strong> ou <strong>-yan</strong> peuvent apparaître selon la liaison.</p>
       <ul class="examples">
         <li><strong>boug-la</strong> : le type · <strong>fanm-lan</strong> : la femme</li>
@@ -247,7 +405,7 @@
     </section>
 
     <section id="lesson-2">
-      <h2>Leçon 2 · L’article indéfini</h2>
+      <h2>L’article indéfini</h2>
       <p>L’indéfini possède la forme unique <strong>an</strong> placée avant le nom, sans distinction de genre. Il peut se combiner avec des possessifs ou d’autres déterminants. Au pluriel, l’absence d’article marque l’indéfini (« forme zéro »), mais on peut rencontrer <strong>dé</strong> dans des contextes spécifiques ou exclamations avec <strong>yan</strong>.</p>
       <ul class="examples">
         <li><strong>an boug</strong> : un type · <strong>an madanm</strong> : une femme</li>
@@ -259,7 +417,7 @@
     </section>
 
     <section id="lesson-3">
-      <h2>Leçon 3 · Le pluriel</h2>
+      <h2>Le pluriel</h2>
       <p>Le pluriel défini se forme avec <strong>sé …-la</strong> ou <strong>sé …-a</strong> selon la finale du mot, alors que le pluriel indéfini est généralement exprimé par la forme zéro ou par <strong>dé</strong>. L’article permet de distinguer les ensembles particuliers des valeurs générales.</p>
       <ul class="examples">
         <li><strong>sé bèf-la</strong> : les bœufs · <strong>sé soulyé-a</strong> : les chaussures</li>
@@ -271,7 +429,7 @@
     </section>
 
     <section id="lesson-4">
-      <h2>Leçon 4 · Les pronoms personnels</h2>
+      <h2>Les pronoms personnels</h2>
       <p>Les pronoms distinguent formes toniques et atones, avec des variantes après voyelle. Les pronoms objets suivent toujours le verbe. Les compléments directs de chose utilisent souvent <strong>sa</strong> plutôt qu’un pronom personnel.</p>
       <ul class="examples">
         <li><strong>mwen / man</strong> : je · <strong>wou / ou / ’w</strong> : tu · <strong>li / i / y</strong> : il/elle</li>
@@ -283,7 +441,7 @@
     </section>
 
     <section id="lesson-5">
-      <h2>Leçon 5 · Les possessifs</h2>
+      <h2>Les possessifs</h2>
       <p>La possession se marque en plaçant le pronom personnel après le nom. L’article défini détermine la portée (générale ou particulière). Les formes pronominales dérivées utilisent la particule <strong>ta</strong> pour exprimer « le mien », « les nôtres », etc.</p>
       <ul class="examples">
         <li><strong>tab li</strong> : ses tables (général) · <strong>tab li a</strong> : sa table</li>
@@ -295,7 +453,7 @@
     </section>
 
     <section id="lesson-6">
-      <h2>Leçon 6 · Les démonstratifs</h2>
+      <h2>Les démonstratifs</h2>
       <p>Le démonstratif adjectival <strong>tala</strong> se place après le nom avec un trait d’union. Des variantes abrégées (<strong>taa</strong>) existent. Le pluriel se forme avec <strong>sé</strong> et des pronoms démonstratifs (<strong>sé tala</strong>) reprennent l’antécédent.</p>
       <ul class="examples">
         <li><strong>bagay-tala</strong> : cette chose-ci/là</li>
@@ -307,7 +465,7 @@
     </section>
 
     <section id="lesson-7">
-      <h2>Leçon 7 · Les relatifs</h2>
+      <h2>Les relatifs</h2>
       <p>Le relatif <strong>ki</strong> s’utilise lorsque l’antécédent est sujet, tandis que la forme zéro s’applique aux compléments. Un article de rappel clôt les subordonnées lorsque l’antécédent est déterminé. Le mot explétif <strong>éti</strong> peut précéder le relatif.</p>
       <ul class="examples">
         <li><strong>sé Pyè ki vòlé bèf-la</strong> : c’est Pierre qui a volé le bœuf</li>
@@ -319,7 +477,7 @@
     </section>
 
     <section id="lesson-8">
-      <h2>Leçon 8 · L’interrogation</h2>
+      <h2>L’interrogation</h2>
       <p>L’interrogation se marque par l’intonation ou par des particules (<strong>ès</strong>, <strong>an</strong>, <strong>wi</strong>, <strong>non</strong>, <strong>pa vré</strong>). Les interrogatifs se combinent souvent avec le relatif <strong>ki</strong>.</p>
       <ul class="examples">
         <li><strong>ou ka vini, an ?</strong> : tu viens ?</li>
@@ -331,7 +489,7 @@
     </section>
 
     <section id="lesson-9">
-      <h2>Leçon 9 · La négation</h2>
+      <h2>La négation</h2>
       <p>La particule <strong>pa</strong> précède le verbe pour exprimer la négation. Selon le temps, elle peut varier : <strong>pé</strong> devant <strong>ké</strong> (futur/conditionnel), <strong>poko</strong> pour « pas encore », <strong>pa… ankò</strong> pour « ne… plus ».</p>
       <ul class="examples">
         <li><strong>i pa ni lajan</strong> : il n’a pas d’argent</li>
@@ -343,7 +501,7 @@
     </section>
 
     <section id="lesson-10">
-      <h2>Leçon 10 · L’exclamation</h2>
+      <h2>L’exclamation</h2>
       <p>Plusieurs particules expriment l’exclamation et l’intensité : <strong>fout</strong>, <strong>wi</strong>, <strong>mé</strong>, <strong>wo</strong>, <strong>dann</strong>, <strong>aten</strong>, <strong>papa</strong>, <strong>mézanmi</strong>, <strong>an</strong>, <strong>woy</strong>, <strong>mi</strong>, <strong>joy</strong>, <strong>yan</strong>, <strong>pou</strong>. Elles peuvent être autonomes ou combinées pour renforcer une réaction.</p>
       <ul class="examples">
         <li><strong>fout madanm-la bèl !</strong> : que la dame est belle !</li>
@@ -355,7 +513,7 @@
     </section>
 
     <section id="lesson-11">
-      <h2>Leçon 11 · La préposition « à »</h2>
+      <h2>La préposition « à »</h2>
       <p>La préposition française « à » peut être rendue par une forme zéro ou par diverses particules selon le contexte : <strong>a</strong>, <strong>ta</strong>, <strong>an</strong>, <strong>épi</strong>, <strong>ala</strong>, <strong>ka</strong>, <strong>ba</strong>, <strong>pou</strong>, <strong>o</strong>, <strong>rivé</strong>.</p>
       <ul class="examples">
         <li><strong>ba Pyè lajan</strong> : donne de l’argent à Pierre</li>
@@ -367,7 +525,7 @@
     </section>
 
     <section id="lesson-12">
-      <h2>Leçon 12 · La préposition « de »</h2>
+      <h2>La préposition « de »</h2>
       <p>« De » se traduit par la forme zéro pour l’appartenance, la partitive, la provenance, etc., mais aussi par <strong>di</strong>, <strong>sòti</strong>, <strong>an</strong>, ou <strong>adan</strong> selon la nuance (matière, provenance, localisation, dénombrement).</p>
       <ul class="examples">
         <li><strong>joujou timanmay-la</strong> : le jouet de l’enfant</li>
@@ -378,7 +536,7 @@
     </section>
 
     <section id="lesson-13">
-      <h2>Leçon 13 · Autres prépositions (I)</h2>
+      <h2>Autres prépositions (I)</h2>
       <p>Les prépositions françaises « pour », « vers », « en/dans », « chez », « contre » se rendent en créole par plusieurs équivalents dépendant du sens précis.</p>
       <ul class="examples">
         <li><strong>man ka travay pou érisi</strong> : je travaille pour réussir</li>
@@ -390,7 +548,7 @@
     </section>
 
     <section id="lesson-14">
-      <h2>Leçon 14 · Autres prépositions (II)</h2>
+      <h2>Autres prépositions (II)</h2>
       <p><strong>épi</strong> traduit fréquemment « avec », complété par <strong>ansanm épi</strong> pour l’accompagnement. D’autres prépositions usuelles : <strong>apré</strong>, <strong>avan</strong>, <strong>dépi</strong>, <strong>dèyè</strong>, <strong>douvan</strong>, <strong>ant</strong>, <strong>adan</strong>, <strong>an déwò</strong>, <strong>jik</strong>, <strong>magré</strong>, <strong>san</strong>, <strong>silon</strong>, <strong>anba</strong>, <strong>anlè</strong>.</p>
       <ul class="examples">
         <li><strong>frè mwen vini épi madanm li</strong> : mon frère est venu avec sa femme</li>
@@ -401,7 +559,7 @@
     </section>
 
     <section id="lesson-15">
-      <h2>Leçon 15 · Le verbe « être »</h2>
+      <h2>Le verbe « être »</h2>
       <p>Quatre stratégies rendent « être » : forme zéro devant adjectif ou compléments, copule <strong>sé</strong> devant un nom, forme <strong>yé</strong> pour les constructions disloquées ou interrogatives, et verbe plein <strong>èt</strong> dans certains contextes.</p>
       <ul class="examples">
         <li><strong>Pyè kontan</strong> : Pierre est content</li>
@@ -412,7 +570,7 @@
     </section>
 
     <section id="lesson-16">
-      <h2>Leçon 16 · Présent et particule « ka »</h2>
+      <h2>Présent et particule « ka »</h2>
       <p>La particule <strong>ka</strong> exprime l’aspect duratif ou habituel. Elle peut disparaître avec certains verbes statifs (<strong>enmen</strong>, <strong>konnèt</strong>, <strong>ni</strong>, <strong>sav</strong>, etc.) sauf pour indiquer l’habitude.</p>
       <ul class="examples">
         <li><strong>man ka chanté</strong> : je chante / je suis en train de chanter</li>
@@ -423,7 +581,7 @@
     </section>
 
     <section id="lesson-17">
-      <h2>Leçon 17 · Le passé</h2>
+      <h2>Le passé</h2>
       <p>Le passé s’exprime par la forme simple (équivalent passé composé/passé simple) ou par la particule <strong>té</strong> (antériorité ou imparfait selon le verbe). La combinaison <strong>té ka</strong> correspond à l’imparfait duratif.</p>
       <ul class="examples">
         <li><strong>yo pati</strong> : ils sont partis</li>
@@ -434,7 +592,7 @@
     </section>
 
     <section id="lesson-18">
-      <h2>Leçon 18 · Futur et conditionnel</h2>
+      <h2>Futur et conditionnel</h2>
       <p>La particule <strong>ké</strong> marque le futur (avec variante proche <strong>kay</strong>). La combinaison <strong>té ké</strong> forme le conditionnel, tandis que <strong>sé</strong> peut rendre un conditionnel optatif. L’antériorité se gère avec <strong>fini</strong>.</p>
       <ul class="examples">
         <li><strong>nou ké dòmi bonnè</strong> : nous dormirons tôt</li>
@@ -445,7 +603,7 @@
     </section>
 
     <section id="lesson-19">
-      <h2>Leçon 19 · La phrase conditionnelle</h2>
+      <h2>La phrase conditionnelle</h2>
       <p>Les subordonnées conditionnelles utilisent <strong>si</strong> ou <strong>siyanka</strong> et se combinent avec différents temps (<strong>ka</strong>, forme simple, <strong>té ka</strong>, <strong>té ké</strong>, optatif). Le choix reflète la probabilité ou l’irréel.</p>
       <ul class="examples">
         <li><strong>si ou lévé, ou ké tann</strong> : si tu te lèves, tu entendras</li>
@@ -456,7 +614,7 @@
     </section>
 
     <section id="lesson-20">
-      <h2>Leçon 20 · L’impératif</h2>
+      <h2>L’impératif</h2>
       <p>L’impératif utilise la forme verbale simple, éventuellement doublée ou renforcée par des particules (<strong>anni</strong>, <strong>kon</strong>, <strong>tou sa</strong>). Certaines personnes emploient <strong>annou</strong> pour la 1<sup>re</sup> pluriel. Des expressions avec <strong>kité</strong>, <strong>ba</strong> ou <strong>prété</strong> rendent l’impératif aux autres personnes.</p>
       <ul class="examples">
         <li><strong>sòti la !</strong> : sors de là !</li>
@@ -468,7 +626,7 @@
     </section>
 
     <section id="lesson-21">
-      <h2>Leçon 21 · Le passif</h2>
+      <h2>Le passif</h2>
       <p>Le passif s’exprime sans changement morphologique majeur : on supprime l’agent ou on utilise des participes lexicalisés (<strong>pri</strong>, <strong>fèt</strong>, <strong>bay</strong>). Certaines constructions participiales complètent la description.</p>
       <ul class="examples">
         <li><strong>lèt-la voyé</strong> : la lettre est envoyée</li>
@@ -479,7 +637,7 @@
     </section>
 
     <section id="lesson-22">
-      <h2>Leçon 22 · Les verbes composés</h2>
+      <h2>Les verbes composés</h2>
       <p>Le créole combine fréquemment deux verbes pour préciser la nuance aspectuelle ou directionnelle. Un verbe porte le sens lexical, l’autre ajoute une orientation ou une manière.</p>
       <ul class="examples">
         <li><strong>maché alé</strong> : marcher vers l’extérieur · <strong>maché vini</strong> : marcher vers l’intérieur</li>
@@ -490,7 +648,7 @@
     </section>
 
     <section id="lesson-23">
-      <h2>Leçon 23 · Obligation et probabilité</h2>
+      <h2>Obligation et probabilité</h2>
       <p>Trois marqueurs principaux expriment l’obligation : <strong>fok/fo</strong>, <strong>pou</strong> et <strong>dwèt</strong>. Ce dernier véhicule aussi la notion de probabilité selon le contexte.</p>
       <ul class="examples">
         <li><strong>fòk ou travay</strong> : il faut que tu travailles</li>
@@ -501,7 +659,7 @@
     </section>
 
     <section id="lesson-24">
-      <h2>Leçon 24 · Le verbe « pouvoir »</h2>
+      <h2>Le verbe « pouvoir »</h2>
       <p><strong>pé</strong> traduit la capacité et la possibilité, souvent combiné à <strong>sa</strong> pour indiquer la réussite. La négation se fond avec <strong>pé</strong> au futur (<strong>pé ké</strong>). Le verbe peut aussi exprimer la probabilité.</p>
       <ul class="examples">
         <li><strong>ou pé pati</strong> : tu peux partir</li>
@@ -512,7 +670,7 @@
     </section>
 
     <section id="lesson-25">
-      <h2>Leçon 25 · Les usages de « sé »</h2>
+      <h2>Les usages de « sé »</h2>
       <p><strong>sé</strong> possède quatre fonctions : présentatif (« c’est »), marque du pluriel défini, copule équivalente à « être » et optatif (conditionnel). Plusieurs occurrences peuvent cohabiter dans une même phrase.</p>
       <ul class="examples">
         <li><strong>sa, sé ki bagay ?</strong> : ça, qu’est-ce que c’est ?</li>
@@ -523,7 +681,7 @@
     </section>
 
     <section id="lesson-26">
-      <h2>Leçon 26 · Le nom commun</h2>
+      <h2>Le nom commun</h2>
       <p>Les noms peuvent apparaître sans article lorsqu’ils ont une valeur générique. Certains adjectifs ou verbes se nominalisent, souvent avec les préfixes <strong>la-</strong> ou <strong>le-</strong> pour les notions abstraites.</p>
       <ul class="examples">
         <li><strong>loto pa pou vini la</strong> : les voitures ne doivent pas venir ici</li>
@@ -534,7 +692,7 @@
     </section>
 
     <section id="lesson-27">
-      <h2>Leçon 27 · Noms propres, titres et adresses</h2>
+      <h2>Noms propres, titres et adresses</h2>
       <p>Les noms propres peuvent recevoir l’article pour marquer la distance. Les titres et formules d’adresse varient selon le registre : <strong>misyé</strong>, <strong>manzè</strong>, <strong>mésyédanm</strong>, <strong>monchè</strong>, etc. Les noms de pays utilisent des prépositions spécifiques.</p>
       <ul class="examples">
         <li><strong>Misiyé Pòl la</strong> : ce Monsieur Paul</li>
@@ -545,7 +703,7 @@
     </section>
 
     <section id="lesson-28">
-      <h2>Leçon 28 · L’adjectif</h2>
+      <h2>L’adjectif</h2>
       <p>De nombreux adjectifs résultent de relatives réduites ou de syntagmes nominalisés. Certains intensifs (<strong>bidim</strong>, <strong>manman</strong>) ou diminutifs (<strong>ti monyonyon</strong>) précèdent le nom. Le genre grammatical n’est pas marqué, mais des suffixes (<strong>-èz</strong>) peuvent souligner le féminin sémantique.</p>
       <ul class="examples">
         <li><strong>an boug vayan</strong> : un homme courageux</li>
@@ -557,7 +715,7 @@
     </section>
 
     <section id="lesson-29">
-      <h2>Leçon 29 · Le comparatif</h2>
+      <h2>Le comparatif</h2>
       <p>La supériorité se marque avec <strong>pli… ki/pasé</strong>, l’égalité avec <strong>osi… ki</strong> ou <strong>otan… otan</strong>, l’infériorité avec <strong>mwen(s)… ki</strong>. Des adverbes (<strong>titak</strong>, <strong>anpil</strong>, <strong>lontan</strong>) modulant l’intensité.</p>
       <ul class="examples">
         <li><strong>Pyè pli sòt ki Wobè</strong> : Pierre est plus bête que Robert</li>
@@ -568,7 +726,7 @@
     </section>
 
     <section id="lesson-30">
-      <h2>Leçon 30 · Le superlatif</h2>
+      <h2>Le superlatif</h2>
       <p>Le superlatif relatif s’appuie sur <strong>pli</strong> ou <strong>mwen</strong> associés à l’article (<strong>sé… a</strong> pour le particulier, <strong>lé</strong> pour le général). Le superlatif absolu se forme par redoublement, particules intensives ou adjectifs comme <strong>bon</strong>, <strong>bèl</strong>, <strong>gwo</strong>, <strong>tou</strong>.</p>
       <ul class="examples">
         <li><strong>boug mwen pyétè a</strong> : le type le moins avare</li>
@@ -579,7 +737,7 @@
     </section>
 
     <section id="lesson-31">
-      <h2>Leçon 31 · Quantification et numération (I)</h2>
+      <h2>Quantification et numération (I)</h2>
       <p>Les adverbes/adjectifs de quantité incluent <strong>tout</strong>, <strong>chak</strong>, <strong>tjèk</strong>, <strong>yonndé</strong>, <strong>anpil</strong>, <strong>anlo</strong>, <strong>lòt</strong>, <strong>menm</strong>, <strong>kalté</strong>. Ils modulent la portée du nom selon qu’il est défini ou indéfini.</p>
       <ul class="examples">
         <li><strong>tout moun</strong> : tout le monde</li>
@@ -590,7 +748,7 @@
     </section>
 
     <section id="lesson-32">
-      <h2>Leçon 32 · Quantification et numération (II)</h2>
+      <h2>Quantification et numération (II)</h2>
       <p>Les numéraux cardinaux (yonn, dé, twa…) et ordinaux (prèmyé, dézyèm…) suivent des règles spécifiques. Certains servent d’intensif. Les expressions de durée ou de fréquence s’appuient sur ces formes.</p>
       <ul class="examples">
         <li><strong>ni dé lanné nou la</strong> : cela fait deux ans que nous sommes là</li>
@@ -605,5 +763,44 @@
   <footer>
     <p>Mise à jour des règles grammaticales pour accompagner les exercices de créole martiniquais.</p>
   </footer>
+
+  <script>
+    const lessonNav = document.querySelector('.lesson-nav');
+    const toggle = lessonNav?.querySelector('.menu-toggle');
+    const panel = lessonNav?.querySelector('.menu-panel');
+
+    if (lessonNav && toggle && panel) {
+      const closeMenu = () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        panel.hidden = true;
+      };
+
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        panel.hidden = expanded;
+      });
+
+      panel.addEventListener('click', (event) => {
+        const link = event.target.closest('a');
+        if (link) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!lessonNav.contains(event.target)) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeMenu();
+          toggle.focus();
+        }
+      });
+    }
+  </script>
 </body>
 </html>
