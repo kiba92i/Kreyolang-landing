@@ -124,6 +124,28 @@
       box-shadow: 0 22px 40px rgba(80, 56, 160, 0.36);
     }
 
+    .link-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 999px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(56, 189, 248, 0.85));
+      color: white;
+      box-shadow: 0 16px 32px rgba(80, 56, 160, 0.22);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .link-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 44px rgba(80, 56, 160, 0.28);
+    }
+
     .menu-toggle svg {
       width: 1rem;
       height: 1rem;
@@ -762,6 +784,9 @@
 
   <footer>
     <p>Mise à jour des règles grammaticales pour accompagner les exercices de créole martiniquais.</p>
+    <p>
+      <a class="link-button" href="subscribe.html">S’abonner à la newsletter</a>
+    </p>
   </footer>
 
   <script>

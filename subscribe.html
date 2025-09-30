@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S’abonner à Kreyolang</title>
+  <style>
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.25), transparent 45%),
+        radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.18), transparent 50%),
+        linear-gradient(180deg, #f5f0ff, rgba(245, 240, 255, 0.88));
+      color: #1a1237;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: clamp(2rem, 5vw, 4rem) 1.5rem;
+    }
+
+    .card {
+      max-width: 520px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 24px;
+      padding: clamp(2rem, 4vw, 3rem);
+      box-shadow: 0 30px 60px rgba(80, 56, 160, 0.2);
+      backdrop-filter: blur(16px);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: clamp(2rem, 4.5vw, 2.75rem);
+    }
+
+    .lead {
+      margin: 0.75rem 0 2rem;
+      color: #4b3c6b;
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    input[type="email"] {
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      font-size: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="email"]:focus {
+      outline: none;
+      border-color: rgba(124, 58, 237, 0.6);
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
+    }
+
+    button[type="submit"],
+    .link-button {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 999px;
+      padding: 0.9rem 1.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(56, 189, 248, 0.85));
+      color: white;
+      box-shadow: 0 20px 40px rgba(80, 56, 160, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button[type="submit"]:hover,
+    .link-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 48px rgba(80, 56, 160, 0.3);
+    }
+
+    button[type="submit"]:disabled {
+      opacity: 0.6;
+      cursor: wait;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .status {
+      min-height: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .status.error {
+      color: #c0392b;
+    }
+
+    .status.success {
+      color: #1b7f5f;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .link-button {
+      text-decoration: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.2), transparent 45%),
+          radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.22), transparent 50%),
+          linear-gradient(180deg, #090414, rgba(12, 6, 24, 0.9));
+        color: #f5f3ff;
+      }
+
+      .card {
+        background: rgba(30, 17, 52, 0.72);
+      }
+
+      .lead {
+        color: #c7bfeb;
+      }
+
+      input[type="email"] {
+        background: rgba(15, 10, 28, 0.8);
+        color: inherit;
+        border-color: rgba(167, 139, 250, 0.35);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="card" aria-labelledby="subscribe-title">
+      <h1 id="subscribe-title">S’abonner</h1>
+      <p class="lead">Complétez votre e-mail pour ouvrir une session Stripe sécurisée et confirmer votre abonnement.</p>
+      <form id="subscribe-form" novalidate>
+        <label for="email">Adresse e-mail</label>
+        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="vous@example.com">
+        <button type="submit">Continuer vers Stripe</button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+  <nav>
+    <a class="link-button" href="index.html">← Retour au site</a>
+  </nav>
+
+  <script>
+    const form = document.getElementById('subscribe-form');
+    const status = document.querySelector('.status');
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('canceled')) {
+      status.textContent = 'Paiement annulé. Vous pouvez réessayer quand vous voulez.';
+      status.classList.add('error');
+    }
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const submitButton = form.querySelector('button[type="submit"]');
+      status.textContent = '';
+      status.classList.remove('error', 'success');
+
+      const formData = new FormData(form);
+      const email = formData.get('email');
+
+      if (!email) {
+        status.textContent = 'Veuillez indiquer une adresse e-mail valide.';
+        status.classList.add('error');
+        return;
+      }
+
+      try {
+        submitButton.disabled = true;
+        status.textContent = 'Création de la session de paiement…';
+
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        const payload = await response.json();
+        if (!response.ok) {
+          throw new Error(payload.error ?? 'Impossible de créer la session Stripe.');
+        }
+
+        if (payload.url) {
+          window.location.href = payload.url;
+        } else {
+          throw new Error('La réponse du serveur ne contient pas d’URL Stripe.');
+        }
+      } catch (error) {
+        console.error(error);
+        status.textContent = error.message;
+        status.classList.add('error');
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
