@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S'abonner - Kreyolang</title>
+  <link rel="stylesheet" href="/css/app.css" />
+  <script src="/js/session.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await window.Session.ensureAuthenticated();
+      const message = document.querySelector('[data-subscription-state]');
+      if (!user || !message) return;
+      if (user.subscription_status === 'active') {
+        message.textContent = 'Votre abonnement est déjà actif. Rendez-vous sur vos modules !';
+      }
+    });
+  </script>
+</head>
+<body>
+  <main>
+    <h1>Activer mon abonnement</h1>
+    <p data-subscription-state>
+      Pour accéder aux modules, finalisez votre abonnement via notre portail de paiement sécurisé.
+    </p>
+    <p>
+      Une fois le paiement validé, Stripe nous enverra un webhook pour activer votre compte automatiquement.
+    </p>
+    <p>
+      Besoin d'aide? Contactez-nous à <a href="mailto:support@kreyolang.com">support@kreyolang.com</a>.
+    </p>
+  </main>
+</body>
+</html>
