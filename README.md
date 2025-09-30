@@ -261,3 +261,18 @@ Tout est normalisé en JSON pour être digéré par un LLM.
 Scripts fournis pour valider et builder.
 
 Prompts prêts à l’emploi pour fiches, quiz, dialogues.
+
+💳 Abonnements & intégration Stripe
+
+Un serveur Express minimal est fourni dans `server/` pour créer des sessions Checkout et stocker les identifiants clients Stripe. Pour l’utiliser :
+
+1. Copiez `server/.env.example` vers `server/.env` et renseignez vos clés (`STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `CLIENT_BASE_URL`).
+2. Installez les dépendances backend :
+   ```bash
+   cd server
+   npm install
+   npm run dev
+   ```
+3. Servez le frontend (par exemple avec `npx serve .`) sur l’URL définie dans `CLIENT_BASE_URL`.
+
+Le bouton « S’abonner » dans `index.html` ouvre `subscribe.html`, qui appelle `/api/create-checkout-session`. Après paiement, Stripe redirige vers `success.html` qui interroge `/api/checkout-session/:id` pour confirmer le paiement et conserver l’identifiant client.
