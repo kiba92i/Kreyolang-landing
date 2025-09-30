@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammaire Martiniquaise</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #fdfdfd;
+      --fg: #1f1f1f;
+      --accent: #0f766e;
+      --muted: #475569;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --fg: #f8fafc;
+        --accent: #14b8a6;
+        --muted: #94a3b8;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      background-color: var(--bg);
+      color: var(--fg);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--accent), #0284c7);
+      color: white;
+      padding: 3rem 1.5rem 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    header p {
+      margin: 0.75rem auto 0;
+      max-width: 60ch;
+      font-size: 1.1rem;
+    }
+
+    nav {
+      background-color: rgba(15, 118, 110, 0.1);
+      border-bottom: 1px solid rgba(15, 118, 110, 0.2);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin: 0;
+      padding: 0.75rem 1.5rem;
+      list-style: none;
+      justify-content: center;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: var(--accent);
+      color: white;
+      outline: none;
+    }
+
+    main {
+      padding: 2.5rem 1.5rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    section {
+      background-color: rgba(148, 163, 184, 0.08);
+      border-radius: 18px;
+      padding: clamp(1.5rem, 2vw, 2.25rem);
+      margin-bottom: clamp(1.75rem, 3vw, 2.75rem);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+    }
+
+    section h2 {
+      margin-top: 0;
+      color: var(--accent);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    h3 {
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    p {
+      margin: 0.6rem 0;
+    }
+
+    ul,
+    ol {
+      margin: 0.75rem 0 0.75rem 1.25rem;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 0.45rem;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .examples li {
+      background-color: rgba(15, 118, 110, 0.08);
+      border-left: 4px solid var(--accent);
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      margin: 0;
+    }
+
+    .note {
+      background-color: rgba(234, 179, 8, 0.15);
+      border-left: 4px solid #f59e0b;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+      color: inherit;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem 3rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Grammaire Martiniquaise</h1>
+    <p>Une compilation des principales règles grammaticales du créole martiniquais organisée en leçons pour accompagner vos exercices et révisions.</p>
+  </header>
+
+  <nav aria-label="Navigation des leçons">
+    <ul>
+      <li><a href="#lesson-1">Leçon 1</a></li>
+      <li><a href="#lesson-2">Leçon 2</a></li>
+      <li><a href="#lesson-3">Leçon 3</a></li>
+      <li><a href="#lesson-4">Leçon 4</a></li>
+      <li><a href="#lesson-5">Leçon 5</a></li>
+      <li><a href="#lesson-6">Leçon 6</a></li>
+      <li><a href="#lesson-7">Leçon 7</a></li>
+      <li><a href="#lesson-8">Leçon 8</a></li>
+      <li><a href="#lesson-9">Leçon 9</a></li>
+      <li><a href="#lesson-10">Leçon 10</a></li>
+      <li><a href="#lesson-11">Leçon 11</a></li>
+      <li><a href="#lesson-12">Leçon 12</a></li>
+      <li><a href="#lesson-13">Leçon 13</a></li>
+      <li><a href="#lesson-14">Leçon 14</a></li>
+      <li><a href="#lesson-15">Leçon 15</a></li>
+      <li><a href="#lesson-16">Leçon 16</a></li>
+      <li><a href="#lesson-17">Leçon 17</a></li>
+      <li><a href="#lesson-18">Leçon 18</a></li>
+      <li><a href="#lesson-19">Leçon 19</a></li>
+      <li><a href="#lesson-20">Leçon 20</a></li>
+      <li><a href="#lesson-21">Leçon 21</a></li>
+      <li><a href="#lesson-22">Leçon 22</a></li>
+      <li><a href="#lesson-23">Leçon 23</a></li>
+      <li><a href="#lesson-24">Leçon 24</a></li>
+      <li><a href="#lesson-25">Leçon 25</a></li>
+      <li><a href="#lesson-26">Leçon 26</a></li>
+      <li><a href="#lesson-27">Leçon 27</a></li>
+      <li><a href="#lesson-28">Leçon 28</a></li>
+      <li><a href="#lesson-29">Leçon 29</a></li>
+      <li><a href="#lesson-30">Leçon 30</a></li>
+      <li><a href="#lesson-31">Leçon 31</a></li>
+      <li><a href="#lesson-32">Leçon 32</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="lesson-1">
+      <h2>Leçon 1 · L’article défini</h2>
+      <p>L’article défini du créole martiniquais est postposé et varie selon la finale phonétique du nom. Les formes principales sont <strong>-la</strong> après une consonne et <strong>-a</strong> après une voyelle. Après une voyelle nasale, on rencontre les variantes <strong>-lan</strong> et <strong>-an</strong>; d’autres formes comme <strong>-wa</strong>, <strong>-wan</strong>, <strong>-ya</strong> ou <strong>-yan</strong> peuvent apparaître selon la liaison.</p>
+      <ul class="examples">
+        <li><strong>boug-la</strong> : le type · <strong>fanm-lan</strong> : la femme</li>
+        <li><strong>loto-a</strong> : la voiture · <strong>sitwon-an</strong> : le citron</li>
+        <li><strong>dto-wa</strong> : l’eau · <strong>zyé-ya</strong> : l’œil</li>
+        <li><strong>kabrit la ou maré a</strong> : la chèvre que tu as attachée</li>
+      </ul>
+      <p>Dans les relatives, le « que » français est implicite et un article de rappel se place en fin de subordonnée lorsque l’antécédent possède déjà un article défini. Le trait d’union est indispensable pour distinguer les constructions nominales des adjectifs.</p>
+      <div class="note">Le créole martiniquais ne marque pas le genre grammatical : seules les distinctions sémantiques (mâle, femelle, inanimé) sont conservées.</div>
+    </section>
+
+    <section id="lesson-2">
+      <h2>Leçon 2 · L’article indéfini</h2>
+      <p>L’indéfini possède la forme unique <strong>an</strong> placée avant le nom, sans distinction de genre. Il peut se combiner avec des possessifs ou d’autres déterminants. Au pluriel, l’absence d’article marque l’indéfini (« forme zéro »), mais on peut rencontrer <strong>dé</strong> dans des contextes spécifiques ou exclamations avec <strong>yan</strong>.</p>
+      <ul class="examples">
+        <li><strong>an boug</strong> : un type · <strong>an madanm</strong> : une femme</li>
+        <li><strong>té ni an fwa…</strong> : il était une fois</li>
+        <li><strong>Mi dé boug kouyon !</strong> : Voilà des types idiots !</li>
+        <li><strong>man pa wè pyès zanmi</strong> : je n’ai vu aucun ami</li>
+      </ul>
+      <p>La négation introduit des nuances : <strong>pa</strong> + indéfini pour « ne… pas », <strong>pyès</strong> pour « aucun ». Des formes pronominales dérivées (par ex. <strong>yann</strong>) expriment « un seul ».</p>
+    </section>
+
+    <section id="lesson-3">
+      <h2>Leçon 3 · Le pluriel</h2>
+      <p>Le pluriel défini se forme avec <strong>sé …-la</strong> ou <strong>sé …-a</strong> selon la finale du mot, alors que le pluriel indéfini est généralement exprimé par la forme zéro ou par <strong>dé</strong>. L’article permet de distinguer les ensembles particuliers des valeurs générales.</p>
+      <ul class="examples">
+        <li><strong>sé bèf-la</strong> : les bœufs · <strong>sé soulyé-a</strong> : les chaussures</li>
+        <li><strong>man wè kay</strong> : j’ai vu des maisons · <strong>man wè sé kay-la</strong> : j’ai vu les maisons</li>
+        <li><strong>sé mèt-la ka palé</strong> : les maîtres parlent</li>
+        <li><strong>tamwen</strong> : les miens (général) · <strong>sé tamwen-an</strong> : les miens (particulier)</li>
+      </ul>
+      <p>Selon les régions, d’autres marques comme <strong>lé</strong> peuvent remplacer <strong>sé</strong>. Les possessifs se combinent avec l’article pour préciser la portée.</p>
+    </section>
+
+    <section id="lesson-4">
+      <h2>Leçon 4 · Les pronoms personnels</h2>
+      <p>Les pronoms distinguent formes toniques et atones, avec des variantes après voyelle. Les pronoms objets suivent toujours le verbe. Les compléments directs de chose utilisent souvent <strong>sa</strong> plutôt qu’un pronom personnel.</p>
+      <ul class="examples">
+        <li><strong>mwen / man</strong> : je · <strong>wou / ou / ’w</strong> : tu · <strong>li / i / y</strong> : il/elle</li>
+        <li><strong>man wè’w</strong> : je t’ai vu(e) · <strong>kité’y palé</strong> : laisse-le parler</li>
+        <li><strong>man ka ba’y li</strong> : je le lui donne (personne avant objet)</li>
+        <li><strong>nou fè sa</strong> : nous l’avons fait</li>
+      </ul>
+      <p>Les formes réfléchies fusionnent avec <strong>kò-</strong> (ex. <strong>kòmwen</strong>). Les intensifs (<strong>mwen menm la</strong>) servent à insister sur le sujet.</p>
+    </section>
+
+    <section id="lesson-5">
+      <h2>Leçon 5 · Les possessifs</h2>
+      <p>La possession se marque en plaçant le pronom personnel après le nom. L’article défini détermine la portée (générale ou particulière). Les formes pronominales dérivées utilisent la particule <strong>ta</strong> pour exprimer « le mien », « les nôtres », etc.</p>
+      <ul class="examples">
+        <li><strong>tab li</strong> : ses tables (général) · <strong>tab li a</strong> : sa table</li>
+        <li><strong>loto mwen</strong> : mes voitures · <strong>loto mwen an</strong> : ma voiture</li>
+        <li><strong>tamwen</strong> : les miens · <strong>tamwen an</strong> : le mien</li>
+        <li><strong>kisa ki ta’w ?</strong> : qu’est-ce qui est à toi ?</li>
+      </ul>
+      <p>Lorsque l’on présume l’unicité (parents, conjoint), l’article disparaît : <strong>papa’w</strong>, <strong>manman’w</strong>. Des tournures comme <strong>an yich mwen</strong> signifient « un de mes enfants ».</p>
+    </section>
+
+    <section id="lesson-6">
+      <h2>Leçon 6 · Les démonstratifs</h2>
+      <p>Le démonstratif adjectival <strong>tala</strong> se place après le nom avec un trait d’union. Des variantes abrégées (<strong>taa</strong>) existent. Le pluriel se forme avec <strong>sé</strong> et des pronoms démonstratifs (<strong>sé tala</strong>) reprennent l’antécédent.</p>
+      <ul class="examples">
+        <li><strong>bagay-tala</strong> : cette chose-ci/là</li>
+        <li><strong>sé moun-tala</strong> : ces gens-là</li>
+        <li><strong>tala ki palé a sé mèt-la</strong> : celui qui a parlé, c’est le maître</li>
+        <li><strong>ba mwen sa</strong> : donne-moi cela</li>
+      </ul>
+      <p>L’article défini peut jouer un rôle démonstratif (<strong>boug-la</strong> = « ce type »). Les expressions temporelles (<strong>oswè-a</strong>, <strong>bonmaten-an</strong>) utilisent l’article pour indiquer la précision.</p>
+    </section>
+
+    <section id="lesson-7">
+      <h2>Leçon 7 · Les relatifs</h2>
+      <p>Le relatif <strong>ki</strong> s’utilise lorsque l’antécédent est sujet, tandis que la forme zéro s’applique aux compléments. Un article de rappel clôt les subordonnées lorsque l’antécédent est déterminé. Le mot explétif <strong>éti</strong> peut précéder le relatif.</p>
+      <ul class="examples">
+        <li><strong>sé Pyè ki vòlé bèf-la</strong> : c’est Pierre qui a volé le bœuf</li>
+        <li><strong>sé bèf-la Pyè vòlé</strong> : c’est le bœuf que Pierre a volé</li>
+        <li><strong>boug-la ki ka rété Fodfrans la</strong> : le type qui habite Fort-de-France</li>
+        <li><strong>koutla-a man ka koupé kann épi’y la</strong> : le coutelas avec lequel je coupe la canne</li>
+      </ul>
+      <p>Les traductions de « dont », « où », « lequel » s’appuient sur des structures possessives ou prépositionnelles (<strong>mi boug-la i té ka palé’w la</strong>).</p>
+    </section>
+
+    <section id="lesson-8">
+      <h2>Leçon 8 · L’interrogation</h2>
+      <p>L’interrogation se marque par l’intonation ou par des particules (<strong>ès</strong>, <strong>an</strong>, <strong>wi</strong>, <strong>non</strong>, <strong>pa vré</strong>). Les interrogatifs se combinent souvent avec le relatif <strong>ki</strong>.</p>
+      <ul class="examples">
+        <li><strong>ou ka vini, an ?</strong> : tu viens ?</li>
+        <li><strong>ès i fè sa ?</strong> : est-ce qu’il a fait ça ?</li>
+        <li><strong>ki moun ki fè sa ?</strong> : qui a fait ça ?</li>
+        <li><strong>poutji ou pa vini ?</strong> : pourquoi n’es-tu pas venu ?</li>
+      </ul>
+      <p>Les formes interrogatives couvrent qui (<strong>ki moun</strong>), quoi (<strong>kisa</strong>), quel (<strong>kilès</strong>), où (<strong>koté</strong>, <strong>oti</strong>), comment (<strong>ki mannyè</strong>), pourquoi (<strong>poutji</strong>), quand (<strong>ki tan</strong>, <strong>ki jou</strong>).</p>
+    </section>
+
+    <section id="lesson-9">
+      <h2>Leçon 9 · La négation</h2>
+      <p>La particule <strong>pa</strong> précède le verbe pour exprimer la négation. Selon le temps, elle peut varier : <strong>pé</strong> devant <strong>ké</strong> (futur/conditionnel), <strong>poko</strong> pour « pas encore », <strong>pa… ankò</strong> pour « ne… plus ».</p>
+      <ul class="examples">
+        <li><strong>i pa ni lajan</strong> : il n’a pas d’argent</li>
+        <li><strong>nou pé ké kontan</strong> : nous ne serons pas contents</li>
+        <li><strong>i pòkò fè sa</strong> : il ne l’a pas encore fait</li>
+        <li><strong>man pa wè pyès moun</strong> : je n’ai vu personne</li>
+      </ul>
+      <p>Des intensificateurs comme <strong>pyès</strong>, <strong>ayen</strong>, <strong>janmen</strong> renforcent la négation. La place de <strong>pa</strong> autour du verbe <strong>pé</strong> (pouvoir) influe sur le sens (<strong>i pa pé</strong> vs <strong>i pé pa</strong>).</p>
+    </section>
+
+    <section id="lesson-10">
+      <h2>Leçon 10 · L’exclamation</h2>
+      <p>Plusieurs particules expriment l’exclamation et l’intensité : <strong>fout</strong>, <strong>wi</strong>, <strong>mé</strong>, <strong>wo</strong>, <strong>dann</strong>, <strong>aten</strong>, <strong>papa</strong>, <strong>mézanmi</strong>, <strong>an</strong>, <strong>woy</strong>, <strong>mi</strong>, <strong>joy</strong>, <strong>yan</strong>, <strong>pou</strong>. Elles peuvent être autonomes ou combinées pour renforcer une réaction.</p>
+      <ul class="examples">
+        <li><strong>fout madanm-la bèl !</strong> : que la dame est belle !</li>
+        <li><strong>mé i mové !</strong> : qu’il est méchant !</li>
+        <li><strong>woy woy woy !</strong> : oh là là !</li>
+        <li><strong>mi kalté gwo madanm !</strong> : quelle grosse femme !</li>
+      </ul>
+      <p>Certains termes sont répétés pour intensifier l’émotion (<strong>pa… pa… pa…</strong>, <strong>an an an an</strong>).</p>
+    </section>
+
+    <section id="lesson-11">
+      <h2>Leçon 11 · La préposition « à »</h2>
+      <p>La préposition française « à » peut être rendue par une forme zéro ou par diverses particules selon le contexte : <strong>a</strong>, <strong>ta</strong>, <strong>an</strong>, <strong>épi</strong>, <strong>ala</strong>, <strong>ka</strong>, <strong>ba</strong>, <strong>pou</strong>, <strong>o</strong>, <strong>rivé</strong>.</p>
+      <ul class="examples">
+        <li><strong>ba Pyè lajan</strong> : donne de l’argent à Pierre</li>
+        <li><strong>man ka alé lanmès</strong> : je vais à la messe</li>
+        <li><strong>vini a katrè</strong> : viens à quatre heures</li>
+        <li><strong>pòté patjé-tala ba papa’w</strong> : porte ce paquet à ton père</li>
+      </ul>
+      <p>Les constructions diffèrent selon qu’il s’agit d’attribution, de caractérisation, de localisation, de destination ou de verbe particulier.</p>
+    </section>
+
+    <section id="lesson-12">
+      <h2>Leçon 12 · La préposition « de »</h2>
+      <p>« De » se traduit par la forme zéro pour l’appartenance, la partitive, la provenance, etc., mais aussi par <strong>di</strong>, <strong>sòti</strong>, <strong>an</strong>, ou <strong>adan</strong> selon la nuance (matière, provenance, localisation, dénombrement).</p>
+      <ul class="examples">
+        <li><strong>joujou timanmay-la</strong> : le jouet de l’enfant</li>
+        <li><strong>i bwè dlo</strong> : il a bu de l’eau</li>
+        <li><strong>man kontan di’w</strong> : je suis content de toi</li>
+        <li><strong>dè adan yo chapé</strong> : deux d’entre eux se sont échappés</li>
+      </ul>
+    </section>
+
+    <section id="lesson-13">
+      <h2>Leçon 13 · Autres prépositions (I)</h2>
+      <p>Les prépositions françaises « pour », « vers », « en/dans », « chez », « contre » se rendent en créole par plusieurs équivalents dépendant du sens précis.</p>
+      <ul class="examples">
+        <li><strong>man ka travay pou érisi</strong> : je travaille pour réussir</li>
+        <li><strong>man ké fè tou sa man pé ba’w</strong> : je ferai tout ce que je peux pour toi</li>
+        <li><strong>nou ka alé o Pòl</strong> : nous allons vers Paul</li>
+        <li><strong>pòté sa alé lakay Pyè</strong> : porte ça chez Pierre</li>
+        <li><strong>nou ké goumen kont yo</strong> : nous nous battrons contre eux</li>
+      </ul>
+    </section>
+
+    <section id="lesson-14">
+      <h2>Leçon 14 · Autres prépositions (II)</h2>
+      <p><strong>épi</strong> traduit fréquemment « avec », complété par <strong>ansanm épi</strong> pour l’accompagnement. D’autres prépositions usuelles : <strong>apré</strong>, <strong>avan</strong>, <strong>dépi</strong>, <strong>dèyè</strong>, <strong>douvan</strong>, <strong>ant</strong>, <strong>adan</strong>, <strong>an déwò</strong>, <strong>jik</strong>, <strong>magré</strong>, <strong>san</strong>, <strong>silon</strong>, <strong>anba</strong>, <strong>anlè</strong>.</p>
+      <ul class="examples">
+        <li><strong>frè mwen vini épi madanm li</strong> : mon frère est venu avec sa femme</li>
+        <li><strong>dèyè kay-la</strong> : derrière la maison</li>
+        <li><strong>ann Italie</strong> : en Italie</li>
+        <li><strong>anba tab-la</strong> : sous la table</li>
+      </ul>
+    </section>
+
+    <section id="lesson-15">
+      <h2>Leçon 15 · Le verbe « être »</h2>
+      <p>Quatre stratégies rendent « être » : forme zéro devant adjectif ou compléments, copule <strong>sé</strong> devant un nom, forme <strong>yé</strong> pour les constructions disloquées ou interrogatives, et verbe plein <strong>èt</strong> dans certains contextes.</p>
+      <ul class="examples">
+        <li><strong>Pyè kontan</strong> : Pierre est content</li>
+        <li><strong>Féfé sé an tigason</strong> : Féfé est un petit garçon</li>
+        <li><strong>koté i yé ?</strong> : où est-il ?</li>
+        <li><strong>i lé èt an bon doktè</strong> : il veut être un bon médecin</li>
+      </ul>
+    </section>
+
+    <section id="lesson-16">
+      <h2>Leçon 16 · Présent et particule « ka »</h2>
+      <p>La particule <strong>ka</strong> exprime l’aspect duratif ou habituel. Elle peut disparaître avec certains verbes statifs (<strong>enmen</strong>, <strong>konnèt</strong>, <strong>ni</strong>, <strong>sav</strong>, etc.) sauf pour indiquer l’habitude.</p>
+      <ul class="examples">
+        <li><strong>man ka chanté</strong> : je chante / je suis en train de chanter</li>
+        <li><strong>Pyè ka pran kouri</strong> : Pierre se met à courir</li>
+        <li><strong>i pa ka travay ankò</strong> : il ne travaille plus</li>
+        <li><strong>man sav sa</strong> : je sais ça (sans <strong>ka</strong>)</li>
+      </ul>
+    </section>
+
+    <section id="lesson-17">
+      <h2>Leçon 17 · Le passé</h2>
+      <p>Le passé s’exprime par la forme simple (équivalent passé composé/passé simple) ou par la particule <strong>té</strong> (antériorité ou imparfait selon le verbe). La combinaison <strong>té ka</strong> correspond à l’imparfait duratif.</p>
+      <ul class="examples">
+        <li><strong>yo pati</strong> : ils sont partis</li>
+        <li><strong>man té di’w</strong> : je t’avais dit</li>
+        <li><strong>man té lé</strong> : je voulais / j’ai voulu</li>
+        <li><strong>i té ka travay</strong> : il travaillait</li>
+      </ul>
+    </section>
+
+    <section id="lesson-18">
+      <h2>Leçon 18 · Futur et conditionnel</h2>
+      <p>La particule <strong>ké</strong> marque le futur (avec variante proche <strong>kay</strong>). La combinaison <strong>té ké</strong> forme le conditionnel, tandis que <strong>sé</strong> peut rendre un conditionnel optatif. L’antériorité se gère avec <strong>fini</strong>.</p>
+      <ul class="examples">
+        <li><strong>nou ké dòmi bonnè</strong> : nous dormirons tôt</li>
+        <li><strong>ou kay travay</strong> : tu vas travailler (futur proche)</li>
+        <li><strong>yo té ké ja pati</strong> : ils seraient déjà partis</li>
+        <li><strong>man sé bwè an koko</strong> : je boirais bien un coco</li>
+      </ul>
+    </section>
+
+    <section id="lesson-19">
+      <h2>Leçon 19 · La phrase conditionnelle</h2>
+      <p>Les subordonnées conditionnelles utilisent <strong>si</strong> ou <strong>siyanka</strong> et se combinent avec différents temps (<strong>ka</strong>, forme simple, <strong>té ka</strong>, <strong>té ké</strong>, optatif). Le choix reflète la probabilité ou l’irréel.</p>
+      <ul class="examples">
+        <li><strong>si ou lévé, ou ké tann</strong> : si tu te lèves, tu entendras</li>
+        <li><strong>si ou té travay, ou té ké ni</strong> : si tu avais travaillé, tu aurais eu</li>
+        <li><strong>siyanka man touvé, man ké pòté</strong> : si je trouve, je porterai</li>
+        <li><strong>siyanka ou té ké ni, ou té ké ba</strong> : si tu avais, tu donnerais</li>
+      </ul>
+    </section>
+
+    <section id="lesson-20">
+      <h2>Leçon 20 · L’impératif</h2>
+      <p>L’impératif utilise la forme verbale simple, éventuellement doublée ou renforcée par des particules (<strong>anni</strong>, <strong>kon</strong>, <strong>tou sa</strong>). Certaines personnes emploient <strong>annou</strong> pour la 1<sup>re</sup> pluriel. Des expressions avec <strong>kité</strong>, <strong>ba</strong> ou <strong>prété</strong> rendent l’impératif aux autres personnes.</p>
+      <ul class="examples">
+        <li><strong>sòti la !</strong> : sors de là !</li>
+        <li><strong>pa menyen mwen !</strong> : ne me touche pas !</li>
+        <li><strong>annou chanté !</strong> : chantons !</li>
+        <li><strong>kit’an fè sa !</strong> : laisse-moi faire ça !</li>
+      </ul>
+      <p>Certains verbes comme <strong>lé</strong> ou <strong>pé</strong> n’ont pas d’impératif propre et recourent à des périphrases.</p>
+    </section>
+
+    <section id="lesson-21">
+      <h2>Leçon 21 · Le passif</h2>
+      <p>Le passif s’exprime sans changement morphologique majeur : on supprime l’agent ou on utilise des participes lexicalisés (<strong>pri</strong>, <strong>fèt</strong>, <strong>bay</strong>). Certaines constructions participiales complètent la description.</p>
+      <ul class="examples">
+        <li><strong>lèt-la voyé</strong> : la lettre est envoyée</li>
+        <li><strong>an kay byen fèt</strong> : une maison bien faite</li>
+        <li><strong>an lajan bay</strong> : une somme donnée</li> 
+        <li><strong>man ka wè’y ka monté mòn-la</strong> : je le vois montant la colline</li>
+      </ul>
+    </section>
+
+    <section id="lesson-22">
+      <h2>Leçon 22 · Les verbes composés</h2>
+      <p>Le créole combine fréquemment deux verbes pour préciser la nuance aspectuelle ou directionnelle. Un verbe porte le sens lexical, l’autre ajoute une orientation ou une manière.</p>
+      <ul class="examples">
+        <li><strong>maché alé</strong> : marcher vers l’extérieur · <strong>maché vini</strong> : marcher vers l’intérieur</li>
+        <li><strong>mennen alé</strong> : emmener · <strong>pòté vini</strong> : apporter</li>
+        <li><strong>tounen viré</strong> : virevolter · <strong>bay désann</strong> : descendre rapidement</li>
+        <li><strong>gadé wè</strong> : s’occuper de · <strong>chèché gadé wè</strong> : chercher à savoir insistance</li>
+      </ul>
+    </section>
+
+    <section id="lesson-23">
+      <h2>Leçon 23 · Obligation et probabilité</h2>
+      <p>Trois marqueurs principaux expriment l’obligation : <strong>fok/fo</strong>, <strong>pou</strong> et <strong>dwèt</strong>. Ce dernier véhicule aussi la notion de probabilité selon le contexte.</p>
+      <ul class="examples">
+        <li><strong>fòk ou travay</strong> : il faut que tu travailles</li>
+        <li><strong>sé pati pou nou pati</strong> : il nous faut partir</li>
+        <li><strong>Pyè dwèt travay</strong> : Pierre doit travailler / Pierre travaille sûrement</li>
+        <li><strong>ou té dwèt pati</strong> : tu aurais dû partir</li>
+      </ul>
+    </section>
+
+    <section id="lesson-24">
+      <h2>Leçon 24 · Le verbe « pouvoir »</h2>
+      <p><strong>pé</strong> traduit la capacité et la possibilité, souvent combiné à <strong>sa</strong> pour indiquer la réussite. La négation se fond avec <strong>pé</strong> au futur (<strong>pé ké</strong>). Le verbe peut aussi exprimer la probabilité.</p>
+      <ul class="examples">
+        <li><strong>ou pé pati</strong> : tu peux partir</li>
+        <li><strong>man ba’y san fran pou i pé sa manjé</strong> : je lui ai donné cent francs pour qu’il puisse manger</li>
+        <li><strong>man pé ké pé vini</strong> : je ne pourrai pas venir</li>
+        <li><strong>i pé ja rivé</strong> : il est peut-être déjà arrivé</li>
+      </ul>
+    </section>
+
+    <section id="lesson-25">
+      <h2>Leçon 25 · Les usages de « sé »</h2>
+      <p><strong>sé</strong> possède quatre fonctions : présentatif (« c’est »), marque du pluriel défini, copule équivalente à « être » et optatif (conditionnel). Plusieurs occurrences peuvent cohabiter dans une même phrase.</p>
+      <ul class="examples">
+        <li><strong>sa, sé ki bagay ?</strong> : ça, qu’est-ce que c’est ?</li>
+        <li><strong>sé zanmi’w la</strong> : tes amis</li>
+        <li><strong>ou sé an salop</strong> : tu es un salaud</li>
+        <li><strong>man sé bwè an koko</strong> : je boirais bien un coco</li>
+      </ul>
+    </section>
+
+    <section id="lesson-26">
+      <h2>Leçon 26 · Le nom commun</h2>
+      <p>Les noms peuvent apparaître sans article lorsqu’ils ont une valeur générique. Certains adjectifs ou verbes se nominalisent, souvent avec les préfixes <strong>la-</strong> ou <strong>le-</strong> pour les notions abstraites.</p>
+      <ul class="examples">
+        <li><strong>loto pa pou vini la</strong> : les voitures ne doivent pas venir ici</li>
+        <li><strong>lajistis sé an bon bagay</strong> : la justice est une bonne chose</li>
+        <li><strong>dòmi dous</strong> : c’est bon de dormir</li>
+        <li><strong>i fè an kay pa gran</strong> : il a construit une maison pas grande</li>
+      </ul>
+    </section>
+
+    <section id="lesson-27">
+      <h2>Leçon 27 · Noms propres, titres et adresses</h2>
+      <p>Les noms propres peuvent recevoir l’article pour marquer la distance. Les titres et formules d’adresse varient selon le registre : <strong>misyé</strong>, <strong>manzè</strong>, <strong>mésyédanm</strong>, <strong>monchè</strong>, etc. Les noms de pays utilisent des prépositions spécifiques.</p>
+      <ul class="examples">
+        <li><strong>Misiyé Pòl la</strong> : ce Monsieur Paul</li>
+        <li><strong>mésyédanm</strong> : Mesdames et messieurs</li>
+        <li><strong>man dirèktris la konprann...</strong> : cette directrice pense…</li>
+        <li><strong>yo ka soti an Frans</strong> : ils viennent de France</li>
+      </ul>
+    </section>
+
+    <section id="lesson-28">
+      <h2>Leçon 28 · L’adjectif</h2>
+      <p>De nombreux adjectifs résultent de relatives réduites ou de syntagmes nominalisés. Certains intensifs (<strong>bidim</strong>, <strong>manman</strong>) ou diminutifs (<strong>ti monyonyon</strong>) précèdent le nom. Le genre grammatical n’est pas marqué, mais des suffixes (<strong>-èz</strong>) peuvent souligner le féminin sémantique.</p>
+      <ul class="examples">
+        <li><strong>an boug vayan</strong> : un homme courageux</li>
+        <li><strong>an ti monyonyon pen</strong> : un tout petit bout de pain</li>
+        <li><strong>fanm ganmé a</strong> : la femme élégante</li>
+        <li><strong>Pyè, sé an boug blip</strong> : Pierre est un type mal dégrossi</li>
+      </ul>
+      <div class="note">Attention aux ambiguïtés : <strong>fanm kouyon an</strong> = la femme idiote ; <strong>fanm kouyon-an</strong> = la femme de l’idiot.</div>
+    </section>
+
+    <section id="lesson-29">
+      <h2>Leçon 29 · Le comparatif</h2>
+      <p>La supériorité se marque avec <strong>pli… ki/pasé</strong>, l’égalité avec <strong>osi… ki</strong> ou <strong>otan… otan</strong>, l’infériorité avec <strong>mwen(s)… ki</strong>. Des adverbes (<strong>titak</strong>, <strong>anpil</strong>, <strong>lontan</strong>) modulant l’intensité.</p>
+      <ul class="examples">
+        <li><strong>Pyè pli sòt ki Wobè</strong> : Pierre est plus bête que Robert</li>
+        <li><strong>Féfé osi gwo ki Pyè</strong> : Féfé est aussi gros que Pierre</li>
+        <li><strong>mwen gran ki Pyè</strong> : moins grand que Pierre</li>
+        <li><strong>pli ou ké dòmi, pli ou ké anvi dòmi</strong> : plus tu dormiras, plus tu auras envie de dormir</li>
+      </ul>
+    </section>
+
+    <section id="lesson-30">
+      <h2>Leçon 30 · Le superlatif</h2>
+      <p>Le superlatif relatif s’appuie sur <strong>pli</strong> ou <strong>mwen</strong> associés à l’article (<strong>sé… a</strong> pour le particulier, <strong>lé</strong> pour le général). Le superlatif absolu se forme par redoublement, particules intensives ou adjectifs comme <strong>bon</strong>, <strong>bèl</strong>, <strong>gwo</strong>, <strong>tou</strong>.</p>
+      <ul class="examples">
+        <li><strong>boug mwen pyétè a</strong> : le type le moins avare</li>
+        <li><strong>Pyè, sé boug pli séryé man konnèt</strong> : Pierre est le type le plus sérieux que je connaisse</li>
+        <li><strong>nou wè an bèl bèl fanm</strong> : nous avons vu une très belle femme</li>
+        <li><strong>i tou kagou</strong> : il est très malade</li>
+      </ul>
+    </section>
+
+    <section id="lesson-31">
+      <h2>Leçon 31 · Quantification et numération (I)</h2>
+      <p>Les adverbes/adjectifs de quantité incluent <strong>tout</strong>, <strong>chak</strong>, <strong>tjèk</strong>, <strong>yonndé</strong>, <strong>anpil</strong>, <strong>anlo</strong>, <strong>lòt</strong>, <strong>menm</strong>, <strong>kalté</strong>. Ils modulent la portée du nom selon qu’il est défini ou indéfini.</p>
+      <ul class="examples">
+        <li><strong>tout moun</strong> : tout le monde</li>
+        <li><strong>chak moun palé</strong> : chacun a parlé</li>
+        <li><strong>ni tjèk sé moun-la</strong> : il y a quelques-unes de ces personnes</li>
+        <li><strong>man pa enmen kalté moun-tala</strong> : je n’aime pas ce genre de personne</li>
+      </ul>
+    </section>
+
+    <section id="lesson-32">
+      <h2>Leçon 32 · Quantification et numération (II)</h2>
+      <p>Les numéraux cardinaux (yonn, dé, twa…) et ordinaux (prèmyé, dézyèm…) suivent des règles spécifiques. Certains servent d’intensif. Les expressions de durée ou de fréquence s’appuient sur ces formes.</p>
+      <ul class="examples">
+        <li><strong>ni dé lanné nou la</strong> : cela fait deux ans que nous sommes là</li>
+        <li><strong>ventan / ven lanné</strong> : vingt ans</li>
+        <li><strong>an dézyèm fi</strong> : une deuxième fille</li>
+        <li><strong>Pyè kouri sé dé prèmyé fwa-a</strong> : Pierre a couru les deux premières fois</li>
+      </ul>
+      <p>Des expressions comme <strong>lo</strong>, <strong>tèlman</strong>, <strong>an étsétéra</strong>, <strong>ti bren</strong> servent aussi à quantifier, parfois par antiphrase.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Mise à jour des règles grammaticales pour accompagner les exercices de créole martiniquais.</p>
+  </footer>
+</body>
+</html>
