@@ -1,4 +1,6 @@
--- Schémas & types
+--- Schémas & types
+
+> 📚 Consultez également la synthèse des [leçons 1 à 50](docs/lecons-1-50.md) pour les points de grammaire et de vocabulaire.
 create schema if not exists app;
 
 create type app.quiz_type as enum ('MCQ','LISTEN','MATCH','TYPE','SPEAK_PLACEHOLDER');
